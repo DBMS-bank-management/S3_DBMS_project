@@ -1,21 +1,26 @@
-var http = require('http');
-//create a server object:
-http.createServer(function (req, res) {
+const express = require("express");
+const cors = require("cors");
 
-    var url = req.url;
-    if(url ==='/users'){
-        const users = [{'name': "test"}, {'contact no': '0767667234'}]
-    //    res.write('<h1>about us page<h1>'); //write a response
-        const jsonContent = JSON.stringify(users)
-       res.end(jsonContent) //end the response
-    }else if(url ==='/contact'){
-       res.write('<h1>contact us page<h1>'); //write a response
-       res.end(); //end the response
-    }else{
-       res.write('<h1>Hello World!<h1>'); //write a response
-       res.end(); //end the response
-    }
-}).listen(8000, function(){
- console.log("server start at port 8000");
- //the server object listens on port 8000
+const app = express();
+
+var corsOptions = {
+  origin: "http://localhost:3000"
+};
+
+app.use(cors(corsOptions));
+
+app.use(express.json()); 
+
+// app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+  res.json({ message: "Successfully started" });
+});
+
+require("./src/routes/userRoutes")(app);
+
+// set port, listen for requests
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });
