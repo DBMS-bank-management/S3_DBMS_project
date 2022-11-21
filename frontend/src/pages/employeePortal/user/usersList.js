@@ -1,7 +1,8 @@
-import { Button, Card, Table } from "antd";
+import { Button, Card, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
-import { getUsers } from "../../api/user";
-import EmployeePageLayout from "../../components/employeePageLayout";
+import { deleteUser, getUsers } from "../../../api/user";
+import ConfirmationDialog from "../../../components/confirmationDialog";
+import EmployeePageLayout from "../../../components/employeePageLayout";
 
 const UsersList = () => {
   const [users, setUsers] = useState();
@@ -10,6 +11,11 @@ const UsersList = () => {
   console.log({ users });
 
   useEffect(() => loadUsersList(), []);
+
+  const onDelete = (id) => {
+    deleteUser(id);
+    loadUsersList()
+  };
 
   function loadUsersList() {
     getUsers()
@@ -35,12 +41,29 @@ const UsersList = () => {
       dataIndex: "role",
       key: "role",
     },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <Button href={`users/${record.auth_ID}`} type="link">
+            Edit
+          </Button>
+          <ConfirmationDialog
+            buttonProps={{ type: "link", danger: true }}
+            onOk={() => {
+              onDelete(record.auth_ID);
+            }}
+          />
+        </Space>
+      ),
+    },
   ];
 
   return (
     <EmployeePageLayout>
       <Card style={{ width: "100%" }}>
-        <Button>Add user</Button>
+        <Button href="users/add-user">Add user</Button>
         <Table dataSource={users} columns={columns} bordered />
       </Card>
     </EmployeePageLayout>

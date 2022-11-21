@@ -59,8 +59,8 @@ User.getAll = (title, result) => {
 
 User.updateById = (id, user, result) => {
   sql.query(
-    "UPDATE auth SET title = ?, description = ?, published = ? WHERE id = ?",
-    [user.title, user.description, user.published, id],
+    "UPDATE auth SET password = ?, role = ? WHERE auth_ID = ?",
+    [user.password, user.role, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -81,7 +81,7 @@ User.updateById = (id, user, result) => {
 };
 
 User.remove = (id, result) => {
-  sql.query("DELETE FROM auth WHERE id = ?", id, (err, res) => {
+  sql.query("DELETE FROM auth WHERE auth_ID = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

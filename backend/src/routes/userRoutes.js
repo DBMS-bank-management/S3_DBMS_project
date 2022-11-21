@@ -11,11 +11,11 @@ module.exports = (app) => {
 
   router.get("/:id", users.findOne);
 
-  // // Update a user with id
-  // router.put("/:id", users.update);
+  // Update a user with id
+  router.put("/:id", users.update);
 
-  // // Delete a user with id
-  // router.delete("/:id", users.delete);
+  // Delete a user with id
+  router.delete("/:id", users.delete);
 
   app.use("/users", router);
 };

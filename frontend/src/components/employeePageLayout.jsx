@@ -29,6 +29,7 @@ const items = [
     getItem("Alex", "5", "/"),
   ]),
   getItem("Users", "sub2", "/", <TeamOutlined />, [
+    getItem("Users", "5", "/users"),
     getItem("Employees", "6", "/users"),
     getItem("Customers", "8", "/users/add-user"),
   ]),
@@ -61,17 +62,12 @@ const EmployeePageLayout = ({ children }) => {
       >
         <div className="logo" />
         <Menu
-        //  inlineIndent={}
+          //  inlineIndent={}
           theme="dark"
           // defaultSelectedKeys={["1"]}
           selectable
           selectedKeys={flatternList(items)
             .filter((a) => {
-              console.log(
-                a,
-                "employee-portal" + a.path,
-                window.location.pathname
-              );
               return "/employee-portal" + a.path == window.location.pathname;
             })
             .map((a) => a.key)}

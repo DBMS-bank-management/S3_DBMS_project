@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   function submitLogin() {
     login({ username, password })
-      .then((token) => (window.location = "/employeePortal"))
+      .then((token) => (window.location = "/employee-portal"))
       .catch((err) => alert(err));
   }
 

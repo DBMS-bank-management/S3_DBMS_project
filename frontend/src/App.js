@@ -4,8 +4,9 @@ import { Contact } from "./pages/contact";
 import Home from "./pages/home";
 import { PrivateRoute } from "./components/auth";
 import Login from "./pages/login";
-import AddUser from "./pages/employeePortal/addUser";
-import UsersList from "./pages/employeePortal/usersList";
+import AddUser from "./pages/employeePortal/user/addUser";
+import UsersList from "./pages/employeePortal/user/usersList";
+import { EditUser } from "./pages/employeePortal/user/editUser";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route exact path="/employee-portal" element={<Home />} />
             <Route path="/employee-portal/users">
               <Route path="/employee-portal/users" element={<UsersList />} />
+              <Route path="/employee-portal/users/:id" element={<EditUser />} />
               <Route
                 path="/employee-portal/users/add-user"
                 element={<AddUser />}

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Card } from "antd";
-import { addUser } from "../../api/user";
-import EmployeePageLayout from "../../components/employeePageLayout";
+import { addUser } from "../../../api/user";
+import EmployeePageLayout from "../../../components/employeePageLayout";
 
 const AddUser = () => {
   const [password, setPassword] = useState("");
   function submitData() {
     addUser({ password })
-      .then((token) => (window.location = "/employeePortal"))
+      .then((token) => (window.location = "/employee-portal/users"))
       .catch((err) => alert(err));
   }
 
