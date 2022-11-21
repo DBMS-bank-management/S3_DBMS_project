@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS trans_mode(
 
 /* AUTHENTICATION TABLES */
 CREATE TABLE IF NOT EXISTS auth (
-    auth_ID varchar(10),
+    auth_ID integer NOT NULL AUTO_INCREMENT,
     password varchar(20),
     role varchar(10),
     primary key (auth_ID)
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS auth (
 CREATE TABLE IF NOT EXISTS activity_log (
     log_ID integer NOT NULL AUTO_INCREMENT,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    auth_id varchar(10),
+    auth_ID integer,
     action varchar(100),
     PRIMARY KEY (log_ID),
     FOREIGN KEY (auth_id) REFERENCES auth(auth_ID)
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS customer (
     ID VARCHAR(10),
     name VARCHAR(100),
     type VARCHAR(10),
-    auth_ID VARCHAR(10),
+    auth_ID integer,
     contact_no VARCHAR(10),
     primary key (ID),
     foreign key (auth_ID) references auth(auth_ID)
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS employee (
     emp_name VARCHAR(100),
     branch_ID VARCHAR(10),
     Is_manager BIT,
-    auth_ID VARCHAR(10),
+    auth_ID integer,
     PRIMARY KEY(emp_ID),
     FOREIGN KEY(branch_ID) REFERENCES branch(branch_ID),
     FOREIGN KEY(auth_ID) REFERENCES auth(auth_ID)

@@ -3,15 +3,11 @@ import { login } from "../api";
 import { Button, Checkbox, Form, Input, Card } from "antd";
 
 const Login = () => {
-  const [state, setState] = useState({});
-
-  function handleInputChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   function submitLogin(event) {
     event.preventDefault();
-    login(this.state)
+    login({ username, password })
       .then((token) => (window.location = "/"))
       .catch((err) => alert(err));
   }
@@ -31,7 +27,7 @@ const Login = () => {
         justifyContent: "center",
         width: "100%",
         height: "100vh",
-        backgroundColor: '#ececec'
+        backgroundColor: "#ececec",
       }}
     >
       <Card>
@@ -56,11 +52,15 @@ const Login = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your username!",
+                message: "Username is required!",
               },
             ]}
           >
-            <Input />
+            <Input
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+            />
           </Form.Item>
 
           <Form.Item
@@ -69,11 +69,11 @@ const Login = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your password!",
+                message: "Password is required!",
               },
             ]}
           >
-            <Input.Password />
+            <Input.Password onChange={(e) => setPassword(e.target.value)} />
           </Form.Item>
 
           <Form.Item
@@ -93,8 +93,12 @@ const Login = () => {
               span: 16,
             }}
           >
-            <Button type="primary" htmlType="submit">
-              Submit
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={!username || !password}
+            >
+              Login
             </Button>
           </Form.Item>
         </Form>
