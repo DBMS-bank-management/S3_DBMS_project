@@ -2,26 +2,25 @@ const sql = require("./database");
 
 // constructor
 const User = function (user) {
-  this.id = user.title;
-  this.description = user.description;
-  this.published = user.published;
+  this.password = user.password;
+  this.role = user.role;
 };
 
-// User.create = (newUser, result) => {
-//   sql.query("INSERT INTO users SET ?", newUser, (err, res) => {
-//     if (err) {
-//       console.log("error: ", err);
-//       result(err, null);
-//       return;
-//     }
+User.create = (newUser, result) => {
+  sql.query("INSERT INTO auth SET ?", newUser, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
 
-//     console.log("created user: ", { id: res.insertId, ...newUser });
-//     result(null, { id: res.insertId, ...newUser });
-//   });
-// };
+    console.log("created user: ", { id: res.insertId, ...newUser });
+    result(null, { id: res.insertId, ...newUser });
+  });
+};
 
 User.findById = (id, result) => {
-  sql.query(`SELECT * FROM users WHERE id = ${id}`, (err, res) => {
+  sql.query(`SELECT * FROM auth WHERE auth_id = ${id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -106,7 +105,7 @@ User.removeAll = (result) => {
       console.log("error: ", err);
       result(null, err);
       return;
-    } 
+    }
 
     console.log(`deleted ${res.affectedRows} users`);
     result(null, res);

@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { login } from "../api";
 import { Button, Checkbox, Form, Input, Card } from "antd";
+import logo from "../logo.svg";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  function submitLogin(event) {
-    event.preventDefault();
+  function submitLogin() {
     login({ username, password })
-      .then((token) => (window.location = "/"))
+      .then((token) => (window.location = "/employeePortal"))
       .catch((err) => alert(err));
   }
 
   const onFinish = (values) => {
+    submitLogin();
     console.log("Success:", values);
   };
   const onFinishFailed = (errorInfo) => {
@@ -31,6 +32,7 @@ const Login = () => {
       }}
     >
       <Card>
+        <img src={logo} className="App-logo" alt="logo" />
         <Form
           name="basic"
           labelCol={{

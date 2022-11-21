@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const BASE_URL = "http://localhost:5000";
+import { BASE_URL } from "./config";
 
 export function getRegularTips() {
   return axios
@@ -19,8 +18,12 @@ export function getSpecialTips() {
 
 export function login(data) {
   return axios
-    .post(`${BASE_URL}/api/auth`, { name: data.name, password: data.password })
+    .post(`${BASE_URL}/auth/login`, {
+      username: data.username,
+      password: data.password,
+    })
     .then((response) => {
+      console.log({ data: response.data });
       localStorage.setItem("x-access-token", response.data.token);
       localStorage.setItem(
         "x-access-token-expiration",
@@ -31,9 +34,17 @@ export function login(data) {
     .catch((err) => Promise.reject("Authentication Failed!"));
 }
 
+export function logout() {
+  localStorage.removeItem("x-access-token");
+  localStorage.removeItem("x-access-token-expiration");
+  window.location = "/login";
+}
+
 export function isAuthenticated() {
   return (
     localStorage.getItem("x-access-token") &&
     localStorage.getItem("x-access-token-expiration") > Date.now()
   );
 }
+
+export function isEmployee() {}

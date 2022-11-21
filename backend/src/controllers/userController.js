@@ -1,6 +1,6 @@
-const User = require("../models/userModel.js");
+const UserModel = require("../models/userModel.js");
 
-// Create and Save a new User
+// Create and Save a new UserModel
 exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
@@ -9,18 +9,18 @@ exports.create = (req, res) => {
     });
   }
 
-  // Create a User
-  const user = new User({
-    title: req.body.title,
-    description: req.body.description,
-    published: req.body.published || false,
+  // Create a UserModel
+  const user = new UserModel({
+    password: req.body.password,
+    role: req.body.role
   });
 
-  // Save User in the database
-  User.create(user, (err, data) => {
+  // Save UserModel in the database
+  UserModel.create(user, (err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the User.",
+        message:
+          err.message || "Some error occurred while creating the UserModel.",
       });
     else res.send(data);
   });
@@ -30,7 +30,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   const title = req.query.title;
 
-  User.getAll(title, (err, data) => {
+  UserModel.getAll(title, (err, data) => {
     if (err)
       res.status(500).send({
         message: err.message || "Some error occurred while retrieving users.",
@@ -39,17 +39,17 @@ exports.findAll = (req, res) => {
   });
 };
 
-// Find a single User by Id
+// Find a single UserModel by Id
 exports.findOne = (req, res) => {
-  User.findById(req.params.id, (err, data) => {
+  UserModel.findById(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found User with id ${req.params.id}.`,
+          message: `Not found UserModel with id ${req.params.id}.`,
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving User with id " + req.params.id,
+          message: "Error retrieving UserModel with id " + req.params.id,
         });
       }
     } else res.send(data);

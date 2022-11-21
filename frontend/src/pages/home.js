@@ -1,6 +1,7 @@
-import logo from '../logo.svg';
-import '../App.css';
-
+import logo from "../logo.svg";
+import "../App.css";
+import { Button } from "antd";
+import { logout } from "../api";
 
 function Home() {
   return (
@@ -10,7 +11,7 @@ function Home() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <button onClick={() => console.log('test')}>test</button>
+        <button onClick={() => console.log("test")}>test</button>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -19,6 +20,7 @@ function Home() {
         >
           Learn React
         </a>
+        <Button onClick={logout}>logout</Button>
       </header>
     </div>
   );
