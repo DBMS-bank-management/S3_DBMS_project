@@ -5,10 +5,6 @@ import { dashSeperatedToHumanReadble } from "../utils/string";
 export const BreadcrumbsFromPath = () => {
   const path = window.location.pathname;
   const splitPath = path.split("/").filter((p) => p);
-
-  console.log({ path });
-  console.log({ splitPath });
-
   const paths = [];
   splitPath.map((path) => {
     var pString = "";
@@ -19,8 +15,6 @@ export const BreadcrumbsFromPath = () => {
     paths.push([path, pString]);
   });
 
-  console.log({ paths });
-
   return (
     <Breadcrumb
       style={{
@@ -28,7 +22,7 @@ export const BreadcrumbsFromPath = () => {
       }}
     >
       {paths.map((path) => (
-        <Breadcrumb.Item href={"/" + path[1]}>
+        <Breadcrumb.Item key={path[1]} href={"/" + path[1]}>
           {dashSeperatedToHumanReadble(path[0])}
         </Breadcrumb.Item>
       ))}

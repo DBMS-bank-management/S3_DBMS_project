@@ -5,6 +5,7 @@ import Home from "./pages/home";
 import { PrivateRoute } from "./components/auth";
 import Login from "./pages/login";
 import AddUser from "./pages/employeePortal/addUser";
+import UsersList from "./pages/employeePortal/usersList";
 
 function App() {
   return (
@@ -13,7 +14,13 @@ function App() {
         <Route path="/">
           <Route exact path="/employee-portal" element={<PrivateRoute />}>
             <Route exact path="/employee-portal" element={<Home />} />
-            <Route path="/employee-portal/add-user" element={<AddUser />} />
+            <Route path="/employee-portal/users">
+              <Route path="/employee-portal/users" element={<UsersList />} />
+              <Route
+                path="/employee-portal/users/add-user"
+                element={<AddUser />}
+              />
+            </Route>
           </Route>
           <Route exact path="/" element={<Home />} />
           <Route exact path="login" element={<Login />} />

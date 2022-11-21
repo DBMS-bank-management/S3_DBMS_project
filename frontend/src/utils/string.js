@@ -1,11 +1,10 @@
 export const dashSeperatedToHumanReadble = (string) => {
-  const words = string.split("-");
+  const wordsList = string.split("-");
 
-  for (let i = 0; i < words.length; i++) {
-    words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+  for (let i = 0; i < wordsList.length; i++) {
+    wordsList[i] = wordsList[i][0].toUpperCase() + wordsList[i].substr(1);
   }
 
-  const str = words.join(" ");
-
+  const str = wordsList.join(" ");
   return str;
 };
