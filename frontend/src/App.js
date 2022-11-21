@@ -7,13 +7,14 @@ import Login from "./pages/login";
 import AddUser from "./pages/employeePortal/user/addUser";
 import UsersList from "./pages/employeePortal/user/usersList";
 import { EditUser } from "./pages/employeePortal/user/editUser";
+import EmployeePageLayout from "./components/employeePageLayout";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/">
-          <Route exact path="/employee-portal" element={<PrivateRoute />}>
+          <Route exact path="/employee-portal" element={<EmployeePageLayout />}>
             <Route exact path="/employee-portal" element={<Home />} />
             <Route path="/employee-portal/users">
               <Route path="/employee-portal/users" element={<UsersList />} />

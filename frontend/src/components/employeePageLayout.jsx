@@ -8,8 +8,9 @@ import {
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Typography } from "antd";
 import { BreadcrumbsFromPath } from "./breadCrumbsFromPath";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Outlet } from "react-router-dom";
 import { flatternList } from "../utils/list";
+import { isAuthenticated } from "../api";
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, path, icon, children) {
   return {
@@ -26,7 +27,6 @@ const items = [
   getItem("User", "sub1", "/", <UserOutlined />, [
     getItem("Tom", "3", "/'"),
     getItem("Bill", "4", "/"),
-    getItem("Alex", "5", "/"),
   ]),
   getItem("Users", "sub2", "/", <TeamOutlined />, [
     getItem("Users", "5", "/users"),
@@ -40,20 +40,22 @@ const EmployeePageLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(true);
   const [selected, setSelected] = useState("");
 
+  const auth = isAuthenticated();
+
   const navigate = useNavigate();
 
   const onClick = (e) => {
-    console.log("click ", e);
     navigate("/employee-portal" + e.item.props.path);
   };
 
-  return (
+  return auth ? (
     <Layout
       style={{
         minHeight: "100vh",
       }}
     >
       <Sider
+        aria-expanded={true}
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
@@ -91,7 +93,7 @@ const EmployeePageLayout = ({ children }) => {
           }}
         >
           <BreadcrumbsFromPath />
-          {children}
+          <Outlet />
         </Content>
         {/* <Footer
           style={{
@@ -102,6 +104,8 @@ const EmployeePageLayout = ({ children }) => {
         </Footer> */}
       </Layout>
     </Layout>
+  ) : (
+    <Navigate to="/login" />
   );
 };
 export default EmployeePageLayout;

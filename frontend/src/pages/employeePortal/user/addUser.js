@@ -20,7 +20,6 @@ const AddUser = () => {
   };
 
   return (
-    <EmployeePageLayout>
       <Card>
         <Form
           name="basic"
@@ -62,7 +61,6 @@ const AddUser = () => {
           </Form.Item>
         </Form>
       </Card>
-    </EmployeePageLayout>
   );
 };
 

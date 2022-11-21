@@ -8,13 +8,11 @@ const UsersList = () => {
   const [users, setUsers] = useState();
   const [loading, setLoading] = useState(true);
 
-  console.log({ users });
-
   useEffect(() => loadUsersList(), []);
 
   const onDelete = (id) => {
     deleteUser(id);
-    loadUsersList()
+    loadUsersList();
   };
 
   function loadUsersList() {
@@ -61,12 +59,10 @@ const UsersList = () => {
   ];
 
   return (
-    <EmployeePageLayout>
-      <Card style={{ width: "100%" }}>
-        <Button href="users/add-user">Add user</Button>
-        <Table dataSource={users} columns={columns} bordered />
-      </Card>
-    </EmployeePageLayout>
+    <Card style={{ width: "100%" }}>
+      <Button href="users/add-user">Add user</Button>
+      <Table dataSource={users} columns={columns} bordered />
+    </Card>
   );
 };
 

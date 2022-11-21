@@ -45,7 +45,6 @@ export const EditUser = () => {
   console.log({ user });
 
   return (
-    <EmployeePageLayout>
       <Card>
         <Form
           name="basic"
@@ -116,6 +115,5 @@ export const EditUser = () => {
           </Form.Item>
         </Form>
       </Card>
-    </EmployeePageLayout>
   );
 };
