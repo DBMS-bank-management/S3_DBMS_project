@@ -1,12 +1,12 @@
 const sql = require("./database");
 
 // constructor
-const User = function (user) {
+const Employee = function (user) {
   this.password = user.password;
   this.role = user.role;
 };
 
-User.create = (newUser, result) => {
+Employee.create = (newObject, result) => {
   sql.query("INSERT INTO auth SET ?", newUser, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -19,8 +19,8 @@ User.create = (newUser, result) => {
   });
 };
 
-User.findById = (id, result) => {
-  sql.query("SELECT * FROM auth WHERE auth_id = ?", [id], (err, res) => {
+Employee.findById = (id, result) => {
+  sql.query(`SELECT * FROM auth WHERE auth_id = ${id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -33,18 +33,16 @@ User.findById = (id, result) => {
       return;
     }
 
-    // not found User with the id
+    // not found Employee with the id
     result({ kind: "not_found" }, null);
   });
 };
 
-
-//remove sql injection here
-User.getAll = (title, result) => {
+Employee.getAll = (title, result) => {
   let query = "SELECT * FROM auth";
 
   if (title) {
-    query += `WHERE title LIKE '%${title}%'`;
+    query += ` WHERE title LIKE '%${title}%'`;
   }
 
   sql.query(query, (err, res) => {
@@ -59,7 +57,7 @@ User.getAll = (title, result) => {
   });
 };
 
-User.updateById = (id, user, result) => {
+Employee.updateById = (id, user, result) => {
   sql.query(
     "UPDATE auth SET password = ?, role = ? WHERE auth_ID = ?",
     [user.password, user.role, id],
@@ -71,7 +69,7 @@ User.updateById = (id, user, result) => {
       }
 
       if (res.affectedRows == 0) {
-        // not found User with the id
+        // not found Employee with the id
         result({ kind: "not_found" }, null);
         return;
       }
@@ -82,7 +80,7 @@ User.updateById = (id, user, result) => {
   );
 };
 
-User.remove = (id, result) => {
+Employee.remove = (id, result) => {
   sql.query("DELETE FROM auth WHERE auth_ID = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -91,7 +89,7 @@ User.remove = (id, result) => {
     }
 
     if (res.affectedRows == 0) {
-      // not found User with the id
+      // not found Employee with the id
       result({ kind: "not_found" }, null);
       return;
     }
@@ -101,7 +99,7 @@ User.remove = (id, result) => {
   });
 };
 
-User.removeAll = (result) => {
+Employee.removeAll = (result) => {
   sql.query("DELETE FROM auth", (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -114,4 +112,4 @@ User.removeAll = (result) => {
   });
 };
 
-module.exports = User;
+module.exports = Employee;

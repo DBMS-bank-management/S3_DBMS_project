@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS loan_plan (
 );
 
 CREATE TABLE IF NOT EXISTS trans_mode(
-    mode_ID integer auto_increment,
+    mode_ID varchar(20),
     fee numeric (5, 2),
     PRIMARY KEY(mode_ID)
 );

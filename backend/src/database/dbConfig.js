@@ -1,6 +1,6 @@
 module.exports = {
-  HOST: "localhost",
-  USER: "root",
+  HOST: "lampuwa.com",
+  USER: "lampuwac_dbms",
   PASSWORD: "CseTrack10",
-  DB: "bank_01"
+  DB: "lampuwac_bank_database_01"
 };

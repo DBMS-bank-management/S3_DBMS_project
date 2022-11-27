@@ -1,7 +1,6 @@
 import { Button, Card, Form, Input, Radio } from "antd";
 import React, { useEffect, useState } from "react";
 import { getUser, updateUser } from "../../../api/user";
-import EmployeePageLayout from "../../../components/employeePageLayout";
 import { useParams } from "react-router-dom";
 
 export const EditUser = () => {

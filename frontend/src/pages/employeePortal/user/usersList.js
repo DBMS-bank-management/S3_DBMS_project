@@ -2,7 +2,6 @@ import { Button, Card, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { deleteUser, getUsers } from "../../../api/user";
 import ConfirmationDialog from "../../../components/confirmationDialog";
-import EmployeePageLayout from "../../../components/employeePageLayout";
 
 const UsersList = () => {
   const [users, setUsers] = useState();

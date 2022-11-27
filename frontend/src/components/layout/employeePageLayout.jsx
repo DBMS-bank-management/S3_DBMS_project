@@ -7,10 +7,10 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Typography } from "antd";
-import { BreadcrumbsFromPath } from "./breadCrumbsFromPath";
+import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
 import { Navigate, useNavigate, Outlet } from "react-router-dom";
-import { flatternList } from "../utils/list";
-import { isAuthenticated } from "../api";
+import { flatternList } from "../../utils/list";
+import { isAuthenticated } from "../../api";
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, path, icon, children) {
   return {

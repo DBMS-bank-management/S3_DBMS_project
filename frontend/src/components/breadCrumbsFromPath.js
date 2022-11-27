@@ -20,8 +20,12 @@ export const BreadcrumbsFromPath = () => {
       style={{
         margin: "16px 0",
       }}
+      separator={">"}
     >
-      {paths.map((path) => (
+      <Breadcrumb.Item key={"home"} href={"/"}>
+       {"> Home"}
+      </Breadcrumb.Item>
+      {paths.map((path, index) => (
         <Breadcrumb.Item key={path[1]} href={"/" + path[1]}>
           {dashSeperatedToHumanReadble(path[0])}
         </Breadcrumb.Item>

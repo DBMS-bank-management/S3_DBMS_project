@@ -2,6 +2,7 @@ import { useState } from "react";
 import { login } from "../api";
 import { Button, Checkbox, Form, Input, Card } from "antd";
 import logo from "../logo.svg";
+import { navigateToHome } from "../utils/navigation";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -89,12 +90,27 @@ const Login = () => {
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
+          <div
+            // wrapperCol={{
+            //   offset: 8,
+            //   span: 16,
+
+            // }}
+            style={{
+              width: "100%",
+              justifyContent: "space-around",
+              flexDirection: "row",
+              display: "flex",
             }}
           >
+            <Button
+              type="primary"
+              htmlType="submit"
+              // disabled={!username || !password}
+              onClick={navigateToHome}
+            >
+              Cancel
+            </Button>
             <Button
               type="primary"
               htmlType="submit"
@@ -102,7 +118,7 @@ const Login = () => {
             >
               Login
             </Button>
-          </Form.Item>
+          </div>
         </Form>
       </Card>
       {/* <div className="container">
