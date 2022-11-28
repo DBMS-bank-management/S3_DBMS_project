@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { login } from "../api";
 import { Button, Checkbox, Form, Input, Card } from "antd";
 import logo from "../logo.svg";
 import { navigateToHome } from "../utils/navigation";
+
+const clamp = (min, max, val) => Math.max(min, Math.min(val, max));
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -19,6 +21,13 @@ const Login = () => {
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+
+  const inputRefs = useRef([]);
+
+  const handleKeyPress = (index) => () => {
+    const nextIndex = clamp(0, 2 - 1, index + 1);
+    inputRefs.current[nextIndex].focus();
   };
 
   return (
@@ -63,6 +72,8 @@ const Login = () => {
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
+              onKeyPress={() => handleKeyPress(0)}
+              inputRef={(ref) => (inputRefs.current[0] = ref)}
             />
           </Form.Item>
 
@@ -76,7 +87,10 @@ const Login = () => {
               },
             ]}
           >
-            <Input.Password onChange={(e) => setPassword(e.target.value)} />
+            <Input.Password
+              onChange={(e) => setPassword(e.target.value)}
+              inputRef={(ref) => (inputRefs.current[1] = ref)}
+            />
           </Form.Item>
 
           <Form.Item
@@ -105,7 +119,6 @@ const Login = () => {
           >
             <Button
               type="primary"
-              htmlType="submit"
               // disabled={!username || !password}
               onClick={navigateToHome}
             >

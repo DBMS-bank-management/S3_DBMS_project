@@ -1,6 +1,6 @@
 const UserController = require("./userController");
 const UserModel = require("../models/userModel.js");
-
+const EmployeeModel = require("../models/employeeModel");
 // Create and Save a new User
 exports.login = (req, res) => {
   // Validate request
@@ -9,8 +9,10 @@ exports.login = (req, res) => {
       message: "Content can not be empty!",
     });
   }
+
   console.log(req.body);
-  UserModel.findById(req.body.username, (err, data) => {
+
+  EmployeeModel.findById(req.body.username, (err, employee) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
@@ -18,20 +20,34 @@ exports.login = (req, res) => {
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving User with id " + req.params.id,
+          message: "Error retrieving Employee with id " + req.params.id,
         });
       }
     } else {
-      console.log({ data }, data.password, req.body.password);
-      if (data.password == req.body.password) {
-        console.log('password match')
-        data['token'] = 'fndjafklyirewlqrbkdbafdsafdsaf'
-        res.send(data);
-      }
-      else{
-        console.log('password not match')
-        res.status(401);
-      }
+      UserModel.findById(employee.auth_ID, (err, auth) => {
+        if (err) {
+          if (err.kind === "not_found") {
+            res.status(404).send({
+              message: `Not found User with id ${req.params.id}.`,
+            });
+          } else {
+            res.status(500).send({
+              message: "Error retrieving User with id " + req.params.id,
+            });
+          }
+        } else {
+          console.log({ auth }, auth.password, req.body.password);
+          if (auth.password == req.body.password) {
+            const data = { auth, employee };
+            // console.log("password match");
+            data["token"] = "fndjafklyirewlqrbkdbafdsafdsaf";
+            res.send(data);
+          } else {
+            console.log("password not match");
+            res.status(401);
+          }
+        }
+      });
     }
   });
 };

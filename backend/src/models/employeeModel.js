@@ -1,26 +1,26 @@
 const sql = require("./database");
 
 // constructor
-const Employee = function (user) {
-  this.password = user.password;
-  this.role = user.role;
+const Employee = function (model) {
+  this.emp_id = model.emp_ID;
+  this.emp_name = model.emp_name;
 };
 
 Employee.create = (newObject, result) => {
-  sql.query("INSERT INTO auth SET ?", newUser, (err, res) => {
+  sql.query("INSERT INTO employee SET ?", newUser, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("created user: ", { id: res.insertId, ...newUser });
+    console.log("created model: ", { id: res.insertId, ...newUser });
     result(null, { id: res.insertId, ...newUser });
   });
 };
 
 Employee.findById = (id, result) => {
-  sql.query(`SELECT * FROM auth WHERE auth_id = ${id}`, (err, res) => {
+  sql.query(`SELECT * FROM employee WHERE emp_ID = '${id}'`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -28,7 +28,7 @@ Employee.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found user: ", res[0]);
+      console.log("found model: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -38,8 +38,9 @@ Employee.findById = (id, result) => {
   });
 };
 
+
 Employee.getAll = (title, result) => {
-  let query = "SELECT * FROM auth";
+  let query = "SELECT * FROM employee";
 
   if (title) {
     query += ` WHERE title LIKE '%${title}%'`;
@@ -57,10 +58,10 @@ Employee.getAll = (title, result) => {
   });
 };
 
-Employee.updateById = (id, user, result) => {
+Employee.updateById = (id, model, result) => {
   sql.query(
-    "UPDATE auth SET password = ?, role = ? WHERE auth_ID = ?",
-    [user.password, user.role, id],
+    "UPDATE employee SET password = ?, role = ? WHERE auth_ID = ?",
+    [model.password, model.role, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -74,14 +75,14 @@ Employee.updateById = (id, user, result) => {
         return;
       }
 
-      console.log("updated user: ", { id: id, ...user });
-      result(null, { id: id, ...user });
+      console.log("updated model: ", { id: id, ...model });
+      result(null, { id: id, ...model });
     }
   );
 };
 
 Employee.remove = (id, result) => {
-  sql.query("DELETE FROM auth WHERE auth_ID = ?", id, (err, res) => {
+  sql.query("DELETE FROM employee WHERE auth_ID = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -94,13 +95,13 @@ Employee.remove = (id, result) => {
       return;
     }
 
-    console.log("deleted user with id: ", id);
+    console.log("deleted model with id: ", id);
     result(null, res);
   });
 };
 
 Employee.removeAll = (result) => {
-  sql.query("DELETE FROM auth", (err, res) => {
+  sql.query("DELETE FROM employee", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
