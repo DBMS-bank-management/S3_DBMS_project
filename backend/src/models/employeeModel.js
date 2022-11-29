@@ -7,15 +7,15 @@ const Employee = function (model) {
 };
 
 Employee.create = (newObject, result) => {
-  sql.query("INSERT INTO employee SET ?", newUser, (err, res) => {
+  sql.query("INSERT INTO employee SET ?", newEmployee, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("created model: ", { id: res.insertId, ...newUser });
-    result(null, { id: res.insertId, ...newUser });
+    console.log("created model: ", { id: res.insertId, ...newEmployee });
+    result(null, { id: res.insertId, ...newEmployee });
   });
 };
 
@@ -53,15 +53,15 @@ Employee.getAll = (title, result) => {
       return;
     }
 
-    console.log("users: ", res);
+    console.log("employees: ", res);
     result(null, res);
   });
 };
 
-Employee.updateById = (id, model, result) => {
+Employee.updateById = (id, employee, result) => {
   sql.query(
-    "UPDATE employee SET password = ?, role = ? WHERE auth_ID = ?",
-    [model.password, model.role, id],
+    "UPDATE employee  SET password = ?, role = ? WHERE auth_ID = ?",
+    [employee.emp_ID, employee.emp_name,employee.branch_id,employee.Is_manager, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -108,7 +108,7 @@ Employee.removeAll = (result) => {
       return;
     }
 
-    console.log(`deleted ${res.affectedRows} users`);
+    console.log(`deleted ${res.affectedRows} employees`);
     result(null, res);
   });
 };
