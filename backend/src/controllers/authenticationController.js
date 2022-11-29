@@ -1,6 +1,7 @@
 const UserController = require("./userController");
 const UserModel = require("../models/userModel.js");
 const EmployeeModel = require("../models/employeeModel");
+const { validatePassword } = require("../utils/hash");
 // Create and Save a new User
 exports.login = (req, res) => {
   // Validate request
@@ -37,7 +38,7 @@ exports.login = (req, res) => {
           }
         } else {
           console.log({ auth }, auth.password, req.body.password);
-          if (auth.password == req.body.password) {
+          if (validatePassword(req.body.password, auth.password)) {
             const data = { auth, employee };
             // console.log("password match");
             data["token"] = "fndjafklyirewlqrbkdbafdsafdsaf";
