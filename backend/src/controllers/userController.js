@@ -1,4 +1,5 @@
 const UserModel = require("../models/userModel.js");
+const { generatePasswordHash } = require("../utils/hash.js");
 
 // Create and Save a new UserModel
 exports.create = (req, res) => {
@@ -11,7 +12,7 @@ exports.create = (req, res) => {
 
   // Create a UserModel
   const user = new UserModel({
-    password: req.body.password,
+    password: generatePasswordHash(req.body.password),
     role: req.body.role,
   });
 

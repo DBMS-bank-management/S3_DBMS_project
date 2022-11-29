@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 require("./src/routes/userRoutes")(app);
 require("./src/routes/authenticationRoutes")(app);
 require("./src/routes/employeeRoutes")(app);
+require("./src/routes/branchRoutes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8000;
