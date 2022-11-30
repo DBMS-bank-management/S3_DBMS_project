@@ -11,6 +11,9 @@ import UsersList from "./pages/employeePortal/user/usersList";
 import { EditUser } from "./pages/employeePortal/user/editUser";
 import EmployeePageLayout from "./components/layout/employeePageLayout";
 import GeneralPageLayout from "./components/layout/pageLayout";
+import AddEmployee from "./pages/employeePortal/employee/addEmployee";
+import { EditEmployee } from "./pages/employeePortal/employee/editEmployee";
+import EmployeeList from "./pages/employeePortal/employee/EmployeesList";
 
 function App() {
   return (
@@ -50,6 +53,19 @@ function App() {
                   element={<AddUser />}
                 />
               </Route>
+
+              <Route path="/employee-portal/employees">
+                <Route path="/employee-portal/employees" element={<EmployeeList />} />
+                <Route
+                  path="/employee-portal/employees/:id"
+                  element={<EditEmployee />}
+                />
+                <Route
+                  path="/employee-portal/employees/add-employee"
+                  element={<AddEmployee />}
+                />
+              </Route>
+
             </Route>
             <Route exact path="/" element={<GeneralPageLayout />}>
               <Route path="/" element={<Home />} />

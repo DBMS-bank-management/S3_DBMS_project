@@ -53,7 +53,7 @@ Employee.getAll = (title, result) => {
       return;
     }
 
-    console.log("users: ", res);
+    // console.log("users: ", res.map(d => ({ ...d, Is_manager: d.Is_manager.data })));
     result(null, res);
   });
 };
