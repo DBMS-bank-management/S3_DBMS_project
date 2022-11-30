@@ -30,7 +30,7 @@ const items = [
   ]),
   getItem("Users", "sub2", "/", <TeamOutlined />, [
     getItem("Users", "5", "/users"),
-    getItem("Employees", "6", "/users"),
+    getItem("Employees", "6", "/employees"),
     getItem("Customers", "8", "/users/add-user"),
   ]),
   getItem("Files", "9", "/", <FileOutlined />),
