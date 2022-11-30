@@ -11,6 +11,8 @@ import UsersList from "./pages/employeePortal/user/usersList";
 import { EditUser } from "./pages/employeePortal/user/editUser";
 import EmployeePageLayout from "./components/layout/employeePageLayout";
 import GeneralPageLayout from "./components/layout/pageLayout";
+import BranchesList from "./pages/employeePortal/user/branch/branchesList";
+import AddBranch from "./pages/employeePortal/user/branch/addBranch";
 
 function App() {
   return (
@@ -48,6 +50,19 @@ function App() {
                 <Route
                   path="/employee-portal/users/add-user"
                   element={<AddUser />}
+                />
+              </Route>
+
+              
+              <Route path="/employee-portal/branches">
+              <Route path="/employee-portal/branches" element={< BranchesList/>} />
+                {/* <Route
+                  path="/employee-portal/branches/:id"
+                  element={<EditBranch />}
+                /> */}
+                <Route
+                  path="/employee-portal/branches/add"
+                  element={<AddBranch />}
                 />
               </Route>
             </Route>
