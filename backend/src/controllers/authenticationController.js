@@ -41,7 +41,15 @@ exports.login = (req, res) => {
           if (validatePassword(req.body.password, auth.password)) {
             const data = { auth, employee };
             // console.log("password match");
-            data["token"] = "fndjafklyirewlqrbkdbafdsafdsaf";
+            data["token"] = jwt.sign(
+              {
+                _id: auth.auth_ID,
+              },
+              config.secret,
+              {
+                expiresIn: "10d",
+              }
+            );
             res.send(data);
           } else {
             console.log("password not match");

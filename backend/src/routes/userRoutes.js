@@ -1,10 +1,10 @@
 module.exports = (app) => {
   const users = require("../controllers/userController");
-
+  const { jwtauth } = require("../utils/jwt.js");
   var router = require("express").Router();
 
   // user signup
-  router.post("/", users.create);
+  router.post("/", [jwtauth], users.create);
 
   // Get all users
   router.get("/", users.findAll);
