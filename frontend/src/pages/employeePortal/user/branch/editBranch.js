@@ -41,7 +41,7 @@ export const EditBranch = () => {
     return <div></div>;
   }
 
-  console.log({ user });
+  console.log({ branch });
 
   return (
       <Card>
