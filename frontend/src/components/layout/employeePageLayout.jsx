@@ -5,6 +5,7 @@ import {
   PieChartOutlined,
   TeamOutlined,
   UserOutlined,
+  BankOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Typography } from "antd";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
@@ -23,17 +24,17 @@ function getItem(label, key, path, icon, children) {
 }
 const items = [
   getItem("Dashboard", "1", "/", <PieChartOutlined />),
-  getItem("Option 2", "2", "/", <DesktopOutlined />),
-  getItem("User", "sub1", "/", <UserOutlined />, [
-    getItem("Tom", "3", "/'"),
-    getItem("Bill", "4", "/"),
-  ]),
+  getItem("Branches", "2", "/branches", <BankOutlined />),
+  // getItem("User", "sub1", "/", <UserOutlined />, [
+  //   getItem("Tom", "3", "/'"),
+  //   getItem("Bill", "4", "/"),
+  // ]),
   getItem("Users", "sub2", "/", <TeamOutlined />, [
     getItem("Users", "5", "/users"),
-    getItem("Employees", "6", "/users"),
+    getItem("Employees", "6", "/employees"),
     getItem("Customers", "8", "/users/add-user"),
   ]),
-  getItem("Files", "9", "/", <FileOutlined />),
+  getItem("Log", "9", "/", <FileOutlined />),
 ];
 
 const EmployeePageLayout = ({ children }) => {
