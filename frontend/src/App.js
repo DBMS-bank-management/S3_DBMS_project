@@ -56,6 +56,18 @@ function App() {
                 />
               </Route>
 
+              <Route path="/employee-portal/customers">
+                <Route path="/employee-portal/customers" element={<UsersList />} />
+                <Route
+                  path="/employee-portal/customers/:id"
+                  element={<EditUser />}
+                />
+                <Route
+                  path="/employee-portal/customers/add"
+                  element={<AddUser />}
+                />
+              </Route>
+
               
               <Route path="/employee-portal/branches">
               <Route path="/employee-portal/branches" element={< BranchesList/>} />
