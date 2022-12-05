@@ -24,20 +24,20 @@ User.findById = (id, result) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
-      return;
+      return false;
     }
 
     if (res.length) {
       console.log("found user: ", res[0]);
       result(null, res[0]);
-      return;
+      return res[0];
     }
 
     // not found User with the id
     result({ kind: "not_found" }, null);
+    return false;
   });
 };
-
 
 //remove sql injection here
 User.getAll = (title, result) => {

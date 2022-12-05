@@ -1,4 +1,5 @@
 import axios from "axios";
+import { employeeAxios } from './index';
 import { BASE_URL } from "./config";
 
 export function addUser(data) {
@@ -14,7 +15,7 @@ export function addUser(data) {
 }
 
 export const getUsers = () => {
-  return axios
+  return employeeAxios
     .get(`${BASE_URL}/users`)
     .then((response) => {
       return response.data;

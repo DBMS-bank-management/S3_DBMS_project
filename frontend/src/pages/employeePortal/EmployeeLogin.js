@@ -1,16 +1,16 @@
 import { useState, useRef } from "react";
-import { login } from "../api";
+import { employeeLogin } from "../../api";
 import { Button, Checkbox, Form, Input, Card } from "antd";
-import logo from "../logo.svg";
-import { navigateToHome } from "../utils/navigation";
+import logo from "../../logo.svg";
+import { navigateToHome } from "../../utils/navigation";
 
 const clamp = (min, max, val) => Math.max(min, Math.min(val, max));
 
-const Login = () => {
+const EmployeeLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   function submitLogin() {
-    login({ username, password })
+    employeeLogin({ username, password })
       .then((token) => (window.location = "/employee-portal"))
       .catch((err) => alert(err));
   }
@@ -173,4 +173,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default EmployeeLogin;

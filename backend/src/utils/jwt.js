@@ -1,12 +1,11 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
-const _ = require("lodash");
-
-const secret = "nNuiVYuov2b#*2d32obdo2dy8d32.Dl2dp2;dL=2<#_D>LD@_ld;-2dj#B"
+// const _ = require("lodash");
+const { JwT_SECRET } = require("../config");
 
 let verifyToken = (token, next) => {
   try {
-    var decoded = jwt.verify(token, secret);
+    var decoded = jwt.verify(token, JwT_SECRET);
     return { ...decoded, expired: false };
   } catch (err) {
     if (err) {
@@ -21,11 +20,14 @@ let verifyToken = (token, next) => {
 };
 
 let tokenValidation = async (req, res, next) => {
-  let token = req.headers["x-access-token"];
+  const token = req.headers["authorization"].split(" ")[1];
+
+  console.log({ token });
   if (token) {
     req.token = token;
     try {
       const decodedToken = verifyToken(req.token, next);
+      console.log({ decodedToken });
       console.log(decodedToken);
       if (!decodedToken) {
         res.status(400).json({
@@ -35,15 +37,13 @@ let tokenValidation = async (req, res, next) => {
       } else if (decodedToken.expired) {
         let decoded = jwt.decode(token);
 
-        let user = await models.User.findOne({
-          _id: decoded._id,
-        });
+        const user = userModel.findById(decoded.auth_ID, (err, res) => {});
 
         user.token = jwt.sign(
           {
             id: user._id,
           },
-          secret,
+          JwT_SECRET,
           {
             expiresIn: "20s", //change
           }
@@ -51,14 +51,24 @@ let tokenValidation = async (req, res, next) => {
         req.user = { user, userType: decoded.userType };
         next();
       } else {
-        let user = await models.User.findOne({
-          _id: decodedToken._id,
+        let decoded = jwt.decode(token);
+        console.log("not expired");
+
+        userModel.findById(decoded.auth_ID, (err, res) => {
+          if(err){
+            console.log({err})
+          }
+          let user = res;
+          user.token = token;
+          req.user = user;
+          next();
         });
-        user.token = req.token;
-        req.user = _.pick(user, models.User.returnable);
-        next();
+        console.log("user got in jwt authorization");
+
+        // req.user = _.pick(user, models.User.returnable);
       }
     } catch (err) {
+      console.log({ err });
       res.status(400).json({
         status: 400,
         message: "Error with your token",

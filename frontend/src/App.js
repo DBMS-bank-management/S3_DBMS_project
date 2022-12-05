@@ -4,8 +4,6 @@ import { ConfigProvider, theme } from "antd";
 import "./App.css";
 import { Contact } from "./pages/contact";
 import Home from "./pages/home";
-import { PrivateRoute } from "./components/auth";
-import Login from "./pages/login";
 import AddUser from "./pages/employeePortal/user/addUser";
 import UsersList from "./pages/employeePortal/user/usersList";
 import { EditUser } from "./pages/employeePortal/user/editUser";
@@ -16,6 +14,7 @@ import AddBranch from "./pages/employeePortal/user/branch/addBranch";
 // import AddEmployee from "./pages/employeePortal/employee/addEmployee";
 // import { EditEmployee } from "./pages/employeePortal/employee/editEmployee";
 import EmployeeList from "./pages/employeePortal/employee/EmployeesList";
+import EmployeeLogin from "./pages/employeePortal/EmployeeLogin";
 
 function App() {
   return (
@@ -38,6 +37,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
+            <Route exact path="employee-login" element={<EmployeeLogin />} />
             <Route
               exact
               path="/employee-portal"
@@ -56,9 +56,11 @@ function App() {
                 />
               </Route>
 
-              
               <Route path="/employee-portal/branches">
-              <Route path="/employee-portal/branches" element={< BranchesList/>} />
+                <Route
+                  path="/employee-portal/branches"
+                  element={<BranchesList />}
+                />
                 {/* <Route
                   path="/employee-portal/branches/:id"
                   element={<EditBranch />}
@@ -69,7 +71,10 @@ function App() {
                 />
               </Route>
               <Route path="/employee-portal/employees">
-                <Route path="/employee-portal/employees" element={<EmployeeList />} />
+                <Route
+                  path="/employee-portal/employees"
+                  element={<EmployeeList />}
+                />
                 {/* <Route
                   path="/employee-portal/employees/:id"
                   element={<EditEmployee />}
@@ -79,13 +84,12 @@ function App() {
                   element={<AddEmployee />}
                 /> */}
               </Route>
-
             </Route>
             <Route exact path="/" element={<GeneralPageLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="contact" element={<Contact />} />
             </Route>
-            <Route exact path="login" element={<Login />} />
+
             {/* <Route path="blogs" element={<Blogs />} /> */}
 
             {/* <Route path="*" element={<NoPage />} /> */}

@@ -7,15 +7,15 @@ module.exports = (app) => {
   router.post("/", [jwtauth], users.create);
 
   // Get all users
-  router.get("/", users.findAll);
+  router.get("/", [jwtauth], users.findAll);
 
-  router.get("/:id", users.findOne);
+  router.get("/:id", [jwtauth], users.findOne);
 
   // Update a user with id
-  router.put("/:id", users.update);
+  router.put("/:id", [jwtauth], users.update);
 
   // Delete a user with id
-  router.delete("/:id", users.delete);
+  router.delete("/:id", [jwtauth], users.delete);
 
   app.use("/users", router);
 };

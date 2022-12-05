@@ -106,7 +106,7 @@ const EmployeePageLayout = ({ children }) => {
       </Layout>
     </Layout>
   ) : (
-    <Navigate to="/login" />
+    <Navigate to="/employee-login" />
   );
 };
 export default EmployeePageLayout;
