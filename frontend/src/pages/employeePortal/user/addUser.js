@@ -3,9 +3,9 @@ import { Button, Form, Input, Card } from "antd";
 import { addUser } from "../../../api/user";
 
 const AddUser = () => {
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({ password: "" });
   function submitData() {
-    addUser({ password })
+    addUser({ formData })
       .then((token) => (window.location = "/employee-portal/users"))
       .catch((err) => alert(err));
   }
@@ -19,47 +19,56 @@ const AddUser = () => {
   };
 
   return (
-      <Card>
-        <Form
-          name="basic"
-          labelCol={{
-            span: 8,
-          }}
+    <Card>
+      <Form
+        name="basic"
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: "Password is required!",
+            },
+          ]}
+        >
+          <Input.Password
+            value={formData.password}
+            onChange={(e) => {
+              setFormData({ ...formData, password: e.target.value });
+            }}
+          />
+        </Form.Item>
+
+        <Form.Item
           wrapperCol={{
+            offset: 8,
             span: 16,
           }}
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
         >
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Password is required!",
-              },
-            ]}
+          <Button
+            type="primary"
+            htmlType="submit"
+            disabled={!formData.password}
           >
-            <Input.Password onChange={(e) => setPassword(e.target.value)} />
-          </Form.Item>
-
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Button type="primary" htmlType="submit" disabled={!password}>
-              Add User
-            </Button>
-          </Form.Item>
-        </Form>
-      </Card>
+            Add User
+          </Button>
+        </Form.Item>
+      </Form>
+    </Card>
   );
 };
 

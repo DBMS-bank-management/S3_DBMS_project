@@ -42,11 +42,12 @@ const UsersList = () => {
       title: "Action",
       key: "action",
       render: (_, record) => (
-        <Space size="middle">
-          <Button href={`users/${record.auth_ID}`} type="link">
+        <Space size="middle" key={record.auth_ID}>
+          <Button href={`users/${record.auth_ID}`} type="link" >
             Edit
           </Button>
           <ConfirmationDialog
+           key={record.auth_ID}
             buttonProps={{ type: "link", danger: true }}
             onOk={() => {
               onDelete(record.auth_ID);
@@ -60,7 +61,7 @@ const UsersList = () => {
   return (
     <Card style={{ width: "100%" }}>
       <Button href="users/add-user">Add user</Button>
-      <Table dataSource={users} columns={columns} bordered />
+      <Table dataSource={users} columns={columns} bordered rowKey={"auth_ID"}/>
     </Card>
   );
 };
