@@ -5,7 +5,7 @@ import { addUser } from "../../../api/user";
 const AddUser = () => {
   const [formData, setFormData] = useState({ password: "" });
   function submitData() {
-    addUser({ formData })
+    addUser(formData)
       .then((token) => (window.location = "/employee-portal/users"))
       .catch((err) => alert(err));
   }

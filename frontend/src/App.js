@@ -35,7 +35,7 @@ function App() {
       }}
     >
       <BrowserRouter>
-        <Routes>
+        <Routes >
           <Route path="/">
             <Route exact path="employee-login" element={<EmployeeLogin />} />
             <Route

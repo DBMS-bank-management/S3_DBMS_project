@@ -40,3 +40,33 @@
 .Header-text {
   color: white !important;
 }
+
+.glass {
+  /* background-color: transparent !important; */
+  background: rgba(255, 255, 255, 0.4) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  padding: 10px;
+}
+
+.slant-container {
+  transform: rotate(10deg);
+  padding: 40px;
+}
+.slant-container > * {
+  transform: rotate(-10deg);
+}
+
+.login {
+  background-image: url("./images/employeePortal/bg1.jpeg");
+  background-size: cover;
+  /* background: fixed; */
+}
+
+.employee-portal-bg {
+  background-image: url("./images/employeePortal/EmployeeLogin.jpg");
+  background-size: cover;
+}
