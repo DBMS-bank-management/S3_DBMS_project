@@ -1,7 +1,7 @@
 import { Button, Card, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
-import { deleteBranch, getBranches } from "../../../../api/branch";
-import ConfirmationDialog from "../../../../components/confirmationDialog";
+import { deleteBranch, getBranches } from "../../../api/branch";
+import ConfirmationDialog from "../../../components/confirmationDialog";
 
 const BranchesList = () => {
   const [branches, setBranches] = useState();

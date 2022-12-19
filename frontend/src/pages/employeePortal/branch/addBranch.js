@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Card } from "antd";
-import { addBranch } from "../../../../api/branch";
+import { addBranch } from "../../../api/branch";
 
 const AddBranch= () => {
   const [branch_name, setBranchName] = useState("");
