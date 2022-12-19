@@ -2,16 +2,16 @@ import axios from "axios";
 import { navigateToEmployeeLogin } from "../utils/navigation";
 import { BASE_URL } from "./config";
 
-const instance = axios.create({baseURL: BASE_URL})
+const instance = axios.create({ baseURL: BASE_URL });
 instance.interceptors.request.use(
-  function(config) {
-    const token = localStorage.getItem("employee-access-token"); 
+  function (config) {
+    const token = localStorage.getItem("employee-access-token");
     if (token) {
-      config.headers["Authorization"] = 'Bearer ' + token;
+      config.headers["Authorization"] = "Bearer " + token;
     }
     return config;
   },
-  function(error) {
+  function (error) {
     return Promise.reject(error);
   }
 );
@@ -26,6 +26,7 @@ export function employeeLogin(data) {
     })
     .then((response) => {
       console.log({ data: response.data });
+      localStorage.setItem("role", response.data.auth.role);
       localStorage.setItem("employee-access-token", response.data.token);
       localStorage.setItem(
         "employee-access-token-expiration",
@@ -39,9 +40,22 @@ export function employeeLogin(data) {
 }
 
 export function logout() {
+  localStorage.removeItem("role");
   localStorage.removeItem("employee-access-token");
   localStorage.removeItem("employee-access-token-expiration");
   navigateToEmployeeLogin();
+}
+
+export function isManager() {
+  return localStorage.getItem("role") == "manager";
+}
+
+export function isEmployee() {
+  return localStorage.getItem("role") == "employee";
+}
+
+export function isCustomer() {
+  return localStorage.getItem("role") == "customer";
 }
 
 export function isAuthenticated() {
@@ -51,4 +65,3 @@ export function isAuthenticated() {
   );
 }
 
-export function isEmployee() {}

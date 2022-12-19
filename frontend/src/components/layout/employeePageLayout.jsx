@@ -7,7 +7,7 @@ import {
   UserOutlined,
   BankOutlined,
 } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu, Typography, Button } from "antd";
+import { Breadcrumb, Layout, Menu, Typography, Button, Card } from "antd";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
 import { Navigate, useNavigate, Outlet } from "react-router-dom";
 import { flatternList } from "../../utils/list";
@@ -57,79 +57,90 @@ const EmployeePageLayout = ({ children }) => {
       style={{
         minHeight: "100vh",
       }}
-      className="employee-portal-bg"
+      className="login"
     >
-      <Sider
-        // className="glass"
-        // aria-expanded={true}
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}
-        onMouseEnter={() => setCollapsed(false)}
-        onMouseLeave={() => setTimeout(() => setCollapsed(true), 50)}
+      <Header
+        style={{
+          padding: 0,
+          width: "100%",
+          // backgroundColor:'red'
+        }}
       >
-        <div className="logo" />
-        <Menu
-          openKeys={collapsed ? [] : [openKey]}
-          // className="glass"
-          //  inlineIndent={}
-          theme="dark"
-          // defaultSelectedKeys={["1"]}
-          selectable
-          selectedKeys={flatternList(items)
-            .filter((a) => {
-              return "/employee-portal" + a.path == window.location.pathname;
-            })
-            .map((a) => a.key)}
-          // disabled={collapsed}
-          mode="inline"
-          items={items}
-          onClick={onClick}
-          triggerSubMenuAction="click"
-          subMenuCloseDelay={0}
-          // inlineCollapsed={true}
-        />
-      </Sider>
-      <Layout className="site-layout">
-        <Header
-          // className="site-layout-background"
+        <div
           style={{
-            padding: 0,
+            display: "flex",
+            alignContent: "center",
+            flexDirection: "row",
+            flex: 1,
             width: "100%",
-            // backgroundColor:'red'
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              alignContent: "center",
-              flexDirection: "row",
-              flex: 1,
-              width: "100%",
-            }}
-          >
-            <div style={{ flex: 0.95 }}>
-              <Typography
-                // style={{ justifySelf: "flex-start" }}
-                className="Header-text"
-              >
-                Employee Portal
-              </Typography>
-            </div>
-            <div style={{ flex: 0.05 }}>
-              <Button type="primary" style={{ justifySelf: "flex-end" }} onClick={logout}>Logout</Button>
-              {/* TODO add profile view */}
-            </div>
+          <div style={{ flex: 0.95 }}>
+            <Typography
+              // style={{ justifySelf: "flex-start" }}
+              className="Header-text"
+            >
+              Employee Portal
+            </Typography>
           </div>
-        </Header>
-        <Content
+          <div style={{ flex: 0.05 }}>
+            <Button
+              type="primary"
+              style={{ justifySelf: "flex-end" }}
+              onClick={logout}
+            >
+              Logout
+            </Button>
+            {/* TODO add profile view */}
+          </div>
+        </div>
+      </Header>
 
-        // style={{
-        //   margin: "0 16px",
-        // }}
+      <Layout className="site-layout transparent">
+        <Sider
+          // className="glass"
+          // aria-expanded={true}
+          // collapsible
+          collapsed={collapsed}
+          onCollapse={(value) => setCollapsed(value)}
+          onMouseEnter={() => setCollapsed(false)}
+          onMouseLeave={() => setTimeout(() => setCollapsed(true), 50)}
+          className="transparent glass"
+          theme="light"
         >
-          <BreadcrumbsFromPath />
-          <Outlet />
+          <div className="logo" />
+          <Menu
+            className="transparent"
+            openKeys={collapsed ? [] : [openKey]}
+            // className="glass"
+            //  inlineIndent={}
+            theme="light"
+            // defaultSelectedKeys={["1"]}
+            selectable
+            selectedKeys={flatternList(items)
+              .filter((a) => {
+                return "/employee-portal" + a.path == window.location.pathname;
+              })
+              .map((a) => a.key)}
+            // disabled={collapsed}
+
+            mode="inline"
+            items={items}
+            onClick={onClick}
+            triggerSubMenuAction="click"
+            subMenuCloseDelay={0}
+            // inlineCollapsed={true}
+          />
+        </Sider>
+        <Content
+          style={{
+            margin: "10px",
+          }}
+        >
+          <Card className="glass">
+            <BreadcrumbsFromPath />
+            <Outlet />
+          </Card>
         </Content>
         {/* <Footer
           style={{

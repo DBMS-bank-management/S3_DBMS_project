@@ -49,7 +49,7 @@ const EmployeeLogin = () => {
         // backgroundImage: "linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)",
       }}
     >
-      <Card className="glass">
+      <Card className="glass padding rounded">
         {/* <div className="glass"> */}
           <img src={logo} className="App-logo" alt="logo" />
           <Form

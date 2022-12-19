@@ -43,13 +43,21 @@
 
 .glass {
   /* background-color: transparent !important; */
-  background: rgba(255, 255, 255, 0.4) !important;
-  border-radius: 10px !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
   border: 1px solid rgba(255, 255, 255, 0.4) !important;
+}
+
+.rounded {
+  border-radius: 10px !important;
+}
+
+.padding {
   padding: 10px;
+  
 }
 
 .slant-container {
@@ -69,4 +77,8 @@
 .employee-portal-bg {
   background-image: url("./images/employeePortal/EmployeeLogin.jpg");
   background-size: cover;
+}
+
+.transparent {
+  background-color: transparent;
 }

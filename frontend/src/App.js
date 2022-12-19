@@ -15,6 +15,7 @@ import AddBranch from "./pages/employeePortal/user/branch/addBranch";
 // import { EditEmployee } from "./pages/employeePortal/employee/editEmployee";
 import EmployeeList from "./pages/employeePortal/employee/EmployeesList";
 import EmployeeLogin from "./pages/employeePortal/EmployeeLogin";
+import { Dashboard } from "./pages/employeePortal/Dashboard";
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
       }}
     >
       <BrowserRouter>
-        <Routes >
+        <Routes>
           <Route path="/">
             <Route exact path="employee-login" element={<EmployeeLogin />} />
             <Route
@@ -43,7 +44,7 @@ function App() {
               path="/employee-portal"
               element={<EmployeePageLayout />}
             >
-              <Route exact path="/employee-portal" element={<Home />} />
+              <Route exact path="/employee-portal" element={<Dashboard />} />
               <Route path="/employee-portal/users">
                 <Route path="/employee-portal/users" element={<UsersList />} />
                 <Route

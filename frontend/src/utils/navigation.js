@@ -3,5 +3,9 @@ export function navigateToHome() {
 }
 
 export function navigateToEmployeeLogin() {
-  window.location = "/employee-login";
+  window.location = "/employee-login/";
+}
+
+export function navigateToEmployeePortal() {
+  window.location = "/employee-portal/";
 }

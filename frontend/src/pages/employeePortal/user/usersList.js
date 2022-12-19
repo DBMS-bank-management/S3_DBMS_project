@@ -1,5 +1,6 @@
 import { Button, Card, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
+import { isManager } from "../../../api";
 import { deleteUser, getUsers } from "../../../api/user";
 import ConfirmationDialog from "../../../components/confirmationDialog";
 
@@ -43,16 +44,18 @@ const UsersList = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle" key={record.auth_ID}>
-          <Button href={`users/${record.auth_ID}`} type="link" >
+          <Button href={`users/${record.auth_ID}`} type="link">
             Edit
           </Button>
-          <ConfirmationDialog
-           key={record.auth_ID}
-            buttonProps={{ type: "link", danger: true }}
-            onOk={() => {
-              onDelete(record.auth_ID);
-            }}
-          />
+          {isManager() && (
+            <ConfirmationDialog
+              key={record.auth_ID}
+              buttonProps={{ type: "link", danger: true }}
+              onOk={() => {
+                onDelete(record.auth_ID);
+              }}
+            />
+          )}
         </Space>
       ),
     },
@@ -60,8 +63,8 @@ const UsersList = () => {
 
   return (
     <Card style={{ width: "100%" }}>
-      <Button href="users/add-user">Add user</Button>
-      <Table dataSource={users} columns={columns} bordered rowKey={"auth_ID"}/>
+      {isManager() && <Button href="users/add-user">Add user</Button>}
+      <Table dataSource={users} columns={columns} bordered rowKey={"auth_ID"} />
     </Card>
   );
 };

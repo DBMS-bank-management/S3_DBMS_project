@@ -1,21 +1,22 @@
 module.exports = (app) => {
   const users = require("../controllers/userController");
   const { jwtauth } = require("../utils/jwt.js");
+  const { isManager, isEmployee } = require("../utils/middleware.js");
   var router = require("express").Router();
 
   // user signup
   router.post("/", users.create);
 
   // Get all users
-  router.get("/", [jwtauth], users.findAll);
+  router.get("/", [jwtauth, isEmployee], users.findAll);
 
-  router.get("/:id", [jwtauth], users.findOne);
+  router.get("/:id", [jwtauth, isEmployee], users.findOne);
 
   // Update a user with id
-  router.put("/:id", [jwtauth], users.update);
+  router.put("/:id", [jwtauth, isManager], users.update);
 
   // Delete a user with id
-  router.delete("/:id", [jwtauth], users.delete);
+  router.delete("/:id", [jwtauth, isManager], users.delete);
 
   app.use("/users", router);
 };
