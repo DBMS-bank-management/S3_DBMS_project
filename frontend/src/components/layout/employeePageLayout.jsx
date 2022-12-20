@@ -19,7 +19,7 @@ const EmployeePageLayout = ({ children }) => {
   // const [selected, setSelected] = useState("");
   const [openKey, setOpenKey] = useState();
 
-  const auth = true; //isAuthenticated();
+  const auth = isAuthenticated();
 
   const navigate = useNavigate();
 
@@ -98,6 +98,7 @@ const EmployeePageLayout = ({ children }) => {
 
       <Layout className="site-layout transparent" style={{minHeight: '100%'}}>
         <Sider
+        style={{marginTop: '10px', marginBottom: '10px', borderTopRightRadius: 10, borderBottomRightRadius: 10}}
           // className="glass"
           // aria-expanded={true}
           // collapsible
