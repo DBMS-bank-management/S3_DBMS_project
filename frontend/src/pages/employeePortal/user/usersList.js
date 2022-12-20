@@ -1,4 +1,4 @@
-import { Button, Card, Space, Table } from "antd";
+import { Button, Card, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { isManager } from "../../../api";
 import { deleteUser, getUsers } from "../../../api/user";
@@ -20,7 +20,7 @@ const UsersList = () => {
       .then((data) => {
         setUsers(data);
       })
-      .catch((err) => alert(err));
+      .catch((err) => message.error(err));
   }
 
   const columns = [

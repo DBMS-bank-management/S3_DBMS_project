@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { employeeLogin } from "../../api";
-import { Button, Checkbox, Form, Input, Card } from "antd";
+import { Button, Checkbox, Form, Input, Card, message } from "antd";
 import logo from "../../logo.svg";
 import { navigateToHome } from "../../utils/navigation";
 import bgImage from "../../images/employeePortal/EmployeeLogin.jpg";
@@ -13,10 +13,13 @@ const EmployeeLogin = () => {
   const [password, setPassword] = useState("");
   function submitLogin() {
     employeeLogin({ username, password })
+      .then(() => {
+        message.success("Login successful");
+      })
       .then((token) => (window.location = "/employee-portal"))
       .catch((err) => {
         setProcessing(false);
-        alert(err);
+        message.error(err);
       });
   }
 
@@ -25,6 +28,7 @@ const EmployeeLogin = () => {
     console.log("Success:", values);
   };
   const onFinishFailed = (errorInfo) => {
+    message.error("Failed: " + errorInfo);
     console.log("Failed:", errorInfo);
   };
 
@@ -51,99 +55,99 @@ const EmployeeLogin = () => {
     >
       <Card className="glass padding rounded">
         {/* <div className="glass"> */}
-          <img src={logo} className="App-logo" alt="logo" />
-          <Form
-            name="basic"
-            labelCol={{
-              span: 8,
-            }}
+        <img src={logo} className="App-logo" alt="logo" />
+        <Form
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
+          wrapperCol={{
+            span: 16,
+          }}
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <Form.Item
+            label="Username"
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: "Username is required!",
+              },
+            ]}
+          >
+            <Input
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+              onKeyPress={() => handleKeyPress(0)}
+              inputRef={(ref) => (inputRefs.current[0] = ref)}
+            />
+          </Form.Item>
+
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "Password is required!",
+              },
+            ]}
+          >
+            <Input.Password
+              onChange={(e) => setPassword(e.target.value)}
+              inputRef={(ref) => (inputRefs.current[1] = ref)}
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="remember"
+            valuePropName="checked"
             wrapperCol={{
+              offset: 8,
               span: 16,
             }}
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
           >
-            <Form.Item
-              label="Username"
-              name="username"
-              rules={[
-                {
-                  required: true,
-                  message: "Username is required!",
-                },
-              ]}
-            >
-              <Input
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-                onKeyPress={() => handleKeyPress(0)}
-                inputRef={(ref) => (inputRefs.current[0] = ref)}
-              />
-            </Form.Item>
+            <Checkbox>Remember me</Checkbox>
+          </Form.Item>
 
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Password is required!",
-                },
-              ]}
-            >
-              <Input.Password
-                onChange={(e) => setPassword(e.target.value)}
-                inputRef={(ref) => (inputRefs.current[1] = ref)}
-              />
-            </Form.Item>
+          <div
+            // wrapperCol={{
+            //   offset: 8,
+            //   span: 16,
 
-            <Form.Item
-              name="remember"
-              valuePropName="checked"
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
+            // }}
+            style={{
+              width: "100%",
+              justifyContent: "space-around",
+              flexDirection: "row",
+              display: "flex",
+            }}
+          >
+            <Button
+              type="primary"
+              // disabled={!username || !password}
+              onClick={navigateToHome}
             >
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-
-            <div
-              // wrapperCol={{
-              //   offset: 8,
-              //   span: 16,
-
-              // }}
-              style={{
-                width: "100%",
-                justifyContent: "space-around",
-                flexDirection: "row",
-                display: "flex",
-              }}
+              Cancel
+            </Button>
+            <Button
+              type={"primary"}
+              loading={processing}
+              htmlType="submit"
+              disabled={!username || !password}
+              onClick={() => setProcessing(true)}
             >
-              <Button
-                type="primary"
-                // disabled={!username || !password}
-                onClick={navigateToHome}
-              >
-                Cancel
-              </Button>
-              <Button
-                type={"primary"}
-                loading={processing}
-                htmlType="submit"
-                disabled={!username || !password}
-                onClick={() => setProcessing(true)}
-              >
-                Login
-              </Button>
-            </div>
-          </Form>
+              Login
+            </Button>
+          </div>
+        </Form>
         {/* </div> */}
       </Card>
       {/* <div className="container">

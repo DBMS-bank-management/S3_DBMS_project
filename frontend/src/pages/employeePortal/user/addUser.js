@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Card } from "antd";
+import { Button, Form, Input, Card, message } from "antd";
 import { addUser } from "../../../api/user";
 
 const AddUser = () => {
@@ -7,7 +7,7 @@ const AddUser = () => {
   function submitData() {
     addUser(formData)
       .then((token) => (window.location = "/employee-portal/users"))
-      .catch((err) => alert(err));
+      .catch((err) => message.error(err));
   }
 
   const onFinish = (values) => {

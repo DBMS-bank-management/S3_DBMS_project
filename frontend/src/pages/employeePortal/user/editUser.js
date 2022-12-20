@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input, Radio } from "antd";
+import { Button, Card, Form, Input, Radio, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { getUser, updateUser } from "../../../api/user";
 import { useParams } from "react-router-dom";
@@ -19,7 +19,7 @@ export const EditUser = () => {
         setFormData(data);
       })
       .then(() => setLoading(false))
-      .catch((err) => alert(err));
+      .catch((err) => message.error(err));
   }
 
   function submitData() {
@@ -27,7 +27,7 @@ export const EditUser = () => {
       .then((token) => {
         console.log("edited");
       })
-      .catch((err) => alert(err));
+      .catch((err) => message.error(err));
   }
 
   const onFinish = (values) => {

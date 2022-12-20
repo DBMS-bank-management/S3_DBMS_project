@@ -1,4 +1,4 @@
-import { Button, Card, Space, Table } from "antd";
+import { Button, Card, Space, Table, message} from "antd";
 import React, { useEffect, useState } from "react";
 import { deleteEmployee, getEmployees } from "../../../api/employee";
 import ConfirmationDialog from "../../../components/confirmationDialog";
@@ -19,7 +19,7 @@ const EmployeeList = () => {
       .then((data) => {
         setEmployee(data);
       })
-      .catch((err) => alert(err));
+      .catch((err) => message.error(err));
   }
 
   const columns = [
