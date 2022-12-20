@@ -45,7 +45,7 @@
   /* background-color: transparent !important; */
   background: rgba(255, 255, 255, 0.6) !important;
 
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
   border: 1px solid rgba(255, 255, 255, 0.4) !important;
@@ -82,3 +82,17 @@
 .transparent {
   background-color: transparent;
 }
+
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.page-heading {
+  padding: 20px;
+  font-size: 40px;
+  text-align: center;
+}
+

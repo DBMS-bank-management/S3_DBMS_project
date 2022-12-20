@@ -96,7 +96,7 @@ const EmployeePageLayout = ({ children }) => {
         </div>
       </Header>
 
-      <Layout className="site-layout transparent">
+      <Layout className="site-layout transparent" style={{minHeight: '100%'}}>
         <Sider
           // className="glass"
           // aria-expanded={true}
@@ -134,10 +134,13 @@ const EmployeePageLayout = ({ children }) => {
         </Sider>
         <Content
           style={{
-            margin: "10px",
+            // margin: "10px",
+            minHeight: '100%',
+            padding: 10
+            // backgroundColor: 'green'
           }}
         >
-          <Card className="glass">
+          <Card className="glass" style={{ minHeight: '100%'}}>
             <BreadcrumbsFromPath />
             <Outlet />
           </Card>
