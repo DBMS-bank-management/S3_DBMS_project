@@ -20,12 +20,11 @@ let verifyToken = (token, next) => {
 };
 
 let tokenValidation = async (req, res, next) => {
-  const token = req.headers["authorization"].split(" ")[1];
-
-  console.log({ token });
-  if (token) {
-    req.token = token;
+  const auth_header = req.headers["authorization"];
+  if (auth_header) {
     try {
+      const token = auth_header.split(" ")[1];
+      req.token = token;
       const decodedToken = verifyToken(req.token, next);
       console.log({ decodedToken });
       console.log(decodedToken);
@@ -55,8 +54,8 @@ let tokenValidation = async (req, res, next) => {
         console.log("not expired");
 
         userModel.findById(decoded.auth_ID, (err, res) => {
-          if(err){
-            console.log({err})
+          if (err) {
+            console.log({ err });
           }
           let user = res;
           user.token = token;
