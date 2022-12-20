@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { isManager } from "../../../api";
 import { deleteUser, getUsers } from "../../../api/user";
 import ConfirmationDialog from "../../../components/confirmationDialog";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 
 const UsersList = () => {
   const [users, setUsers] = useState();
@@ -62,10 +63,14 @@ const UsersList = () => {
   ];
 
   return (
+    <div className="transparent">
+      <EmployeePageHeading text={"Users"} />
     <Card style={{ width: "100%" }}>
+     
       {isManager() || true && <Button href="users/add">Add user</Button>}
       <Table dataSource={users} columns={columns} bordered rowKey={"auth_ID"} />
     </Card>
+    </div>
   );
 };
 

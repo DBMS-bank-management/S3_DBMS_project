@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Card, message } from "antd";
 import { addBranch } from "../../../api/branch";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 
 const AddBranch = () => {
   const [branch_name, setBranchName] = useState("");
@@ -19,47 +20,50 @@ const AddBranch = () => {
   };
 
   return (
-    <Card>
-      <Form
-        name="basic"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <Form.Item
-          label="Name"
-          name="branch_name"
-          rules={[
-            {
-              required: true,
-              message: "Branch name is required!",
-            },
-          ]}
-        >
-          <Input.Name onChange={(e) => setBranchName(e.target.value)} />
-        </Form.Item>
-
-        <Form.Item
+    <div className="transparent">
+      <EmployeePageHeading text={"Add branch"} />
+      <Card>
+        <Form
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
           wrapperCol={{
-            offset: 8,
             span: 16,
           }}
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
         >
-          <Button type="primary" htmlType="submit" disabled={!branch_name}>
-            Add branch
-          </Button>
-        </Form.Item>
-      </Form>
-    </Card>
+          <Form.Item
+            label="Name"
+            name="branch_name"
+            rules={[
+              {
+                required: true,
+                message: "Branch name is required!",
+              },
+            ]}
+          >
+            <Input.Name onChange={(e) => setBranchName(e.target.value)} />
+          </Form.Item>
+
+          <Form.Item
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
+            <Button type="primary" htmlType="submit" disabled={!branch_name}>
+              Add branch
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card>
+    </div>
   );
 };
 

@@ -1,7 +1,8 @@
-import { Button, Card, Space, Table, message} from "antd";
+import { Button, Card, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { deleteEmployee, getEmployees } from "../../../api/employee";
 import ConfirmationDialog from "../../../components/confirmationDialog";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 
 const EmployeeList = () => {
   const [Employee, setEmployee] = useState();
@@ -39,15 +40,15 @@ const EmployeeList = () => {
       key: "branch_ID",
     },
     {
-        title: "Manager",
-        dataIndex: "Is_manager",
-        key: "Is_manager",
-        render: (val) => val ? "yes" : "no"
+      title: "Manager",
+      dataIndex: "Is_manager",
+      key: "Is_manager",
+      render: (val) => (val ? "yes" : "no"),
     },
     {
-        title: "Authorization ID",
-        dataIndex: "auth_ID",
-        key: "auth_ID",
+      title: "Authorization ID",
+      dataIndex: "auth_ID",
+      key: "auth_ID",
     },
     {
       title: "Action",
@@ -69,10 +70,13 @@ const EmployeeList = () => {
   ];
 
   return (
-    <Card style={{ width: "100%" }}>
-      <Button href="employees/add-employee">Add Employee</Button>
-      <Table dataSource={Employee} columns={columns} bordered />
-    </Card>
+    <div className="transparent">
+      <EmployeePageHeading text={"Employees"} />
+      <Card style={{ width: "100%" }}>
+        <Button href="employees/add-employee">Add Employee</Button>
+        <Table dataSource={Employee} columns={columns} bordered />
+      </Card>
+    </div>
   );
 };
 

@@ -44,6 +44,8 @@ export const EditBranch = () => {
   console.log({ branch });
 
   return (
+    <div className="transparent">
+      <EmployeePageHeading text={"Edit branch " + branch.name} />
       <Card>
         <Form
           name="basic"
@@ -114,5 +116,6 @@ export const EditBranch = () => {
           </Form.Item>
         </Form>
       </Card>
+    </div>
   );
 };

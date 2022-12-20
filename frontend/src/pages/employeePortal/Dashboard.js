@@ -14,6 +14,7 @@ import {
   AreaChart,
   Area,
 } from "recharts";
+import { EmployeePageHeading } from "../../components/layout/employeePageHeading";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -187,15 +188,17 @@ export const Dashboard = () => {
 
   return (
     // <Card className="glass">
-    <Layout style={{ height: '100%' }} className="transparent">
+    <Layout style={{ height: "100%" }} className="transparent">
       {/* <Header> */}
-      <Typography className="page-heading">
-        {isManager()
-          ? "Manager Dashboard"
-          : isEmployee()
-          ? "Employee Dashboard"
-          : null}
-      </Typography>
+      <EmployeePageHeading
+        text={
+          isManager()
+            ? "Manager Dashboard"
+            : isEmployee()
+            ? "Employee Dashboard"
+            : null
+        }
+      />
       {/* </Header> */}
       <Divider />
       <Content className="transparent">
@@ -207,7 +210,7 @@ export const Dashboard = () => {
           </Col>
           <Col span={6}>
             <Card className="glass center-content" hoverable>
-              <Statistic title="Total in accounts" value={112893}/>
+              <Statistic title="Total in accounts" value={112893} />
             </Card>
           </Col>
           <Col span={6}>
