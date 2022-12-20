@@ -42,37 +42,31 @@ function App() {
             <Route exact path="employee-login" element={<EmployeeLogin />} />
             <Route
               exact
-              path="/employee-portal"
+              path="/employee-portal/"
               element={<EmployeePageLayout />}
             >
-              <Route exact path="/employee-portal" element={<Dashboard />} />
-              <Route path="/employee-portal/users">
-                <Route path="/employee-portal/users" element={<UsersList />} />
+              <Route exact path="" element={<Dashboard />} />
+              <Route path="users/">
+                <Route path="" element={<UsersList />} />
                 <Route
-                  path="/employee-portal/users/:id"
+                  path=":id"
                   element={
                     <OnlyManager>
                       <EditUser />
                     </OnlyManager>
                   }
                 />
-                <Route
-                  path="/employee-portal/users/add-user"
-                  element={<AddUser />}
-                />
+                <Route path="add" element={<AddUser />} />
               </Route>
 
-              <Route path="/employee-portal/branches">
-                <Route
-                  path="/employee-portal/branches"
-                  element={<BranchesList />}
-                />
+              <Route path="branches">
+                <Route path="" element={<BranchesList />} />
                 {/* <Route
                   path="/employee-portal/branches/:id"
                   element={<EditBranch />}
                 /> */}
                 <Route
-                  path="/employee-portal/branches/add"
+                  path="add"
                   element={
                     <OnlyManager>
                       <AddBranch />
@@ -80,11 +74,8 @@ function App() {
                   }
                 />
               </Route>
-              <Route path="/employee-portal/employees">
-                <Route
-                  path="/employee-portal/employees"
-                  element={<EmployeeList />}
-                />
+              <Route path="employees">
+                <Route path="" element={<EmployeeList />} />
                 {/* <Route
                   path="/employee-portal/employees/:id"
                   element={<EditEmployee />}

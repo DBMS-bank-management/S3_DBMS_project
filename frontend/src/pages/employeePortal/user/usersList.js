@@ -63,7 +63,7 @@ const UsersList = () => {
 
   return (
     <Card style={{ width: "100%" }}>
-      {isManager() && <Button href="users/add-user">Add user</Button>}
+      {isManager() || true && <Button href="users/add">Add user</Button>}
       <Table dataSource={users} columns={columns} bordered rowKey={"auth_ID"} />
     </Card>
   );
