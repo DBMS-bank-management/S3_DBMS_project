@@ -1,4 +1,4 @@
-const CustomerModel = require("../models/userModel.js");
+const CustomerModel = require("../models/customerModel.js");
 
 
 // Create and Save a new UserModel
