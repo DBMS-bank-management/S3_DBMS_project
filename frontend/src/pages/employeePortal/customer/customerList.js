@@ -4,7 +4,7 @@ import { deleteCustomer, getCustomers } from "../../../api/customer";
 import ConfirmationDialog from "../../../components/confirmationDialog";
 
 const CustomersList = () => {
-  const [customers, setCustomers] = useState();
+  const [customer, setCustomers] = useState();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => loadCustomersList(), []);
@@ -23,11 +23,7 @@ const CustomersList = () => {
   }
 
   const columns = [
-    {
-      title: "auth_ID",
-      dataIndex: "auth_ID",
-      key: "auth_ID",
-    },
+    
     {
         title: "ID",
         dataIndex: "ID",
@@ -42,6 +38,11 @@ const CustomersList = () => {
       title: "type",
       dataIndex: "type",
       key: "type",
+    },
+    {
+      title: "auth_ID",
+      dataIndex: "auth_ID",
+      key: "auth_ID",
     },
     {
       title: "contact_no",

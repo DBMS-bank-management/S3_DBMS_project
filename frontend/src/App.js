@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ConfigProvider, theme } from "antd";
 
+import CustomersList from "./pages/employeePortal/customer/customerList";
 import "./App.css";
 import { Contact } from "./pages/contact";
 import Home from "./pages/home";
@@ -63,7 +64,7 @@ function App() {
               <Route path="/employee-portal/customers">
                 <Route
                   path="/employee-portal/customers"
-                  element={<UsersList />}
+                  element={<CustomersList />}
                 />
                 <Route
                   path="/employee-portal/customers/:id"
