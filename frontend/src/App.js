@@ -39,6 +39,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
+            {/* EMPLOYEE PORTAL ROUTES*/}
+
             <Route exact path="employee-login" element={<EmployeeLogin />} />
             <Route
               exact
@@ -86,14 +88,16 @@ function App() {
                 /> */}
               </Route>
             </Route>
+
+            {/* CUSTOMER PORTAL ROUTES */}
+
+            {/* PUBLIC ROUTES */}
+
             <Route exact path="/" element={<GeneralPageLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="contact" element={<Contact />} />
             </Route>
-
-            {/* <Route path="blogs" element={<Blogs />} /> */}
-
-            {/* <Route path="*" element={<NoPage />} /> */}
+            <Route path="*" element={<p>Invalid Route</p>} />
           </Route>
         </Routes>
       </BrowserRouter>
