@@ -108,18 +108,19 @@ function App() {
                 /> */}
                 </Route>
               </Route>
-
-              {/* CUSTOMER PORTAL ROUTES */}
-
-              {/* PUBLIC ROUTES */}
-              <Route exact path="employee-login" element={<EmployeeLogin />} />
-
-              <Route exact path="/" element={<GeneralPageLayout />}>
-                <Route path="/" element={<Home />} />
-                <Route path="contact" element={<Contact />} />
-              </Route>
-              <Route path="*" element={<p>Invalid Route</p>} />
             </Route>
+
+            {/* CUSTOMER PORTAL ROUTES */}
+
+            {/* PUBLIC ROUTES */}
+            <Route exact path="employee-login" element={<EmployeeLogin />} />
+
+            <Route exact path="/" element={<GeneralPageLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="contact" element={<Contact />} />
+            </Route>
+            <Route path="*" element={<p>Invalid Route</p>} />
+
           </Route>
         </Routes>
       </BrowserRouter>
