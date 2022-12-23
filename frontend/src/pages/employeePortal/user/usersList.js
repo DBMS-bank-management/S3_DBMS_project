@@ -1,7 +1,9 @@
-import { Button, Card, Space, Table } from "antd";
+import { Button, Card, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
+import { isManager } from "../../../api";
 import { deleteUser, getUsers } from "../../../api/user";
 import ConfirmationDialog from "../../../components/confirmationDialog";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 
 const UsersList = () => {
   const [users, setUsers] = useState();
@@ -19,7 +21,7 @@ const UsersList = () => {
       .then((data) => {
         setUsers(data);
       })
-      .catch((err) => alert(err));
+      .catch((err) => message.error(err));
   }
 
   const columns = [
@@ -42,26 +44,33 @@ const UsersList = () => {
       title: "Action",
       key: "action",
       render: (_, record) => (
-        <Space size="middle">
+        <Space size="middle" key={record.auth_ID}>
           <Button href={`users/${record.auth_ID}`} type="link">
             Edit
           </Button>
-          <ConfirmationDialog
-            buttonProps={{ type: "link", danger: true }}
-            onOk={() => {
-              onDelete(record.auth_ID);
-            }}
-          />
+          {isManager() && (
+            <ConfirmationDialog
+              key={record.auth_ID}
+              buttonProps={{ type: "link", danger: true }}
+              onOk={() => {
+                onDelete(record.auth_ID);
+              }}
+            />
+          )}
         </Space>
       ),
     },
   ];
 
   return (
+    <div className="transparent">
+      <EmployeePageHeading text={"Users"} />
     <Card style={{ width: "100%" }}>
-      <Button href="users/add-user">Add user</Button>
-      <Table dataSource={users} columns={columns} bordered />
+     
+      {isManager() || true && <Button href="users/add">Add user</Button>}
+      <Table dataSource={users} columns={columns} bordered rowKey={"auth_ID"} />
     </Card>
+    </div>
   );
 };
 

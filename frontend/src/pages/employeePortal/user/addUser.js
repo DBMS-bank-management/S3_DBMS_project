@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Card } from "antd";
+import { Button, Form, Input, Card, message } from "antd";
 import { addUser } from "../../../api/user";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 
 const AddUser = () => {
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({ password: "" });
   function submitData() {
-    addUser({ password })
+    addUser(formData)
       .then((token) => (window.location = "/employee-portal/users"))
-      .catch((err) => alert(err));
+      .catch((err) => message.error(err));
   }
 
   const onFinish = (values) => {
@@ -19,6 +20,8 @@ const AddUser = () => {
   };
 
   return (
+    <div className="transparent">
+      <EmployeePageHeading text={"Add user"} />
       <Card>
         <Form
           name="basic"
@@ -45,7 +48,12 @@ const AddUser = () => {
               },
             ]}
           >
-            <Input.Password onChange={(e) => setPassword(e.target.value)} />
+            <Input.Password
+              value={formData.password}
+              onChange={(e) => {
+                setFormData({ ...formData, password: e.target.value });
+              }}
+            />
           </Form.Item>
 
           <Form.Item
@@ -54,12 +62,17 @@ const AddUser = () => {
               span: 16,
             }}
           >
-            <Button type="primary" htmlType="submit" disabled={!password}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={!formData.password}
+            >
               Add User
             </Button>
           </Form.Item>
         </Form>
       </Card>
+    </div>
   );
 };
 

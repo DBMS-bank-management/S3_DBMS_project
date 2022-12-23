@@ -1,7 +1,10 @@
+const jwt = require("jsonwebtoken");
+
 const UserController = require("./userController");
 const UserModel = require("../models/userModel.js");
 const EmployeeModel = require("../models/employeeModel");
 const { validatePassword } = require("../utils/hash");
+const { JwT_SECRET } = require("../config");
 // Create and Save a new User
 exports.login = (req, res) => {
   // Validate request
@@ -41,7 +44,15 @@ exports.login = (req, res) => {
           if (validatePassword(req.body.password, auth.password)) {
             const data = { auth, employee };
             // console.log("password match");
-            data["token"] = "fndjafklyirewlqrbkdbafdsafdsaf";
+            data["token"] = jwt.sign(
+              {
+                ...auth,
+              },
+              JwT_SECRET,
+              {
+                expiresIn: "10d",
+              }
+            );
             res.send(data);
           } else {
             console.log("password not match");

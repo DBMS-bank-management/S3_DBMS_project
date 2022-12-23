@@ -1,18 +1,26 @@
 import { useState, useRef } from "react";
-import { login } from "../api";
-import { Button, Checkbox, Form, Input, Card } from "antd";
-import logo from "../logo.svg";
-import { navigateToHome } from "../utils/navigation";
+import { employeeLogin } from "../../api";
+import { Button, Checkbox, Form, Input, Card, message } from "antd";
+import logo from "../../logo.svg";
+import { navigateToHome } from "../../utils/navigation";
+import bgImage from "../../images/employeePortal/EmployeeLogin.jpg";
 
 const clamp = (min, max, val) => Math.max(min, Math.min(val, max));
 
-const Login = () => {
+const EmployeeLogin = () => {
   const [username, setUsername] = useState("");
+  const [processing, setProcessing] = useState(false);
   const [password, setPassword] = useState("");
   function submitLogin() {
-    login({ username, password })
+    employeeLogin({ username, password })
+      .then(() => {
+        message.success("Login successful");
+      })
       .then((token) => (window.location = "/employee-portal"))
-      .catch((err) => alert(err));
+      .catch((err) => {
+        setProcessing(false);
+        message.error(err);
+      });
   }
 
   const onFinish = (values) => {
@@ -20,6 +28,7 @@ const Login = () => {
     console.log("Success:", values);
   };
   const onFinishFailed = (errorInfo) => {
+    message.error("Failed: " + errorInfo);
     console.log("Failed:", errorInfo);
   };
 
@@ -32,6 +41,7 @@ const Login = () => {
 
   return (
     <div
+      className="login"
       style={{
         display: "flex",
         alignItems: "center",
@@ -39,9 +49,12 @@ const Login = () => {
         width: "100%",
         height: "100vh",
         backgroundColor: "#ececec",
+        // background-color: #21D4FD;
+        // backgroundImage: "linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)",
       }}
     >
-      <Card>
+      <Card className="glass padding rounded">
+        {/* <div className="glass"> */}
         <img src={logo} className="App-logo" alt="logo" />
         <Form
           name="basic"
@@ -125,14 +138,17 @@ const Login = () => {
               Cancel
             </Button>
             <Button
-              type="primary"
+              type={"primary"}
+              loading={processing}
               htmlType="submit"
               disabled={!username || !password}
+              onClick={() => setProcessing(true)}
             >
               Login
             </Button>
           </div>
         </Form>
+        {/* </div> */}
       </Card>
       {/* <div className="container">
         <hr />
@@ -173,4 +189,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default EmployeeLogin;

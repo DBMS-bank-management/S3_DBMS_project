@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Card } from "antd";
-import { addBranch } from "../../../../api/branch";
+import { Button, Form, Input, Card, message } from "antd";
+import { addBranch } from "../../../api/branch";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 
-const AddBranch= () => {
+const AddBranch = () => {
   const [branch_name, setBranchName] = useState("");
   function submitData() {
     addBranch({ branch_name })
       .then((token) => (window.location = "/employee-portal/branches"))
-      .catch((err) => alert(err));
+      .catch((err) => message.error(err));
   }
 
   const onFinish = (values) => {
@@ -19,6 +20,8 @@ const AddBranch= () => {
   };
 
   return (
+    <div className="transparent">
+      <EmployeePageHeading text={"Add branch"} />
       <Card>
         <Form
           name="basic"
@@ -60,6 +63,7 @@ const AddBranch= () => {
           </Form.Item>
         </Form>
       </Card>
+    </div>
   );
 };
 

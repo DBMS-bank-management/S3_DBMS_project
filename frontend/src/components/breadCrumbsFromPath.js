@@ -23,7 +23,7 @@ export const BreadcrumbsFromPath = () => {
       separator={">"}
     >
       <Breadcrumb.Item key={"home"} href={"/"}>
-       {"> Home"}
+        {"Home"}
       </Breadcrumb.Item>
       {paths.map((path, index) => (
         <Breadcrumb.Item key={path[1]} href={"/" + path[1]}>

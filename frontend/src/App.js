@@ -4,18 +4,19 @@ import { ConfigProvider, theme } from "antd";
 import "./App.css";
 import { Contact } from "./pages/contact";
 import Home from "./pages/home";
-import { PrivateRoute } from "./components/auth";
-import Login from "./pages/login";
 import AddUser from "./pages/employeePortal/user/addUser";
 import UsersList from "./pages/employeePortal/user/usersList";
 import { EditUser } from "./pages/employeePortal/user/editUser";
 import EmployeePageLayout from "./components/layout/employeePageLayout";
 import GeneralPageLayout from "./components/layout/pageLayout";
-import BranchesList from "./pages/employeePortal/user/branch/branchesList";
-import AddBranch from "./pages/employeePortal/user/branch/addBranch";
+import BranchesList from "./pages/employeePortal/branch/branchesList";
+import AddBranch from "./pages/employeePortal/branch/addBranch";
 // import AddEmployee from "./pages/employeePortal/employee/addEmployee";
 // import { EditEmployee } from "./pages/employeePortal/employee/editEmployee";
 import EmployeeList from "./pages/employeePortal/employee/EmployeesList";
+import EmployeeLogin from "./pages/employeePortal/EmployeeLogin";
+import { Dashboard } from "./pages/employeePortal/Dashboard";
+import { OnlyManager } from "./components/roleBasedRoute";
 
 function App() {
   return (
@@ -38,26 +39,32 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
+            {/* EMPLOYEE PORTAL ROUTES*/}
             <Route
               exact
-              path="/employee-portal"
+              path="/employee-portal/"
               element={<EmployeePageLayout />}
             >
-              <Route exact path="/employee-portal" element={<Home />} />
-              <Route path="/employee-portal/users">
-                <Route path="/employee-portal/users" element={<UsersList />} />
+              <Route exact path="" element={<Dashboard />} />
+
+              <Route path="users/">
+                <Route path="" element={<UsersList />} />
                 <Route
-                  path="/employee-portal/users/:id"
-                  element={<EditUser />}
+                  path=":id"
+                  element={
+                    <OnlyManager>
+                      <EditUser />
+                    </OnlyManager>
+                  }
                 />
-                <Route
-                  path="/employee-portal/users/add-user"
-                  element={<AddUser />}
-                />
+                <Route path="add" element={<AddUser />} />
               </Route>
 
               <Route path="/employee-portal/customers">
-                <Route path="/employee-portal/customers" element={<UsersList />} />
+                <Route
+                  path="/employee-portal/customers"
+                  element={<UsersList />}
+                />
                 <Route
                   path="/employee-portal/customers/:id"
                   element={<EditUser />}
@@ -68,21 +75,30 @@ function App() {
                 />
               </Route>
 
-              
               <Route path="/employee-portal/branches">
-              <Route path="/employee-portal/branches" element={< BranchesList/>} />
-                {/* <Route
+                <Route
+                  path="/employee-portal/branches"
+                  element={<BranchesList />}
+                />
+                <Route path="branches">
+                  <Route path="" element={<BranchesList />} />
+                  {/* <Route
                   path="/employee-portal/branches/:id"
                   element={<EditBranch />}
                 /> */}
-                <Route
-                  path="/employee-portal/branches/add"
-                  element={<AddBranch />}
-                />
-              </Route>
-              <Route path="/employee-portal/employees">
-                <Route path="/employee-portal/employees" element={<EmployeeList />} />
-                {/* <Route
+                  <Route
+                    path="add"
+                    element={
+                      <OnlyManager>
+                        <AddBranch />
+                      </OnlyManager>
+                    }
+                  />
+                </Route>
+
+                <Route path="employees">
+                  <Route path="" element={<EmployeeList />} />
+                  {/* <Route
                   path="/employee-portal/employees/:id"
                   element={<EditEmployee />}
                 />
@@ -90,17 +106,20 @@ function App() {
                   path="/employee-portal/employees/add-employee"
                   element={<AddEmployee />}
                 /> */}
+                </Route>
               </Route>
 
-            </Route>
-            <Route exact path="/" element={<GeneralPageLayout />}>
-              <Route path="/" element={<Home />} />
-              <Route path="contact" element={<Contact />} />
-            </Route>
-            <Route exact path="login" element={<Login />} />
-            {/* <Route path="blogs" element={<Blogs />} /> */}
+              {/* CUSTOMER PORTAL ROUTES */}
 
-            {/* <Route path="*" element={<NoPage />} /> */}
+              {/* PUBLIC ROUTES */}
+              <Route exact path="employee-login" element={<EmployeeLogin />} />
+
+              <Route exact path="/" element={<GeneralPageLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="contact" element={<Contact />} />
+              </Route>
+              <Route path="*" element={<p>Invalid Route</p>} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

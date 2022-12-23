@@ -1,33 +1,34 @@
-import { Button, Card, Form, Input, Radio } from "antd";
+import { Button, Card, Form, Input, Radio, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { getUser, updateUser } from "../../../api/user";
 import { useParams } from "react-router-dom";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 
 export const EditUser = () => {
-  const [user, setUser] = useState();
+  const [formData, setFormData] = useState();
   const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
 
-  console.log({ user });
+  console.log({ formData });
 
   useEffect(() => loadUser(), []);
 
   function loadUser() {
     getUser(id)
       .then((data) => {
-        setUser(data);
+        setFormData(data);
       })
       .then(() => setLoading(false))
-      .catch((err) => alert(err));
+      .catch((err) => message.error(err));
   }
 
   function submitData() {
-    updateUser(user)
+    updateUser(formData)
       .then((token) => {
         console.log("edited");
       })
-      .catch((err) => alert(err));
+      .catch((err) => message.error(err));
   }
 
   const onFinish = (values) => {
@@ -41,9 +42,11 @@ export const EditUser = () => {
     return <div></div>;
   }
 
-  console.log({ user });
+  console.log({ formData });
 
   return (
+    <div className="transparent">
+      <EmployeePageHeading text={"Edit User " + id} />
       <Card>
         <Form
           name="basic"
@@ -61,7 +64,7 @@ export const EditUser = () => {
           autoComplete="off"
         >
           <Form.Item
-            initialValue={user.password}
+            initialValue={formData.password}
             label="Password"
             name="password"
             rules={[
@@ -71,14 +74,14 @@ export const EditUser = () => {
               },
             ]}
           >
-            <Input
+            <Input.Password
               onChange={(e) => {
-                setUser({ ...user, password: e.target.value });
+                setFormData({ ...formData, password: e.target.value });
               }}
             />
           </Form.Item>
           <Form.Item
-            initialValue={user.role}
+            initialValue={formData.role}
             label="Role"
             name="role"
             rules={[
@@ -90,9 +93,9 @@ export const EditUser = () => {
           >
             <Radio.Group
               onChange={(e) => {
-                setUser({ ...user, role: e.target.value });
+                setFormData({ ...formData, role: e.target.value });
               }}
-              value={user.role}
+              value={formData.role}
             >
               {["employee", "customer", "manager"].map((role) => (
                 <Radio key={role} value={role}>
@@ -114,5 +117,6 @@ export const EditUser = () => {
           </Form.Item>
         </Form>
       </Card>
+    </div>
   );
 };

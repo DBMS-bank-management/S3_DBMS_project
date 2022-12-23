@@ -1,7 +1,8 @@
-import { Button, Card, Space, Table } from "antd";
+import { Button, Card, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
-import { deleteBranch, getBranches } from "../../../../api/branch";
-import ConfirmationDialog from "../../../../components/confirmationDialog";
+import { deleteBranch, getBranches } from "../../../api/branch";
+import ConfirmationDialog from "../../../components/confirmationDialog";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 
 const BranchesList = () => {
   const [branches, setBranches] = useState();
@@ -19,7 +20,7 @@ const BranchesList = () => {
       .then((data) => {
         setBranches(data);
       })
-      .catch((err) => alert(err));
+      .catch((err) => message.error(err));
   }
 
   const columns = [
@@ -58,10 +59,13 @@ const BranchesList = () => {
   ];
 
   return (
-    <Card style={{ width: "100%" }}>
-      <Button href="branches/add">Add branch</Button>
-      <Table dataSource={branches} columns={columns} bordered />
-    </Card>
+    <div className="transparent">
+      <EmployeePageHeading text={"Add branch"} />
+      <Card style={{ width: "100%" }}>
+        <Button href="branches/add">Add branch</Button>
+        <Table dataSource={branches} columns={columns} bordered />
+      </Card>
+    </div>
   );
 };
 
