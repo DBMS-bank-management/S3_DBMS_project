@@ -1,23 +1,23 @@
 import { Button, Card, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
-import { deleteUser, getUsers } from "../../../api/user";
+import { deleteCustomer, getCustomers } from "../../../api/customer";
 import ConfirmationDialog from "../../../components/confirmationDialog";
 
-const UsersList = () => {
-  const [users, setUsers] = useState();
+const CustomersList = () => {
+  const [customers, setCustomers] = useState();
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => loadUsersList(), []);
+  useEffect(() => loadCustomersList(), []);
 
   const onDelete = (id) => {
-    deleteUser(id);
-    loadUsersList();
+    deleteCustomer(id);
+    loadCustomersList();
   };
 
-  function loadUsersList() {
-    getUsers()
+  function loadCustomersList() {
+    getCustomers()
       .then((data) => {
-        setUsers(data);
+        setCustomers(data);
       })
       .catch((err) => alert(err));
   }
@@ -69,10 +69,10 @@ const UsersList = () => {
 
   return (
     <Card style={{ width: "100%" }}>
-      <Button href="customers/add">Add user</Button>
-      <Table dataSource={users} columns={columns} bordered />
+      <Button href="customers/add">Add Customer</Button>
+      <Table dataSource={customer} columns={columns} bordered />
     </Card>
   );
 };
 
-export default UsersList;
+export default CustomersList;

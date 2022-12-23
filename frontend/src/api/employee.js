@@ -4,8 +4,10 @@ import { BASE_URL } from "./config";
 export function addEmployee(data) {
   return axios
     .post(`${BASE_URL}/employees`, {
-      password: data.password,
-      role: "employee",
+      emp_name: data.emp_name,
+      branch_ID: data.branch_ID,
+      Is_manager: data.Is_manager,
+      auth_ID: data.auth_ID
     })
     .then((response) => {
       return response.data;
