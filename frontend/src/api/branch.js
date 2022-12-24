@@ -42,7 +42,6 @@ export const updateBranch = (data) => {
     .catch((err) =>
       Promise.reject("Failed to update branch with id = " + data.branch_id + "!")
     );
-  console.log({ data });
 };
 
 export const deleteBranch = (id) => {

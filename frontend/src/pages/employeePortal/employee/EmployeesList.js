@@ -16,7 +16,7 @@ const EmployeeList = () => {
   };
 
   function loadEmployeeList() {
-    getEmployees()
+     getEmployees()
       .then((data) => {
         setEmployee(data);
       })
