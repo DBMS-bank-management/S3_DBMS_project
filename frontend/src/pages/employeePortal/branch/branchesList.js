@@ -60,7 +60,7 @@ const BranchesList = () => {
 
   return (
     <div className="transparent">
-      <EmployeePageHeading text={"Add branch"} />
+      <EmployeePageHeading text={"Branches"} />
       <Card style={{ width: "100%" }}>
         <Button href="branches/add">Add branch</Button>
         <Table dataSource={branches} columns={columns} bordered />

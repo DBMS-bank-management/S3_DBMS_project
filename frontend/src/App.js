@@ -14,6 +14,7 @@ import AddBranch from "./pages/employeePortal/branch/addBranch";
 // import AddEmployee from "./pages/employeePortal/employee/addEmployee";
 // import { EditEmployee } from "./pages/employeePortal/employee/editEmployee";
 import EmployeeList from "./pages/employeePortal/employee/EmployeesList";
+import LogsList from "./pages/employeePortal/Log/logList";
 import EmployeeLogin from "./pages/employeePortal/EmployeeLogin";
 import { Dashboard } from "./pages/employeePortal/Dashboard";
 import { OnlyManager } from "./components/roleBasedRoute";
@@ -87,6 +88,13 @@ function App() {
                   element={<AddEmployee />}
                 /> */}
               </Route>
+              <Route path="activitylogs">
+              <Route path="" element={<LogsList />} />
+            </Route>
+            </Route>
+
+            <Route path="activitylogs">
+              <Route path="" element={<LogsList />} />
             </Route>
 
             {/* CUSTOMER PORTAL ROUTES */}
