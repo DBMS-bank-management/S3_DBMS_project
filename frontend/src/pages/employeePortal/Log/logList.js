@@ -45,7 +45,7 @@ function loadLogsList() {
 
   return (
     <div className="transparent">
-      <EmployeePageHeading text={"Activity Logs Motherfuckers"} />
+      <EmployeePageHeading text={"Activity Logs"} />
       <Card style={{ width: "100%" }}>
         <Table dataSource={activities} columns={columns} bordered />
       </Card>
