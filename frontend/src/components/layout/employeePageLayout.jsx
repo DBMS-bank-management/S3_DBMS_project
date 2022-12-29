@@ -72,7 +72,7 @@ const EmployeePageLayout = ({ children }) => {
       getItem("Employees", "6", "/employees"),
       getItem("Customers", "8", "/customers"),
     ]),
-    getItem("Log", "9", "/", <FileOutlined />),
+    getItem("Log", "9", "/activitylogs", <FileOutlined />),
   ];
 
   return auth ? (
