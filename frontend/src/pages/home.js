@@ -1,7 +1,7 @@
 import logo from "../logo.svg";
 import "../App.css";
 import { Button } from "antd";
-import { logout } from "../api";
+import { employeeLogout } from "../api";
 
 function Home() {
   return (
@@ -20,7 +20,7 @@ function Home() {
         >
           Employee portal
         </a>
-        <Button onClick={logout}>logout</Button>
+        <Button onClick={employeeLogout}>employeeLogout</Button>
       </header>
     </div>
   );

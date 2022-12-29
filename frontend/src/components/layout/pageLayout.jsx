@@ -2,7 +2,10 @@ import React from "react";
 import { Breadcrumb, Layout, Menu, Button, Row } from "antd";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
 import { Navigate, useNavigate, Outlet } from "react-router-dom";
-import { navigateToEmployeePortal } from "../../utils/navigation";
+import {
+  navigateToCustomerPortal,
+  navigateToEmployeePortal,
+} from "../../utils/navigation";
 const { Header, Content, Footer } = Layout;
 
 const GeneralPageLayout = () => {
@@ -25,7 +28,7 @@ const GeneralPageLayout = () => {
             width: "100%",
           }}
         >
-          <div style={{ flex: 0.8, justifyContent:'flex-start' }}>
+          <div style={{ flex: 0.8, justifyContent: "flex-start" }}>
             <Menu
               className="transparent"
               theme="dark"
@@ -54,11 +57,18 @@ const GeneralPageLayout = () => {
               onClick={onClick}
             />
           </div>
-          <div style={{ display:'flex', flex: 0.20, justifyContent: 'flex-end', direction: 'row', alignSelf: "center" }}>
-            
+          <div
+            style={{
+              display: "flex",
+              flex: 0.2,
+              justifyContent: "flex-end",
+              direction: "row",
+              alignSelf: "center",
+            }}
+          >
             <Button
               // type="primary"
-              type='link'
+              type="link"
               style={{ justifySelf: "flex-end" }}
               onClick={navigateToEmployeePortal}
             >
@@ -67,9 +77,9 @@ const GeneralPageLayout = () => {
             {/* TODO add profile view */}
             <Button
               // type="primary"
-              type='link'
+              type="link"
               style={{ justifySelf: "flex-end" }}
-              onClick={navigateToEmployeePortal}
+              onClick={navigateToCustomerPortal}
             >
               Customer portal
             </Button>
@@ -100,7 +110,7 @@ export default GeneralPageLayout;
 // import logo from "../logo.svg";
 // import "../App.css";
 // import { Button } from "antd";
-// import { logout } from "../api";
+// import { employeeLogout } from "../api";
 // import EmployeePageLayout from "../components/employeePageLayout";
 
 // function Home() {
@@ -120,7 +130,7 @@ export default GeneralPageLayout;
 //         >
 //           Employee portal
 //         </a>
-//         <Button onClick={logout}>logout</Button>
+//         <Button onClick={employeeLogout}>employeeLogout</Button>
 //       </header>
 //     </div>
 //   );

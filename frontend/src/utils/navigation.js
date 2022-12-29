@@ -9,3 +9,11 @@ export function navigateToEmployeeLogin() {
 export function navigateToEmployeePortal() {
   window.location = "/employee-portal/";
 }
+
+export function navigateToCustomerLogin() {
+  window.location = "/customer-login/";
+}
+
+export function navigateToCustomerPortal() {
+  window.location = "/customer-portal/";
+}

@@ -2,7 +2,7 @@ import axios from "axios";
 import { navigateToEmployeeLogin } from "../utils/navigation";
 import { BASE_URL } from "./config";
 
-const instance = axios.create({ baseURL: BASE_URL });
+export const employeeAxios = axios.create({ baseURL: BASE_URL });
 instance.interceptors.request.use(
   function (config) {
     const token = localStorage.getItem("employee-access-token");
@@ -16,9 +16,7 @@ instance.interceptors.request.use(
   }
 );
 
-export const employeeAxios = instance;
-
-export function employeeLogin(data) {
+export async function employeeLogin(data) {
   return axios
     .post(`${BASE_URL}/auth/login`, {
       username: data.username,
@@ -39,7 +37,7 @@ export function employeeLogin(data) {
     .catch((err) => Promise.reject("Authentication Failed!"));
 }
 
-export function logout() {
+export function employeeLogout() {
   localStorage.removeItem("role");
   localStorage.removeItem("employee-access-token");
   localStorage.removeItem("employee-access-token-expiration");
@@ -47,21 +45,27 @@ export function logout() {
 }
 
 export function isManager() {
-  return localStorage.getItem("role") == "manager";
+  return localStorage.getItem("role") === "manager";
 }
 
 export function isEmployee() {
-  return localStorage.getItem("role") == "employee";
+  return localStorage.getItem("role") === "employee";
 }
 
 export function isCustomer() {
-  return localStorage.getItem("role") == "customer";
+  return localStorage.getItem("role") === "customer";
 }
 
-export function isAuthenticated() {
+export function isAuthenticatedEmployee() {
   return (
     localStorage.getItem("employee-access-token") &&
     localStorage.getItem("employee-access-token-expiration") > Date.now()
   );
 }
 
+export function isAuthenticatedCustomer() {
+  return (
+    localStorage.getItem("employee-access-token") &&
+    localStorage.getItem("employee-access-token-expiration") > Date.now()
+  );
+}

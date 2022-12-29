@@ -17,8 +17,11 @@ import AddBranch from "./pages/employeePortal/branch/addBranch";
 import EmployeeList from "./pages/employeePortal/employee/EmployeesList";
 import LogsList from "./pages/employeePortal/Log/logList";
 import EmployeeLogin from "./pages/employeePortal/EmployeeLogin";
-import { Dashboard } from "./pages/employeePortal/Dashboard";
+import { Dashboard } from "./pages/employeePortal/EmployeeDashboard";
 import { OnlyManager } from "./components/roleBasedRoute";
+import CustomerLogin from "./pages/customerPortal/CustomerLogin";
+import CustomerDashboard from "./pages/customerPortal/CustomerDashboard";
+import CustomerPageLayout from "./components/layout/CustomerPageLayout";
 
 function App() {
   return (
@@ -69,20 +72,19 @@ function App() {
               </Route>
 
               <Route path="branches/">
-                <Route path="">
-                  <Route path="" element={<BranchesList />} />
-                  <Route
-                    path="add"
-                    element={
-                      <OnlyManager>
-                        <AddBranch />
-                      </OnlyManager>
-                    }
-                  />
-                </Route>
-                <Route path="employees/">
-                  <Route path="" element={<EmployeeList />} />
-                  {/* <Route
+                <Route path="" element={<BranchesList />} />
+                <Route
+                  path="add"
+                  element={
+                    <OnlyManager>
+                      <AddBranch />
+                    </OnlyManager>
+                  }
+                />
+              </Route>
+              <Route path="employees/">
+                <Route path="" element={<EmployeeList />} />
+                {/* <Route
                   path="/employee-portal/employees/:id"
                   element={<EditEmployee />}
                 />
@@ -90,7 +92,6 @@ function App() {
                   path="/employee-portal/employees/add-employee"
                   element={<AddEmployee />}
                 /> */}
-                </Route>
               </Route>
               <Route path="activitylogs/">
                 <Route path="" element={<LogsList />} />
@@ -98,8 +99,13 @@ function App() {
             </Route>
             {/* CUSTOMER PORTAL ROUTES */}
 
+            <Route path="customer-portal" element={<CustomerPageLayout />}>
+              <Route path="" element={<CustomerDashboard />} />
+            </Route>
+
             {/* PUBLIC ROUTES */}
             <Route exact path="employee-login" element={<EmployeeLogin />} />
+            <Route path="customer-login" element={<CustomerLogin />} />
             <Route exact path="/" element={<GeneralPageLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="contact" element={<Contact />} />

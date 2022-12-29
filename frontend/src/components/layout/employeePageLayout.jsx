@@ -11,7 +11,7 @@ import { Breadcrumb, Layout, Menu, Typography, Button, Card } from "antd";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
 import { Navigate, useNavigate, Outlet } from "react-router-dom";
 import { flatternList } from "../../utils/list";
-import { isAuthenticated, logout } from "../../api";
+import { isAuthenticatedEmployee, employeeLogout } from "../../api";
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, path, icon, children) {
   return {
@@ -42,7 +42,7 @@ const EmployeePageLayout = ({ children }) => {
   // const [selected, setSelected] = useState("");
   const [openKey, setOpenKey] = useState();
 
-  const auth = isAuthenticated();
+  const auth = isAuthenticatedEmployee();
 
   const navigate = useNavigate();
 
@@ -110,7 +110,7 @@ const EmployeePageLayout = ({ children }) => {
             <Button
               type="primary"
               style={{ justifySelf: "flex-end" }}
-              onClick={logout}
+              onClick={employeeLogout}
             >
               Logout
             </Button>
