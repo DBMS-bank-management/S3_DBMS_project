@@ -62,32 +62,15 @@ function App() {
                 <Route path="add" element={<AddUser />} />
               </Route>
 
-              <Route path="/employee-portal/customers">
-                <Route
-                  path="/employee-portal/customers"
-                  element={<CustomersList />}
-                />
-                <Route
-                  path="/employee-portal/customers/:id"
-                  element={<EditUser />}
-                />
-                <Route
-                  path="/employee-portal/customers/add"
-                  element={<AddUser />}
-                />
+              <Route path="customers/">
+                <Route path="" element={<CustomersList />} />
+                <Route path=":id" element={<EditUser />} />
+                <Route path="add" element={<AddUser />} />
               </Route>
 
-              <Route path="/employee-portal/branches">
-                <Route
-                  path="/employee-portal/branches"
-                  element={<BranchesList />}
-                />
-                <Route path="branches">
+              <Route path="branches/">
+                <Route path="">
                   <Route path="" element={<BranchesList />} />
-                  {/* <Route
-                  path="/employee-portal/branches/:id"
-                  element={<EditBranch />}
-                /> */}
                   <Route
                     path="add"
                     element={
@@ -97,8 +80,7 @@ function App() {
                     }
                   />
                 </Route>
-
-                <Route path="employees">
+                <Route path="employees/">
                   <Route path="" element={<EmployeeList />} />
                   {/* <Route
                   path="/employee-portal/employees/:id"
@@ -110,26 +92,19 @@ function App() {
                 /> */}
                 </Route>
               </Route>
-              <Route path="activitylogs">
-              <Route path="" element={<LogsList />} />
+              <Route path="activitylogs/">
+                <Route path="" element={<LogsList />} />
+              </Route>
             </Route>
-            </Route>
-
-            <Route path="activitylogs">
-              <Route path="" element={<LogsList />} />
-            </Route>
-
             {/* CUSTOMER PORTAL ROUTES */}
 
             {/* PUBLIC ROUTES */}
             <Route exact path="employee-login" element={<EmployeeLogin />} />
-
             <Route exact path="/" element={<GeneralPageLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="contact" element={<Contact />} />
             </Route>
             <Route path="*" element={<p>Invalid Route</p>} />
-
           </Route>
         </Routes>
       </BrowserRouter>
