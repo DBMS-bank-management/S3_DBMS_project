@@ -13,6 +13,29 @@ import { Navigate, useNavigate, Outlet } from "react-router-dom";
 import { flatternList } from "../../utils/list";
 import { isAuthenticated, logout } from "../../api";
 const { Header, Content, Footer, Sider } = Layout;
+function getItem(label, key, path, icon, children) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    path,
+  };
+}
+const items = [
+  getItem("Dashboard", "1", "/", <PieChartOutlined />),
+  getItem("Branches", "2", "/branches", <BankOutlined />),
+  // getItem("User", "sub1", "/", <UserOutlined />, [
+  //   getItem("Tom", "3", "/'"),
+  //   getItem("Bill", "4", "/"),
+  // ]),
+  getItem("Users", "sub2", "/", <TeamOutlined />, [
+    getItem("Users", "5", "/users"),
+    getItem("Employees", "6", "/employees"),
+    getItem("Customers", "8", "/customers"),
+  ]),
+  getItem("Log", "9", "/", <FileOutlined />),
+];
 
 const EmployeePageLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -47,7 +70,7 @@ const EmployeePageLayout = ({ children }) => {
     getItem("Users", "sub2", "/", <TeamOutlined />, [
       getItem("Users", "5", "/users"),
       getItem("Employees", "6", "/employees"),
-      getItem("Customers", "8", "/users/add"),
+      getItem("Customers", "8", "/customers"),
     ]),
     getItem("Log", "9", "/activitylogs", <FileOutlined />),
   ];

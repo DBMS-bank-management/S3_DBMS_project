@@ -22,6 +22,7 @@ require("./src/routes/userRoutes")(app);
 require("./src/routes/authenticationRoutes")(app);
 require("./src/routes/employeeRoutes")(app);
 require("./src/routes/branchRoutes")(app);
+require("./src/routes/customerRoutes")(app);
 require("./src/routes/activityLogRoutes")(app);
 
 // set port, listen for requests
