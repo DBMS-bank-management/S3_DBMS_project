@@ -2,8 +2,8 @@ import axios from "axios";
 import { navigateToEmployeeLogin } from "../utils/navigation";
 import { BASE_URL } from "./config";
 
-export const employeeAxios = axios.create({ baseURL: BASE_URL });
-instance.interceptors.request.use(
+const employeeAxiosInstance = axios.create({ baseURL: BASE_URL });
+employeeAxiosInstance.interceptors.request.use(
   function (config) {
     const token = localStorage.getItem("employee-access-token");
     if (token) {
@@ -15,6 +15,7 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+export const employeeAxios = employeeAxiosInstance;
 
 export async function employeeLogin(data) {
   return axios
