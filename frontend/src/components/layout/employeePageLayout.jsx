@@ -33,6 +33,7 @@ const items = [
     getItem("Users", "5", "/users"),
     getItem("Employees", "6", "/employees"),
     getItem("Customers", "8", "/customers"),
+    getItem("Accounts", "7","/accounts"),
   ]),
   getItem("Log", "9", "/", <FileOutlined />),
 ];
@@ -71,6 +72,7 @@ const EmployeePageLayout = ({ children }) => {
       getItem("Users", "5", "/users"),
       getItem("Employees", "6", "/employees"),
       getItem("Customers", "8", "/customers"),
+      getItem("Accounts", "7","/accounts"),
     ]),
     getItem("Log", "9", "/activitylogs", <FileOutlined />),
   ];
