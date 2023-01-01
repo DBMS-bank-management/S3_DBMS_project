@@ -23,6 +23,7 @@ import CustomerLogin from "./pages/customerPortal/CustomerLogin";
 import CustomerDashboard from "./pages/customerPortal/CustomerDashboard";
 import CustomerPageLayout from "./components/layout/CustomerPageLayout";
 import AccountsList from "./pages/employeePortal/account/accountsList";
+import InstallmentList from "./pages/employeePortal/installment/installmentList";
 
 function App() {
   return (
@@ -81,6 +82,17 @@ function App() {
                     </OnlyManager>
                   }
                 />
+              </Route>
+
+              <Route path="installments/">
+                <Route path="" element={<InstallmentList />} />
+                <Route
+                  path="add"
+                  element={
+                    <OnlyManager>
+                    </OnlyManager>
+                  }
+                />              
               </Route>
 
               <Route path="branches/">
