@@ -1,7 +1,7 @@
 import logo from "../logo.svg";
 import "../App.css";
 import { Button } from "antd";
-import { employeeLogout } from "../api";
+import { employeeLogout } from "../api/authentication.js";
 
 function Home() {
   return (

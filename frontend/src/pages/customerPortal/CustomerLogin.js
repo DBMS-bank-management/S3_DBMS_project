@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { employeeLogin } from "../../api";
+import { employeeLogin } from "../../api/authentication.js";
 import { Button, Checkbox, Form, Input, Card, message } from "antd";
 import logo from "../../logo.svg";
 import { navigateToHome } from "../../utils/navigation";

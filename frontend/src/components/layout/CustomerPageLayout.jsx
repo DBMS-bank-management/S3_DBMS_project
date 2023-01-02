@@ -1,7 +1,8 @@
 import React from "react";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
+import { isAuthenticatedCustomer } from "../../api/authentication";
 
 const { Header, Content, Footer } = Layout;
 
@@ -10,7 +11,9 @@ const CustomerPageLayout = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  return (
+  const authenticated = isAuthenticatedCustomer();
+
+  return authenticated ? (
     <Layout className="layout">
       <Header>
         <div className="logo" />
@@ -40,6 +43,8 @@ const CustomerPageLayout = () => {
         Designed and built by DBMS group
       </Footer>
     </Layout>
+  ) : (
+    <Navigate to="/customer-login" />
   );
 };
 
