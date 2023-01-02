@@ -133,7 +133,7 @@ const EmployeePageLayout = ({ children }) => {
           <div className="logo" />
           <Menu
             className="transparent"
-            openKeys={collapsed ? [] : [openKey]}
+            openKeys={collapsed ? [] : items.filter(item => !!item.children).map(item => item.key)}
             // className="glass"
             //  inlineIndent={}
             theme="light"
