@@ -1,5 +1,5 @@
 import axios from "axios";
-import { navigateToEmployeeLogin } from "../utils/navigation";
+import { navigateToCustomerLogin, navigateToEmployeeLogin } from "../utils/navigation";
 import { BASE_URL } from "./config";
 
 const employeeAxiosInstance = axios.create({ baseURL: BASE_URL });
@@ -81,7 +81,7 @@ export const customerAxios = customerAxiosInstance;
 
 export async function customerLogin(data) {
   return axios
-    .post(`${BASE_URL}/auth/login`, {
+    .post(`${BASE_URL}/auth/customer-login`, {
       username: data.username,
       password: data.password,
     })
@@ -104,7 +104,7 @@ export function customerLogout() {
   localStorage.removeItem("role");
   localStorage.removeItem("customer-access-token");
   localStorage.removeItem("customer-access-token-expiration");
-  navigateToEmployeeLogin();
+  navigateToCustomerLogin();
 }
 
 export function isAuthenticatedCustomer() {
