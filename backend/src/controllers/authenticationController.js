@@ -6,7 +6,7 @@ const EmployeeModel = require("../models/employeeModel");
 const { validatePassword } = require("../utils/hash");
 const { JwT_SECRET } = require("../config");
 // Create and Save a new User
-exports.login = (req, res) => {
+exports.employeeLogin = (req, res) => {
   // Validate request
   if (!req.body) {
     res.status(400).send({
@@ -56,7 +56,9 @@ exports.login = (req, res) => {
             res.send(data);
           } else {
             console.log("password not match");
-            res.status(401);
+            res.status(401).send({
+              message: "Wrong password or username",
+            });
           }
         }
       });

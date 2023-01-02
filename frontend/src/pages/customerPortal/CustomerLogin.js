@@ -16,7 +16,7 @@ const CustomerLogin = () => {
       .then(() => {
         message.success("Login successful");
       })
-      .then((token) => (window.location = "/employee-portal"))
+      .then((token) => (window.location = "/customer-portal"))
       .catch((err) => {
         setProcessing(false);
         message.error(err);

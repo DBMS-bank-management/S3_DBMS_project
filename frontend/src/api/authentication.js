@@ -19,7 +19,7 @@ export const employeeAxios = employeeAxiosInstance;
 
 export async function employeeLogin(data) {
   return axios
-    .post(`${BASE_URL}/auth/login`, {
+    .post(`${BASE_URL}/auth/employee-login`, {
       username: data.username,
       password: data.password,
     })
@@ -64,9 +64,52 @@ export function isAuthenticatedEmployee() {
   );
 }
 
+const customerAxiosInstance = axios.create({ baseURL: BASE_URL });
+customerAxiosInstance.interceptors.request.use(
+  function (config) {
+    const token = localStorage.getItem("employee-access-token");
+    if (token) {
+      config.headers["Authorization"] = "Bearer " + token;
+    }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
+export const customerAxios = customerAxiosInstance;
+
+export async function customerLogin(data) {
+  return axios
+    .post(`${BASE_URL}/auth/login`, {
+      username: data.username,
+      password: data.password,
+    })
+    .then((response) => {
+      console.log({ data: response.data });
+      localStorage.setItem("role", response.data.auth.role);
+      localStorage.setItem("customer-access-token", response.data.token);
+      localStorage.setItem(
+        "customer-access-token-expiration",
+        Date.now() + 2 * 60 * 60 * 1000
+      );
+      axios.defaults.headers.common["Authorization"] =
+        "Bearer " + response.data.token;
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Authentication Failed!"));
+}
+
+export function customerLogout() {
+  localStorage.removeItem("role");
+  localStorage.removeItem("customer-access-token");
+  localStorage.removeItem("customer-access-token-expiration");
+  navigateToEmployeeLogin();
+}
+
 export function isAuthenticatedCustomer() {
   return (
-    localStorage.getItem("employee-access-token") &&
-    localStorage.getItem("employee-access-token-expiration") > Date.now()
+    localStorage.getItem("customer-access-token") &&
+    localStorage.getItem("customer-access-token-expiration") > Date.now()
   );
 }

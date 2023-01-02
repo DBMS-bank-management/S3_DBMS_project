@@ -4,7 +4,7 @@ const authentication = require("../controllers/authenticationController");
 var router = require("express").Router();
 
 // user signup
-router.post("/login", authentication.login);
+router.post("/employee-login", authentication.employeeLogin);
 
 app.use("/auth", router);
 };
