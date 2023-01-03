@@ -49,23 +49,7 @@ const TransactionList = () => {
         key: "amount",
       },
       
-    {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <Button href={`transactions/${record.trans_ID}`} type="link">
-            Edit
-          </Button>
-          <ConfirmationDialog
-            buttonProps={{ type: "link", danger: true }}
-            onOk={() => {
-              onDelete(record.trans_ID);
-            }}
-          />
-        </Space>
-      ),
-    },
+    
   ];
 
   return (

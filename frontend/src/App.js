@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ConfigProvider, theme } from "antd";
 
+import TransactionList from "./pages/employeePortal/transaction/transactionList";
 import CustomersList from "./pages/employeePortal/customer/customerList";
 import "./App.css";
 import { Contact } from "./pages/contact";
@@ -102,6 +103,16 @@ function App() {
                   element={
                     <OnlyManager>
                       <AddBranch />
+                    </OnlyManager>
+                  }
+                />
+              </Route>
+              <Route path="transactions/">
+                <Route path="" element={<TransactionList />} />
+                <Route
+                  path="add"
+                  element={
+                    <OnlyManager>
                     </OnlyManager>
                   }
                 />

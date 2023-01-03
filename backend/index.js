@@ -26,6 +26,7 @@ require("./src/routes/customerRoutes")(app);
 require("./src/routes/activityLogRoutes")(app);
 require("./src/routes/accountRoutes")(app);
 require("./src/routes/installmentRoutes")(app);
+require("./src/routes/transactionRoutes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8000;
