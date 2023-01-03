@@ -36,7 +36,12 @@ const items = [
     getItem("Accounts", "7","/accounts"),
     getItem("Installments", "10","/installments"),
   ]),
-  getItem("Log", "9", "/", <FileOutlined />),
+  getItem("Log", "9", "/activitylogs", <FileOutlined />),
+
+  getItem("Applications", "sub2", "/", <TeamOutlined />, [
+    getItem("Normal Applications", "11","/normalApplications"),
+    getItem("Online Applications", "12","/onlineApplications"),
+  ]),
 ];
 
 const EmployeePageLayout = ({ children }) => {
@@ -77,6 +82,11 @@ const EmployeePageLayout = ({ children }) => {
       getItem("Installments", "10","/installments"),
     ]),
     getItem("Log", "9", "/activitylogs", <FileOutlined />),
+
+    getItem("Applications", "sub2", "/", <TeamOutlined />, [
+      getItem("Normal Applications", "11","/normalApplications"),
+      getItem("Online Applications", "12","/onlineApplications"),
+    ]),
   ];
 
   return authenticated ? (
