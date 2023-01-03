@@ -17,6 +17,9 @@ module.exports = (app) => {
     // Delete a user with id
     router.delete("/:id", transactions.delete);
   
+    // Get the transactions by id
+    router.get("/users/:id",  transactions.getTransactionsByUserID)
+
     app.use("/transactions", router);
   };
   

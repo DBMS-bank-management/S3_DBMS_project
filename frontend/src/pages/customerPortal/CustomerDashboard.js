@@ -3,6 +3,7 @@ import { Typography, Layout, Card, Col, Row, Statistic, Divider } from "antd";
 import { isEmployee, isManager } from "../../api/authentication";
 import { CustomerPageHeading } from "../../components/layout/CustomerPageHeading";
 import AccountsList from "./Accounts/dashboardAccountList";
+import TransactionsList from "./Accounts/dashboardTransactionList";
 const { Header, Footer, Sider, Content } = Layout;
 
 export const CustomerDashboard = () => {
@@ -35,7 +36,8 @@ export const CustomerDashboard = () => {
             </Col>
           {/* Second square */}
               <Col span={12}>
-              <Card className="glass center-content" hoverable>
+              <Card className="glass center-content" hoverable bodyStyle={{width: '100%'}}>
+              <TransactionsList />
               </Card>
             </Col>
             {/* Third square */}

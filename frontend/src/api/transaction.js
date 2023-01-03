@@ -57,3 +57,12 @@ export const deleteTransaction = (id) => {
       Promise.reject("Failed to delete transaction with id = " + id + "!")
     );
 };
+
+export const getTransactionsByID = (id) => {
+  return axios
+    .get(`${BASE_URL}/transactions/users/2`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Failed to get transactions ID list!"));
+};

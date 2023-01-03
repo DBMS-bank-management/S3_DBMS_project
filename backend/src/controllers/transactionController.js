@@ -101,3 +101,14 @@ exports.delete = (req, res) => {
 };
 
 //find by account number???
+exports.getTransactionsByUserID= (req, res) => {
+  const name = null //req.query.name;
+
+  TransactionModel.findTransactionsByUserId(req.params.id, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving transactions.",
+      });
+    else res.send(data);
+  });
+};
