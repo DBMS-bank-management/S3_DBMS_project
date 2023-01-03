@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography, Layout, Card, Col, Row, Statistic, Divider } from "antd";
-import { isEmployee, isManager } from "../../api";
+import { isEmployee, isManager } from "../../api/authentication";
 import { CustomerPageHeading } from "../../components/layout/CustomerPageHeading";
 import AccountsList from "./Accounts/dashboardAccountList";
 const { Header, Footer, Sider, Content } = Layout;
