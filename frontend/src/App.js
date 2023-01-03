@@ -30,6 +30,7 @@ import AddNormalApplication from "./pages/employeePortal/normalApplication/addNo
 import OnlineApplicationsList from "./pages/employeePortal/onlineApplication/onlineApplicationList";
 import { EditOnlineApplication } from "./pages/employeePortal/onlineApplication/editOnlineApplication";
 import AddOnlineApplication from "./pages/employeePortal/onlineApplication/addOnlineApplication";
+import AddAccount from "./pages/employeePortal/account/AddAccounts";
 
 function App() {
   return (
@@ -83,10 +84,7 @@ function App() {
                 <Route path="" element={<AccountsList />} />
                 <Route
                   path="add"
-                  element={
-                    <OnlyManager>
-                    </OnlyManager>
-                  }
+                  element={<AddAccount/>}
                 />
               </Route>
 
