@@ -2,8 +2,10 @@ const sql = require("./database");
 
 // constructor
 const Employee = function (model) {
-  this.emp_id = model.emp_ID;
   this.emp_name = model.emp_name;
+  this.branch_ID = model.branch_ID;
+  this.Is_manager = model.Is_manager;
+  this.auth_ID = model.auth_ID;
 };
 
 Employee.create = (newObject, result) => {
@@ -60,8 +62,8 @@ Employee.getAll = (title, result) => {
 
 Employee.updateById = (id, model, result) => {
   sql.query(
-    "UPDATE employee SET password = ?, role = ? WHERE auth_ID = ?",
-    [model.password, model.role, id],
+    "UPDATE employee SET emp_name = ?, branch_ID = ?, Is_manager = ?, auth_ID = ? WHERE emp_ID = ?",
+    [model.emp_name, model.branch_ID, model.Is_manager, model.auth_ID, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -82,7 +84,7 @@ Employee.updateById = (id, model, result) => {
 };
 
 Employee.remove = (id, result) => {
-  sql.query("DELETE FROM employee WHERE auth_ID = ?", id, (err, res) => {
+  sql.query("DELETE FROM employee WHERE emp_ID = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
