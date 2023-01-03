@@ -66,6 +66,8 @@ const EmployeePageLayout = ({ children }) => {
       getItem("Accounts", "7", "/accounts"),
       getItem("Installments", "10", "/installments"),
       getItem("Transactions", "11", "/transactions"),
+      getItem("Fixed Deposits", "12", "/fixed-deposits"),
+
 
     ]),
     getItem("Log", "9", "/activitylogs", <FileOutlined />),

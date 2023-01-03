@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ConfigProvider, theme } from "antd";
 
+import FDList from "./pages/employeePortal/fd/fdList";
 import TransactionList from "./pages/employeePortal/transaction/transactionList";
 import CustomersList from "./pages/employeePortal/customer/customerList";
 import "./App.css";
@@ -116,6 +117,17 @@ function App() {
 
               <Route path="transactions/">
                 <Route path="" element={<TransactionList />} />
+                <Route
+                  path="add"
+                  element={
+                    <OnlyManager>
+                    </OnlyManager>
+                  }
+                />
+              </Route>
+              
+              <Route path="fixed-deposits/">
+                <Route path="" element={<FDList />} />
                 <Route
                   path="add"
                   element={

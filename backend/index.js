@@ -29,7 +29,7 @@ require("./src/routes/installmentRoutes")(app);
 require("./src/routes/transactionRoutes")(app);
 require("./src/routes/normalApplicationRoutes")(app);
 require("./src/routes/onlineApplicationRoutes")(app);
-
+require("./src/routes/FDRoutes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8000;
