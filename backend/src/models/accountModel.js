@@ -115,7 +115,18 @@ Account.getAll = (title, result) => {
       result(null, res);
     });
   };
-  
-  module.exports = Account;
-  
+
+  Account.findAccountsByUserId=(id,result)=> {
+    sql.query("SELECT account_ID,branch_ID,balance,plan_ID from account where customer_ID = ?", id, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("accounts: ", res);
+      result(null, res);
+    });
+  };
+
+module.exports = Account;
   
