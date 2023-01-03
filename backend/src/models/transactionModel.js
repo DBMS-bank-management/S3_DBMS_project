@@ -8,6 +8,7 @@ const Transaction = function (transaction) {
     this.mode_ID=transaction.mode_ID;
     this.acc_ID =transaction.acc_ID;
     this.description= transaction.description;  
+    this.timestamp= transaction.timestamp;
   };
 
   Transaction.create = (newTransaction, result) => {
@@ -117,6 +118,18 @@ Transaction.getAll = (title, result) => {
     });
   };
   
+
+  
+  Transaction.findTransactionsByUserId=(id,result)=> {
+    sql.query("SELECT timestamp,amount,description from transaction where acc_ID = ?", id, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("transactions: ", res);
+      result(null, res);
+    });
+  };
+
   module.exports = Transaction;
-  
-  
