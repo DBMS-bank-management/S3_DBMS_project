@@ -6,12 +6,16 @@ import {
   TeamOutlined,
   UserOutlined,
   BankOutlined,
+  DollarOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Typography, Button, Card } from "antd";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
 import { Navigate, useNavigate, Outlet } from "react-router-dom";
 import { flatternList } from "../../utils/list";
-import { isAuthenticatedEmployee, employeeLogout } from "../../api/authentication";
+import {
+  isAuthenticatedEmployee,
+  employeeLogout,
+} from "../../api/authentication";
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, path, icon, children) {
   return {
@@ -22,27 +26,6 @@ function getItem(label, key, path, icon, children) {
     path,
   };
 }
-const items = [
-  getItem("Dashboard", "1", "/", <PieChartOutlined />),
-  getItem("Branches", "2", "/branches", <BankOutlined />),
-  // getItem("User", "sub1", "/", <UserOutlined />, [
-  //   getItem("Tom", "3", "/'"),
-  //   getItem("Bill", "4", "/"),
-  // ]),
-  getItem("Users", "sub2", "/", <TeamOutlined />, [
-    getItem("Users", "5", "/users"),
-    getItem("Employees", "6", "/employees"),
-    getItem("Customers", "8", "/customers"),
-    getItem("Accounts", "7","/accounts"),
-    getItem("Installments", "10","/installments"),
-  ]),
-  getItem("Log", "9", "/activitylogs", <FileOutlined />),
-
-  getItem("Applications", "sub2", "/", <TeamOutlined />, [
-    getItem("Normal Applications", "11","/normalApplications"),
-    getItem("Online Applications", "12","/onlineApplications"),
-  ]),
-];
 
 const EmployeePageLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -64,7 +47,7 @@ const EmployeePageLayout = ({ children }) => {
       children,
       label,
       path,
-      onTitleClick: () => (openKey ? setOpenKey() : setOpenKey(key)),
+      onTitleClick: () => (openKey == key ? setOpenKey() : setOpenKey(key)),
     };
   }
   const items = [
@@ -78,8 +61,10 @@ const EmployeePageLayout = ({ children }) => {
       getItem("Users", "5", "/users"),
       getItem("Employees", "6", "/employees"),
       getItem("Customers", "8", "/customers"),
-      getItem("Accounts", "7","/accounts"),
-      getItem("Installments", "10","/installments"),
+    ]),
+    getItem("Accounts", "accounts", "/", <DollarOutlined />, [
+      getItem("Accounts", "7", "/accounts"),
+      getItem("Installments", "10", "/installments"),
     ]),
     getItem("Log", "9", "/activitylogs", <FileOutlined />),
 
@@ -133,9 +118,14 @@ const EmployeePageLayout = ({ children }) => {
         </div>
       </Header>
 
-      <Layout className="site-layout transparent" style={{minHeight: '100%'}}>
+      <Layout className="site-layout transparent" style={{ minHeight: "100%" }}>
         <Sider
-        style={{marginTop: '10px', marginBottom: '10px', borderTopRightRadius: 10, borderBottomRightRadius: 10}}
+          style={{
+            marginTop: "10px",
+            marginBottom: "10px",
+            borderTopRightRadius: 10,
+            borderBottomRightRadius: 10,
+          }}
           // className="glass"
           // aria-expanded={true}
           // collapsible
@@ -149,7 +139,7 @@ const EmployeePageLayout = ({ children }) => {
           <div className="logo" />
           <Menu
             className="transparent"
-            openKeys={collapsed ? [] : [openKey]}
+            openKeys={collapsed ? [] : items.filter(item => !!item.children).map(item => item.key)}
             // className="glass"
             //  inlineIndent={}
             theme="light"
@@ -157,7 +147,9 @@ const EmployeePageLayout = ({ children }) => {
             selectable
             selectedKeys={flatternList(items)
               .filter((a) => {
-                return "/employee-portal" + a.path == window.location.pathname;
+                return a.path == "/" ? window.location.pathname == "/employee-portal/" : window.location.pathname.includes(
+                  "/employee-portal" + a.path
+                );
               })
               .map((a) => a.key)}
             // disabled={collapsed}
@@ -165,7 +157,7 @@ const EmployeePageLayout = ({ children }) => {
             mode="inline"
             items={items}
             onClick={onClick}
-            triggerSubMenuAction="click"
+            triggerSubMenuAction="hover"
             subMenuCloseDelay={0}
             // inlineCollapsed={true}
           />
@@ -173,12 +165,12 @@ const EmployeePageLayout = ({ children }) => {
         <Content
           style={{
             // margin: "10px",
-            minHeight: '100%',
-            padding: 10
+            minHeight: "100%",
+            padding: 10,
             // backgroundColor: 'green'
           }}
         >
-          <Card className="glass" style={{ minHeight: '100%'}}>
+          <Card className="glass" style={{ minHeight: "100%" }}>
             <BreadcrumbsFromPath />
             <Outlet />
           </Card>
