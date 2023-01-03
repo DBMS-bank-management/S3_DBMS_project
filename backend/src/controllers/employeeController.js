@@ -11,8 +11,10 @@ exports.create = (req, res) => {
 
   // Create a EmployeeModel
   const employee = new EmployeeModel({
-    password: req.body.password,
-    role: req.body.role,
+    emp_name: req.body.emp_name,
+    branch_ID: req.body.branch_ID,
+    Is_manager: req.body.Is_manager,
+    auth_ID: req.body.auth_ID,
   });
 
   // Save EmployeeModel in the database
