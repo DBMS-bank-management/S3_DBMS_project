@@ -57,3 +57,4 @@ export const deleteCustomer = (id) => {
       Promise.reject("Failed to delete customer with id = " + id + "!")
     );
 };
+

@@ -26,6 +26,7 @@ function getItem(label, key, path, icon, children) {
     path,
   };
 }
+
 const EmployeePageLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(true);
   // const [selected, setSelected] = useState("");
@@ -68,6 +69,11 @@ const EmployeePageLayout = ({ children }) => {
 
     ]),
     getItem("Log", "9", "/activitylogs", <FileOutlined />),
+
+    getItem("Applications", "sub2", "/", <TeamOutlined />, [
+      getItem("Normal Applications", "11","/normalApplications"),
+      getItem("Online Applications", "12","/onlineApplications"),
+    ]),
   ];
 
   return authenticated ? (

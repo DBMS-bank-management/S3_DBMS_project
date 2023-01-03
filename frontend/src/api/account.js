@@ -57,3 +57,12 @@ export const deleteAccount = (id) => {
       Promise.reject("Failed to delete account with id = " + id + "!")
     );
 };
+
+export const getAccountsByID = (id) => {
+  return axios
+    .get(`${BASE_URL}/accounts/users/2`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Failed to get customers ID list!"));
+};

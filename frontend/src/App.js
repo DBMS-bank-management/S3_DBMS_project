@@ -13,8 +13,8 @@ import EmployeePageLayout from "./components/layout/employeePageLayout";
 import GeneralPageLayout from "./components/layout/pageLayout";
 import BranchesList from "./pages/employeePortal/branch/branchesList";
 import AddBranch from "./pages/employeePortal/branch/addBranch";
-// import AddEmployee from "./pages/employeePortal/employee/addEmployee";
-// import { EditEmployee } from "./pages/employeePortal/employee/editEmployee";
+import AddEmployee from "./pages/employeePortal/employee/addEmployee";
+import { EditEmployee } from "./pages/employeePortal/employee/editEmployee";
 import EmployeeList from "./pages/employeePortal/employee/EmployeesList";
 import LogsList from "./pages/employeePortal/Log/logList";
 import EmployeeLogin from "./pages/employeePortal/EmployeeLogin";
@@ -25,6 +25,12 @@ import CustomerDashboard from "./pages/customerPortal/CustomerDashboard";
 import CustomerPageLayout from "./components/layout/CustomerPageLayout";
 import AccountsList from "./pages/employeePortal/account/accountsList";
 import InstallmentList from "./pages/employeePortal/installment/installmentList";
+import NormalApplicationsList from "./pages/employeePortal/normalApplication/normalApplicationList";
+import { EditNormalApplication } from "./pages/employeePortal/normalApplication/editNormalApplication";
+import AddNormalApplication from "./pages/employeePortal/normalApplication/addNormalApplication";
+import OnlineApplicationsList from "./pages/employeePortal/onlineApplication/onlineApplicationList";
+import { EditOnlineApplication } from "./pages/employeePortal/onlineApplication/editOnlineApplication";
+import AddOnlineApplication from "./pages/employeePortal/onlineApplication/addOnlineApplication";
 
 function App() {
   return (
@@ -107,6 +113,7 @@ function App() {
                   }
                 />
               </Route>
+
               <Route path="transactions/">
                 <Route path="" element={<TransactionList />} />
                 <Route
@@ -117,17 +124,46 @@ function App() {
                   }
                 />
               </Route>
+
+              <Route path="normalApplications/">
+                <Route path="" element={<NormalApplicationsList />} />
+                <Route
+                  path=":id"
+                  element={
+                    <OnlyManager>
+                      <EditNormalApplication />
+                    </OnlyManager>
+                  }
+                />      
+                <Route path="add" element={<AddNormalApplication />} />        
+              </Route>
+
+              <Route path="onlineApplications/">
+                <Route path="" element={<OnlineApplicationsList />} />
+                <Route
+                  path=":id"
+                  element={
+                    <OnlyManager>
+                      <EditOnlineApplication />
+                    </OnlyManager>
+                  }
+                />      
+                <Route path="add" element={<AddOnlineApplication />} />        
+              </Route>
+
               <Route path="employees/">
                 <Route path="" element={<EmployeeList />} />
-                {/* <Route
-                  path="/employee-portal/employees/:id"
-                  element={<EditEmployee />}
-                />
                 <Route
-                  path="/employee-portal/employees/add-employee"
-                  element={<AddEmployee />}
-                /> */}
+                  path=":id"
+                  element={
+                    <OnlyManager>
+                      //<EditEmployee />
+                    </OnlyManager>
+                  }
+                />      
+                <Route path="add" element={<AddEmployee />} />
               </Route>
+
               <Route path="activitylogs/">
                 <Route path="" element={<LogsList />} />
               </Route>

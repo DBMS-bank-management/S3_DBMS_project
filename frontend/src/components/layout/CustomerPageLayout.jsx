@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb, Button, Layout, Menu, theme } from "antd";
+import { Breadcrumb, Button, Card, Layout, Menu, theme } from "antd";
 import { Navigate, Outlet } from "react-router-dom";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
 import {
@@ -17,7 +17,7 @@ const CustomerPageLayout = () => {
   const authenticated = isAuthenticatedCustomer();
 
   return authenticated ? (
-    <Layout className="layout">
+    <Layout className="layout login" style={{ minHeight: "100vh" }}>
       <Header>
         <div className="logo" />
         <div
@@ -55,17 +55,24 @@ const CustomerPageLayout = () => {
           </div>
         </div>
       </Header>
-      <Content style={{ padding: "0 50px" }}>
-        <BreadcrumbsFromPath />
-        <div
-          className="site-layout-content"
-          style={{ background: colorBgContainer }}
+      <Content style={{ padding: "10px", minHeight: "100%" }}>
+        <Card
+          className="glass"
+          style={{ minHeight: "max-content", padding: "0 50px" }}
         >
+          <BreadcrumbsFromPath />
+
           <Outlet />
-        </div>
+        </Card>
       </Content>
-      <Footer style={{ textAlign: "center" }}>
-        Designed and built by DBMS group
+      <Footer
+        style={{
+          textAlign: "center",
+          backgroundColor: "transparent",
+          color: "white",
+        }}
+      >
+        Designed and built by DBMS group 8
       </Footer>
     </Layout>
   ) : (
