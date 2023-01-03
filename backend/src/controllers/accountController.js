@@ -99,3 +99,15 @@ exports.delete = (req, res) => {
     } else res.send({ message: `Account was deleted successfully!` });
   });
 };
+
+exports.getAccountsByUserID= (req, res) => {
+  const name = null //req.query.name;
+
+  AccountModel.findAccountsByUserId(req.params.id, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving accounts.",
+      });
+    else res.send(data);
+  });
+};
