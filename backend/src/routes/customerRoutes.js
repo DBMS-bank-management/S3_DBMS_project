@@ -1,6 +1,8 @@
 module.exports = (app) => {
     const customers = require("../controllers/customerController");
+    const { jwtauth } = require("../utils/jwt.js");
   
+
     var router = require("express").Router();
   
     // customers signup
@@ -16,7 +18,8 @@ module.exports = (app) => {
   
     // Delete a user with id
     router.delete("/:id", customers.delete);
-  
+
+
     app.use("/customers", router);
   };
   

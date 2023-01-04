@@ -17,7 +17,6 @@ app.get("/", (req, res) => {
   res.json({ message: "Successfully started" });
 });
 
-
 require("./src/routes/userRoutes")(app);
 require("./src/routes/authenticationRoutes")(app);
 require("./src/routes/employeeRoutes")(app);
@@ -27,7 +26,13 @@ require("./src/routes/activityLogRoutes")(app);
 require("./src/routes/LoanplanRoutes")(app);
 require("./src/routes/accountplanRoutes")(app);
 require("./src/routes/FdplanRoutes")(app);
-
+require("./src/routes/transmodeRoutes")(app);
+require("./src/routes/accountRoutes")(app);
+require("./src/routes/installmentRoutes")(app);
+require("./src/routes/transactionRoutes")(app);
+require("./src/routes/normalApplicationRoutes")(app);
+require("./src/routes/onlineApplicationRoutes")(app);
+require("./src/routes/FDRoutes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8000;

@@ -1,5 +1,5 @@
 // import axios from "axios";
-import { employeeAxios as axios } from './index';
+import { employeeAxios as axios } from './authentication';
 import { BASE_URL } from "./config";
 
 export function addUser(data) {
