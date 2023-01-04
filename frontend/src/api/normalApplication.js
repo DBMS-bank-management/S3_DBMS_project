@@ -2,7 +2,7 @@
 import { employeeAxios as axios } from './authentication';
 import { BASE_URL } from "./config";
 
-export function addNormalApplication(data) {
+export function   addNormalApplication(data) {
   return axios
     .post(`${BASE_URL}/normalApplications`, {
       branch_ID: data.branch_ID,
@@ -11,6 +11,7 @@ export function addNormalApplication(data) {
       is_approved: data.is_approved,
       app_date: data.app_date,
       loan_ID: data.loan_ID,
+      plan_ID: data.plan_ID
     })
     .then((response) => {
       return response.data;

@@ -122,14 +122,9 @@ function App() {
               <Route path="normalApplications/">
                 <Route path="" element={<NormalApplicationsList />} />
                 <Route
-                  path=":id"
-                  element={
-                    <OnlyManager>
-                      <EditNormalApplication />
-                    </OnlyManager>
-                  }
+                  path="add"
+                  element={<AddNormalApplication/>}
                 />      
-                <Route path="add" element={<AddNormalApplication />} />        
               </Route>
 
               <Route path="onlineApplications/">
