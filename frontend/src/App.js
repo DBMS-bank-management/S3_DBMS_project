@@ -137,7 +137,7 @@ function App() {
                 />
               </Route>
 
-              <Route path="normalApplications/">
+              <Route path="normal-applications/">
                 <Route path="" element={<NormalApplicationsList />} />
                 <Route
                   path=":id"
@@ -150,7 +150,7 @@ function App() {
                 <Route path="add" element={<AddNormalApplication />} />        
               </Route>
 
-              <Route path="onlineApplications/">
+              <Route path="online-applications/">
                 <Route path="" element={<OnlineApplicationsList />} />
                 <Route
                   path=":id"
@@ -176,7 +176,7 @@ function App() {
                 <Route path="add" element={<AddEmployee />} />
               </Route>
 
-              <Route path="activitylogs/">
+              <Route path="activity-logs/">
                 <Route path="" element={<LogsList />} />
               </Route>
             </Route>
