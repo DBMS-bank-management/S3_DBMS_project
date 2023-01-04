@@ -18,7 +18,7 @@ import { capitalize } from "../../../utils/string";
 
 const AddAccount = () => {
   const [customers, setCustomers] = useState([]);
-  const [formValues, setFormValues] = useState({});
+  const [formValues, setFormValues] = useState({ plan: null, deposit: null });
   const [selectedCustomer, setSelectedCustomer] = useState();
 
   useEffect(() => loadCustomersList(), []);
@@ -71,6 +71,7 @@ const AddAccount = () => {
               ]}
             >
               <Select
+              style={{width: 300}}
                 defaultValue={selectedCustomer}
                 showSearch
                 placeholder="Type username or name"
@@ -94,9 +95,10 @@ const AddAccount = () => {
     },
     {
       title: "Create Account",
-      content: (
+      content: selectedCustomer && (
         <div className="center-content" style={{ flexDirection: "column" }}>
           <Form
+          size='large'
             layout="vertical"
             name="basic"
             // labelCol={{
@@ -148,17 +150,24 @@ const AddAccount = () => {
     },
     {
       title: "Confirm",
-      content: (
+      content: selectedCustomer && (
         <div className="center-content" style={{ flexDirection: "column" }}>
           {/* {JSON.stringify(formValues)} */}
           <Descriptions title="Customer details" bordered>
-            {Object.keys(customers.map(c => ({ID: c.ID, name: c.name, type: c.type, "contact_no": c.Contact_no})).find((c) => (c.ID = selectedCustomer))).map(
-              (key) => (
-                <Descriptions.Item label={capitalize(key)} span={4}>
-                  {customers.find((c) => (c.ID = selectedCustomer))[key]}
-                </Descriptions.Item>
-              )
-            )}
+            {Object.keys(
+              customers
+                .map((c) => ({
+                  ID: c.ID,
+                  name: c.name,
+                  type: c.type,
+                  contact_no: c.Contact_no,
+                }))
+                .find((c) => (c.ID = selectedCustomer))
+            ).map((key) => (
+              <Descriptions.Item label={capitalize(key)} span={4}>
+                {customers.find((c) => (c.ID = selectedCustomer))[key]}
+              </Descriptions.Item>
+            ))}
           </Descriptions>
           <Divider />
           <Descriptions title="Account details" bordered>
@@ -195,9 +204,18 @@ const AddAccount = () => {
       <div className="steps-content fill center-content test">
         {steps[current].content}
       </div>
-      <div className="steps-action">
+      <div
+        className="steps-action"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          flexDirection: "row-reverse",
+          padding: "0 100px"
+        }}
+      >
         {current < steps.length - 1 && (
           <Button
+            style={{ justifySelf: "flex-end" }}
             type="primary"
             disabled={
               (current == 0 && !selectedCustomer) ||
@@ -210,6 +228,7 @@ const AddAccount = () => {
         )}
         {current === steps.length - 1 && (
           <Button
+            style={{backgroundColor: 'green'}}
             type="primary"
             onClick={() => message.success("Processing complete!")}
           >
