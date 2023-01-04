@@ -3,6 +3,7 @@ import { ConfigProvider, theme } from "antd";
 
 import FDList from "./pages/employeePortal/fd/fdList";
 import TransactionList from "./pages/employeePortal/transaction/transactionList";
+import AddTransaction from "./pages/employeePortal/transaction/addTransaction";
 import CustomersList from "./pages/employeePortal/customer/customerList";
 import "./App.css";
 import { Contact } from "./pages/contact";
@@ -120,8 +121,9 @@ function App() {
                 <Route
                   path="add"
                   element={
-                    <OnlyManager>
-                    </OnlyManager>
+                    
+                      <AddTransaction/>
+                    
                   }
                 />
               </Route>

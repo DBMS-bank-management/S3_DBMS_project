@@ -54,10 +54,19 @@ const TransactionList = () => {
 
   return (
       <Card style={{ width: "100%" }}>
-        {/* <Button href="transactions/add">Add transaction</Button> */}
+        <Button href="transactions/add">Add transaction</Button>
         <Table dataSource={transactions} columns={columns} bordered />
       </Card>
   );
 };
 
+{/*return (
+  <div className="transparent">
+    <EmployeePageHeading text={"Transactions"} />
+    <Card style={{ width: "100%" }}>
+      <Button href="transactions/add">Add Transaction</Button>
+      <Table dataSource={Transaction} columns={columns} bordered />
+    </Card>
+  </div>
+);*/}
 export default TransactionList;
