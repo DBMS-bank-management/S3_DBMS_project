@@ -8,3 +8,8 @@ export const dashSeperatedToHumanReadble = (string) => {
   const str = wordsList.join(" ");
   return str;
 };
+
+
+ export const capitalize = (string) => {
+  return string[0].toUpperCase() + string.substr(1);
+ }

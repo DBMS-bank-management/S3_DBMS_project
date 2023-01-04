@@ -170,7 +170,7 @@ const EmployeePageLayout = ({ children }) => {
             // backgroundColor: 'green'
           }}
         >
-          <Card className="glass" style={{ minHeight: "100%" }}>
+          <Card className="glass" style={{ minHeight: "100%"}} bodyStyle={{minHeight: '100%'}}>
             <BreadcrumbsFromPath />
             <Outlet />
           </Card>

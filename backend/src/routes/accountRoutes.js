@@ -19,7 +19,10 @@ module.exports = (app) => {
     router.delete("/:id", accounts.delete);
   
     // Get the accounts by id
-    router.get("/users/:id",  accounts.getAccountsByUserID)
+    router.get("/currentUsersAccounts",  accounts.getAccountsByUserID)
+
+    // Get the accounts by id
+    router.get("/currentUsersAccounts",  accounts.getAccountsByUserID)
 
     app.use("/accounts", router);
   };
