@@ -31,6 +31,7 @@ import OnlineApplicationsList from "./pages/employeePortal/onlineApplication/onl
 import { EditOnlineApplication } from "./pages/employeePortal/onlineApplication/editOnlineApplication";
 import AddOnlineApplication from "./pages/employeePortal/onlineApplication/addOnlineApplication";
 import AddAccount from "./pages/employeePortal/account/AddAccounts";
+import LoanList from "./pages/employeePortal/loan/LoanList";
 
 function App() {
   return (
@@ -85,6 +86,13 @@ function App() {
                 <Route
                   path="add"
                   element={<AddAccount/>}
+                />
+              </Route>
+
+              <Route path="loans/">
+                <Route path="" element={<LoanList />} />
+                <Route
+                  path="add"
                 />
               </Route>
 

@@ -71,6 +71,7 @@ const EmployeePageLayout = ({ children }) => {
     getItem("Applications", "sub2", "/", <TeamOutlined />, [
       getItem("Normal Applications", "11","/normalApplications"),
       getItem("Online Applications", "12","/onlineApplications"),
+      getItem("Loans", "13","/loans"),
     ]),
   ];
 
