@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { employeeLogin } from "../../api";
+import { customerLogin, employeeLogin } from "../../api/authentication.js";
 import { Button, Checkbox, Form, Input, Card, message } from "antd";
 import logo from "../../logo.svg";
 import { navigateToHome } from "../../utils/navigation";
@@ -12,11 +12,11 @@ const CustomerLogin = () => {
   const [processing, setProcessing] = useState(false);
   const [password, setPassword] = useState("");
   function submitLogin() {
-    employeeLogin({ username, password })
+    customerLogin({ username, password })
       .then(() => {
         message.success("Login successful");
       })
-      .then((token) => (window.location = "/employee-portal"))
+      .then((token) => (window.location = "/customer-portal"))
       .catch((err) => {
         setProcessing(false);
         message.error(err);

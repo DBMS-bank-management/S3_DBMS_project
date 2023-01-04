@@ -1,6 +1,6 @@
 import { Button, Card, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
-import { isManager } from "../../../api";
+import { isManager } from "../../../api/authentication.js";
 import { deleteUser, getUsers } from "../../../api/user";
 import ConfirmationDialog from "../../../components/confirmationDialog";
 import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
