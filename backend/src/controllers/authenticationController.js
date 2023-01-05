@@ -48,6 +48,7 @@ exports.employeeLogin = (req, res) => {
             data["token"] = jwt.sign(
               {
                 ...auth,
+                employee,
               },
               JwT_SECRET,
               {
@@ -108,6 +109,7 @@ exports.customerLogin = (req, res) => {
             data["token"] = jwt.sign(
               {
                 ...auth,
+                customer,
               },
               JwT_SECRET,
               {

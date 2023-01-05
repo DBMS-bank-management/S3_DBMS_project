@@ -65,14 +65,15 @@ const EmployeePageLayout = ({ children }) => {
     getItem("Accounts", "accounts", "/", <DollarOutlined />, [
       getItem("Accounts", "7", "/accounts"),
       getItem("Installments", "10", "/installments"),
-    ]),
-    getItem("Log", "9", "/activitylogs", <FileOutlined />),
-
-    getItem("Applications", "sub2", "/", <TeamOutlined />, [
-      getItem("Normal Applications", "11","/normalApplications"),
-      getItem("Online Applications", "12","/onlineApplications"),
+      getItem("Transactions", "11", "/transactions"),
+      getItem("Fixed Deposits", "12", "/fixed-deposits"),
       getItem("Loans", "13","/loans"),
     ]),
+    getItem("Applications", "sub3", "/", <TeamOutlined />, [
+      getItem("Normal Applications", "15", "/normal-applications"),
+      getItem("Online Applications", "16", "/online-applications"),
+    ]),
+    getItem("Log", "9", "/activity-logs", <FileOutlined />),
   ];
 
   return authenticated ? (
@@ -140,7 +141,13 @@ const EmployeePageLayout = ({ children }) => {
           <div className="logo" />
           <Menu
             className="transparent"
-            openKeys={collapsed ? [] : items.filter(item => !!item.children).map(item => item.key)}
+            openKeys={
+              collapsed
+                ? []
+                : items
+                    .filter((item) => !!item.children)
+                    .map((item) => item.key)
+            }
             // className="glass"
             //  inlineIndent={}
             theme="light"
@@ -148,9 +155,11 @@ const EmployeePageLayout = ({ children }) => {
             selectable
             selectedKeys={flatternList(items)
               .filter((a) => {
-                return a.path == "/" ? window.location.pathname == "/employee-portal/" : window.location.pathname.includes(
-                  "/employee-portal" + a.path
-                );
+                return a.path == "/"
+                  ? window.location.pathname == "/employee-portal/"
+                  : window.location.pathname.includes(
+                      "/employee-portal" + a.path
+                    );
               })
               .map((a) => a.key)}
             // disabled={collapsed}

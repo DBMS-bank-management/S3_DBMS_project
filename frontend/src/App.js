@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ConfigProvider, theme } from "antd";
 
+import FDList from "./pages/employeePortal/fd/fdList";
+import TransactionList from "./pages/employeePortal/transaction/transactionList";
+import AddTransaction from "./pages/employeePortal/transaction/addTransaction";
 import CustomersList from "./pages/employeePortal/customer/customerList";
 import "./App.css";
 import { Contact } from "./pages/contact";
@@ -119,7 +122,30 @@ function App() {
                 />
               </Route>
 
-              <Route path="normalApplications/">
+              <Route path="transactions/">
+                <Route path="" element={<TransactionList />} />
+                <Route
+                  path="add"
+                  element={
+                    
+                      <AddTransaction/>
+                    
+                  }
+                />
+              </Route>
+              
+              <Route path="fixed-deposits/">
+                <Route path="" element={<FDList />} />
+                <Route
+                  path="add"
+                  element={
+                    <OnlyManager>
+                    </OnlyManager>
+                  }
+                />
+              </Route>
+
+              <Route path="normal-applications/">
                 <Route path="" element={<NormalApplicationsList />} />
                 <Route
                   path="add"
@@ -127,7 +153,7 @@ function App() {
                 />      
               </Route>
 
-              <Route path="onlineApplications/">
+              <Route path="online-applications/">
                 <Route path="" element={<OnlineApplicationsList />} />
                 <Route
                   path=":id"
@@ -140,7 +166,6 @@ function App() {
                 <Route path="add" element={<AddOnlineApplication />} />        
               </Route>
 
-              
               <Route path="employees/">
                 <Route path="" element={<EmployeeList />} />
                 <Route
@@ -154,7 +179,7 @@ function App() {
                 <Route path="add" element={<AddEmployee />} />
               </Route>
 
-              <Route path="activitylogs/">
+              <Route path="activity-logs/">
                 <Route path="" element={<LogsList />} />
               </Route>
             </Route>
