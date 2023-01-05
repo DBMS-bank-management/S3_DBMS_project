@@ -7,6 +7,7 @@ import {
   UserOutlined,
   BankOutlined,
   DollarOutlined,
+  UnorderedListOutlined
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Typography, Button, Card } from "antd";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
@@ -69,6 +70,11 @@ const EmployeePageLayout = ({ children }) => {
       getItem("Transactions", "11", "/transactions"),
       getItem("Fixed Deposits", "12", "/fixed-deposits"),
       getItem("Loans", "13", "/loans"),
+    ]),
+    getItem("Plans", "accountplans", "/", <UnorderedListOutlined/>, [
+      getItem("Account Plans", "17", "/account-plans"),
+      getItem("Fixed deposit Plans", "18", "/fixed-deposit-plans"),
+      getItem("Loan Plans", "19", "/loan-plans"),
     ]),
     getItem("Applications", "sub3", "/", <TeamOutlined />, [
       getItem("Normal Applications", "15", "/normal-applications"),
