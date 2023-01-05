@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ConfigProvider, theme } from "antd";
 
+import FDList from "./pages/employeePortal/fd/fdList";
+import TransactionList from "./pages/employeePortal/transaction/transactionList";
+import AddTransaction from "./pages/employeePortal/transaction/addTransaction";
 import CustomersList from "./pages/employeePortal/customer/customerList";
 import "./App.css";
 import { Contact } from "./pages/contact";
@@ -31,6 +34,10 @@ import OnlineApplicationsList from "./pages/employeePortal/onlineApplication/onl
 import { EditOnlineApplication } from "./pages/employeePortal/onlineApplication/editOnlineApplication";
 import AddOnlineApplication from "./pages/employeePortal/onlineApplication/addOnlineApplication";
 import AddAccount from "./pages/employeePortal/account/AddAccounts";
+import LoanList from "./pages/employeePortal/loan/LoanList";
+import AccountPlanList from "./pages/employeePortal/AccountPlans/AccountplanList";
+import LoanPlanList from "./pages/employeePortal/Loanplan/LoanplanList";
+import FdPlanList from "./pages/employeePortal/Fdplans/FdplanList";
 
 function App() {
   return (
@@ -88,6 +95,13 @@ function App() {
                 />
               </Route>
 
+              <Route path="loans/">
+                <Route path="" element={<LoanList />} />
+                <Route
+                  path="add"
+                />
+              </Route>
+
               <Route path="installments/">
                 <Route path="" element={<InstallmentList />} />
                 <Route
@@ -111,20 +125,38 @@ function App() {
                 />
               </Route>
 
-              <Route path="normalApplications/">
-                <Route path="" element={<NormalApplicationsList />} />
+              <Route path="transactions/">
+                <Route path="" element={<TransactionList />} />
                 <Route
-                  path=":id"
+                  path="add"
+                  element={
+                    
+                      <AddTransaction/>
+                    
+                  }
+                />
+              </Route>
+              
+              <Route path="fixed-deposits/">
+                <Route path="" element={<FDList />} />
+                <Route
+                  path="add"
                   element={
                     <OnlyManager>
-                      <EditNormalApplication />
                     </OnlyManager>
                   }
-                />      
-                <Route path="add" element={<AddNormalApplication />} />        
+                />
               </Route>
 
-              <Route path="onlineApplications/">
+              <Route path="normal-applications/">
+                <Route path="" element={<NormalApplicationsList />} />
+                <Route
+                  path="add"
+                  element={<AddNormalApplication/>}
+                />      
+              </Route>
+
+              <Route path="online-applications/">
                 <Route path="" element={<OnlineApplicationsList />} />
                 <Route
                   path=":id"
@@ -137,7 +169,6 @@ function App() {
                 <Route path="add" element={<AddOnlineApplication />} />        
               </Route>
 
-              
               <Route path="employees/">
                 <Route path="" element={<EmployeeList />} />
                 <Route
@@ -151,10 +182,23 @@ function App() {
                 <Route path="add" element={<AddEmployee />} />
               </Route>
 
-              <Route path="activitylogs/">
+              <Route path="activity-logs/">
                 <Route path="" element={<LogsList />} />
               </Route>
+              <Route path="account-plans/">
+                <Route path="" element={<AccountPlanList />} />
+              </Route>
+              <Route path="loan-plans/">
+                <Route path="" element={<LoanPlanList />} />
+              </Route>
+
+              <Route path="fixed-deposit-plans/">
+                <Route path="" element={<FdPlanList />} />
+              </Route>
+
             </Route>
+
+            
             {/* CUSTOMER PORTAL ROUTES */}
 
             <Route path="customer-portal" element={<CustomerPageLayout />}>

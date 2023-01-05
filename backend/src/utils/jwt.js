@@ -51,7 +51,8 @@ let tokenValidation = async (req, res, next) => {
         next();
       } else {
         let decoded = jwt.decode(token);
-        console.log("not expired");
+
+        console.log("not expired", {decoded});
 
         userModel.findById(decoded.auth_ID, (err, res) => {
           if (err) {
@@ -59,7 +60,7 @@ let tokenValidation = async (req, res, next) => {
           }
           let user = res;
           user.token = token;
-          req.user = user;
+          req.user = decoded;
           next();
         });
         console.log("user got in jwt authorization");

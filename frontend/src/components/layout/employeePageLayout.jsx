@@ -7,6 +7,7 @@ import {
   UserOutlined,
   BankOutlined,
   DollarOutlined,
+  UnorderedListOutlined
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Typography, Button, Card } from "antd";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
@@ -16,6 +17,7 @@ import {
   isAuthenticatedEmployee,
   employeeLogout,
 } from "../../api/authentication";
+import { Profile } from "../profile";
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, path, icon, children) {
   return {
@@ -65,13 +67,20 @@ const EmployeePageLayout = ({ children }) => {
     getItem("Accounts", "accounts", "/", <DollarOutlined />, [
       getItem("Accounts", "7", "/accounts"),
       getItem("Installments", "10", "/installments"),
+      getItem("Transactions", "11", "/transactions"),
+      getItem("Fixed Deposits", "12", "/fixed-deposits"),
+      getItem("Loans", "13", "/loans"),
     ]),
-    getItem("Log", "9", "/activitylogs", <FileOutlined />),
-
-    getItem("Applications", "sub2", "/", <TeamOutlined />, [
-      getItem("Normal Applications", "11","/normalApplications"),
-      getItem("Online Applications", "12","/onlineApplications"),
+    getItem("Plans", "accountplans", "/", <UnorderedListOutlined/>, [
+      getItem("Account Plans", "17", "/account-plans"),
+      getItem("Fixed deposit Plans", "18", "/fixed-deposit-plans"),
+      getItem("Loan Plans", "19", "/loan-plans"),
     ]),
+    getItem("Applications", "sub3", "/", <TeamOutlined />, [
+      getItem("Normal Applications", "15", "/normal-applications"),
+      getItem("Online Applications", "16", "/online-applications"),
+    ]),
+    getItem("Log", "9", "/activity-logs", <FileOutlined />),
   ];
 
   return authenticated ? (
@@ -83,8 +92,8 @@ const EmployeePageLayout = ({ children }) => {
     >
       <Header
         style={{
-          padding: 0,
-          width: "100%",
+          // padding: 0,
+          // width: "100%",
           // backgroundColor:'red'
         }}
       >
@@ -97,22 +106,24 @@ const EmployeePageLayout = ({ children }) => {
             width: "100%",
           }}
         >
-          <div style={{ flex: 0.95 }}>
-            <Typography
-              // style={{ justifySelf: "flex-start" }}
-              className="Header-text"
-            >
-              Employee Portal
-            </Typography>
+          <div style={{ color: "white", flex: 0.15, fontSize: 20 }}>
+            Employee portal
           </div>
+          <div style={{ flex: 0.8 }}></div>
           <div style={{ flex: 0.05 }}>
-            <Button
-              type="primary"
-              style={{ justifySelf: "flex-end" }}
-              onClick={employeeLogout}
-            >
-              Logout
-            </Button>
+            <Profile
+              type={"employee"}
+              LogoutButton={
+                <Button
+                  type="primary"
+                  style={{ justifySelf: "flex-end" }}
+                  onClick={employeeLogout}
+                >
+                  Logout
+                </Button>
+              }
+            />
+
             {/* TODO add profile view */}
           </div>
         </div>
@@ -139,7 +150,13 @@ const EmployeePageLayout = ({ children }) => {
           <div className="logo" />
           <Menu
             className="transparent"
-            openKeys={collapsed ? [] : items.filter(item => !!item.children).map(item => item.key)}
+            openKeys={
+              collapsed
+                ? []
+                : items
+                    .filter((item) => !!item.children)
+                    .map((item) => item.key)
+            }
             // className="glass"
             //  inlineIndent={}
             theme="light"
@@ -147,9 +164,11 @@ const EmployeePageLayout = ({ children }) => {
             selectable
             selectedKeys={flatternList(items)
               .filter((a) => {
-                return a.path == "/" ? window.location.pathname == "/employee-portal/" : window.location.pathname.includes(
-                  "/employee-portal" + a.path
-                );
+                return a.path == "/"
+                  ? window.location.pathname == "/employee-portal/"
+                  : window.location.pathname.includes(
+                      "/employee-portal" + a.path
+                    );
               })
               .map((a) => a.key)}
             // disabled={collapsed}

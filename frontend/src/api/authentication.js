@@ -1,5 +1,8 @@
 import axios from "axios";
-import { navigateToCustomerLogin, navigateToEmployeeLogin } from "../utils/navigation";
+import {
+  navigateToCustomerLogin,
+  navigateToEmployeeLogin,
+} from "../utils/navigation";
 import { BASE_URL } from "./config";
 
 const employeeAxiosInstance = axios.create({ baseURL: BASE_URL });
@@ -25,7 +28,8 @@ export async function employeeLogin(data) {
     })
     .then((response) => {
       console.log({ data: response.data });
-      localStorage.setItem("role", response.data.auth.role);
+      localStorage.setItem("employee-role", response.data.auth.role);
+      localStorage.setItem("employee", JSON.stringify(response.data.employee));
       localStorage.setItem("employee-access-token", response.data.token);
       localStorage.setItem(
         "employee-access-token-expiration",
@@ -39,22 +43,23 @@ export async function employeeLogin(data) {
 }
 
 export function employeeLogout() {
-  localStorage.removeItem("role");
+  localStorage.removeItem("employee-role");
+  localStorage.removeItem("employee");
   localStorage.removeItem("employee-access-token");
   localStorage.removeItem("employee-access-token-expiration");
   navigateToEmployeeLogin();
 }
 
 export function isManager() {
-  return localStorage.getItem("role") === "manager";
+  return localStorage.getItem("employee-role") === "manager";
 }
 
 export function isEmployee() {
-  return localStorage.getItem("role") === "employee";
+  return localStorage.getItem("employee-role") === "employee";
 }
 
 export function isCustomer() {
-  return localStorage.getItem("role") === "customer";
+  return localStorage.getItem("customer-role") === "customer";
 }
 
 export function isAuthenticatedEmployee() {
@@ -67,7 +72,7 @@ export function isAuthenticatedEmployee() {
 const customerAxiosInstance = axios.create({ baseURL: BASE_URL });
 customerAxiosInstance.interceptors.request.use(
   function (config) {
-    const token = localStorage.getItem("employee-access-token");
+    const token = localStorage.getItem("customer-access-token");
     if (token) {
       config.headers["Authorization"] = "Bearer " + token;
     }
@@ -87,7 +92,8 @@ export async function customerLogin(data) {
     })
     .then((response) => {
       console.log({ data: response.data });
-      localStorage.setItem("role", response.data.auth.role);
+      localStorage.setItem("customer-role", response.data.auth.role);
+      localStorage.setItem("customer", JSON.stringify(response.data.customer));
       localStorage.setItem("customer-access-token", response.data.token);
       localStorage.setItem(
         "customer-access-token-expiration",
@@ -101,7 +107,8 @@ export async function customerLogin(data) {
 }
 
 export function customerLogout() {
-  localStorage.removeItem("role");
+  localStorage.removeItem("customer-role");
+  localStorage.removeItem("customer");
   localStorage.removeItem("customer-access-token");
   localStorage.removeItem("customer-access-token-expiration");
   navigateToCustomerLogin();

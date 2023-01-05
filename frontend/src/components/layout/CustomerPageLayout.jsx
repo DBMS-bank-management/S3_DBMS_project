@@ -1,11 +1,17 @@
-import React from "react";
+import React , {useState} from "react";
 import { Breadcrumb, Button, Card, Layout, Menu, theme } from "antd";
+import {
+  AppstoreOutlined,
+  MailOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 import { Navigate, Outlet } from "react-router-dom";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
 import {
   customerLogout,
   isAuthenticatedCustomer,
 } from "../../api/authentication";
+import { Profile } from "../profile";
 
 const { Header, Content, Footer } = Layout;
 
@@ -15,6 +21,69 @@ const CustomerPageLayout = () => {
   } = theme.useToken();
 
   const authenticated = isAuthenticatedCustomer();
+
+  const items = [
+    {
+      label: "Navigation One",
+      key: "mail",
+      icon: <MailOutlined />,
+    },
+    {
+      label: "Navigation Two",
+      key: "app",
+      icon: <AppstoreOutlined />,
+      disabled: true,
+    },
+    {
+      label: "Navigation Three - Submenu",
+      key: "SubMenu",
+      icon: <SettingOutlined />,
+      children: [
+        {
+          type: "group",
+          label: "Item 1",
+          children: [
+            {
+              label: "Option 1",
+              key: "setting:1",
+            },
+            {
+              label: "Option 2",
+              key: "setting:2",
+            },
+          ],
+        },
+        {
+          type: "group",
+          label: "Item 2",
+          children: [
+            {
+              label: "Option 3",
+              key: "setting:3",
+            },
+            {
+              label: "Option 4",
+              key: "setting:4",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: (
+        <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+          Navigation Four - Link
+        </a>
+      ),
+      key: "alipay",
+    },
+  ];
+
+  const [current, setCurrent] = useState("mail");
+  const onClick = (e) => {
+    console.log("click ", e);
+    setCurrent(e.key);
+  };
 
   return authenticated ? (
     <Layout className="layout login" style={{ minHeight: "100vh" }}>
@@ -29,9 +98,16 @@ const CustomerPageLayout = () => {
             width: "100%",
           }}
         >
-          <div style={{ flex: 0.95 }}>
+          <div style={{ color: "white", flex: 0.15, fontSize:20 }}>Customer portal</div>
+          <div style={{ flex: 0.85, justifyContent: 'center' }}>
             <Menu
+              onClick={onClick}
+              selectedKeys={[current]}
+              mode="horizontal"
               theme="dark"
+              items={items}
+            />
+            {/* <Menu
               mode="horizontal"
               defaultSelectedKeys={["2"]}
               items={new Array(15).fill(null).map((_, index) => {
@@ -41,16 +117,22 @@ const CustomerPageLayout = () => {
                   label: `nav ${key}`,
                 };
               })}
-            />
+            /> */}
           </div>
           <div style={{ flex: 0.05 }}>
-            <Button
-              type="primary"
-              style={{ justifySelf: "flex-end" }}
-              onClick={customerLogout}
-            >
-              Logout
-            </Button>
+            <Profile
+              type={"customer"}
+              LogoutButton={
+                <Button
+                  type="primary"
+                  style={{ justifySelf: "flex-end" }}
+                  onClick={customerLogout}
+                >
+                  Logout
+                </Button>
+              }
+            />
+
             {/* TODO add profile view */}
           </div>
         </div>
