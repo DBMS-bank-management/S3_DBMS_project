@@ -35,6 +35,9 @@ import { EditOnlineApplication } from "./pages/employeePortal/onlineApplication/
 import AddOnlineApplication from "./pages/employeePortal/onlineApplication/addOnlineApplication";
 import AddAccount from "./pages/employeePortal/account/AddAccounts";
 import LoanList from "./pages/employeePortal/loan/LoanList";
+import AccountPlanList from "./pages/employeePortal/AccountPlans/AccountplanList";
+import LoanPlanList from "./pages/employeePortal/Loanplan/LoanplanList";
+import FdPlanList from "./pages/employeePortal/Fdplans/FdplanList";
 
 function App() {
   return (
@@ -182,7 +185,20 @@ function App() {
               <Route path="activity-logs/">
                 <Route path="" element={<LogsList />} />
               </Route>
+              <Route path="account-plans/">
+                <Route path="" element={<AccountPlanList />} />
+              </Route>
+              <Route path="loan-plans/">
+                <Route path="" element={<LoanPlanList />} />
+              </Route>
+
+              <Route path="fixed-deposit-plans/">
+                <Route path="" element={<FdPlanList />} />
+              </Route>
+
             </Route>
+
+            
             {/* CUSTOMER PORTAL ROUTES */}
 
             <Route path="customer-portal" element={<CustomerPageLayout />}>

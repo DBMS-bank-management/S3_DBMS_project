@@ -13,8 +13,9 @@ exports.create = (req, res) => {
     // Create a accountplanModel
     const accountplan = new accountPlanModel({
         Plan_id: req.body.Plan_ID,
-        interest: req.body.interset,
-        duration: req.body.duration
+        Type: req.body.Type,
+        withdrawal_count : req.body.withdrawal_count,
+        Min_amount: req.body.Min_amount
         
     });
 
