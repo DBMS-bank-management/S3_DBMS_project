@@ -1,8 +1,9 @@
-import axios from "axios";
+// import employeeAxios from "employeeAxios";
 import { BASE_URL } from "./config";
+import { employeeAxios, customerAxios} from "./authentication";
 
 export function addAccount(data) {
-  return axios
+  return employeeAxios
     .post(`${BASE_URL}/accounts`, {
       account_id: data.account_id,
       branch_id: data.branch_id,
@@ -17,7 +18,7 @@ export function addAccount(data) {
 }
 
 export const getAccounts = () => {
-  return axios
+  return employeeAxios
     .get(`${BASE_URL}/accounts`)
     .then((response) => {
       return response.data;
@@ -26,7 +27,7 @@ export const getAccounts = () => {
 };
 
 export const getAccount = (id) => {
-  return axios
+  return employeeAxios
     .get(`${BASE_URL}/accounts/${id}`)
     .then((response) => {
       return response.data;
@@ -36,7 +37,7 @@ export const getAccount = (id) => {
 
 export const updateAccount = (data) => {
   console.log("update account", { data });
-  return axios
+  return employeeAxios
     .put(`${BASE_URL}/accounts/${data.account_id}`, data)
     .then((response) => {
       return response.data;
@@ -48,7 +49,7 @@ export const updateAccount = (data) => {
 
 export const deleteAccount = (id) => {
   console.log("update account", { id });
-  return axios
+  return employeeAxios
     .delete(`${BASE_URL}/accounts/${id}`)
     .then((response) => {
       return response.data;
@@ -59,10 +60,10 @@ export const deleteAccount = (id) => {
 };
 
 export const getAccountsByID = (id) => {
-  return axios
-    .get(`${BASE_URL}/accounts/users/2`)
+  return customerAxios
+    .get(`${BASE_URL}/accounts/byUser`)
     .then((response) => {
       return response.data;
     })
-    .catch((err) => Promise.reject("Failed to get customers ID list!"));
+    .catch((err) => Promise.reject("Failed to get customers accounts list!"));
 };

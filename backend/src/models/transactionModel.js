@@ -127,7 +127,7 @@ Transaction.getAll = (title, result) => {
         result(null, err);
         return;
       }
-      console.log("transactions: ", res);
+      // console.log("transactions: ", res);
       result(null, res);
     });
   };

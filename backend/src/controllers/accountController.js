@@ -13,8 +13,8 @@ exports.create = (req, res) => {
   const account = new AccountModel({
     account_id: req.body.account_id,
     branch_id: req.body.branch_id,
-    balance : req.body.balance,
-    plan_id: req.body.plan_id,  
+    balance: req.body.balance,
+    plan_id: req.body.plan_id,
     customer_id: req.body.customer_id,
   });
 
@@ -36,7 +36,8 @@ exports.findAll = (req, res) => {
   AccountModel.getAll(title, (err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving Accounts.",
+        message:
+          err.message || "Some error occurred while retrieving Accounts.",
       });
     else res.send(data);
   });
@@ -69,19 +70,23 @@ exports.update = (req, res) => {
 
   console.log(req.body);
 
-  AccountModel.updateById(req.params.id, new AccountModel(req.body), (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found Account with account_id ${req.params.id}.`,
-        });
-      } else {
-        res.status(500).send({
-          message: "Error updating Account with account_id " + req.params.id,
-        });
-      }
-    } else res.send(data);
-  });
+  AccountModel.updateById(
+    req.params.id,
+    new AccountModel(req.body),
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found Account with account_id ${req.params.id}.`,
+          });
+        } else {
+          res.status(500).send({
+            message: "Error updating Account with account_id " + req.params.id,
+          });
+        }
+      } else res.send(data);
+    }
+  );
 };
 
 exports.delete = (req, res) => {
@@ -100,13 +105,16 @@ exports.delete = (req, res) => {
   });
 };
 
-exports.getAccountsByUserID= (req, res) => {
-  const name = null //req.query.name;
+exports.getAccountsByCustomerId = (req, res) => {
+  const name = null; //req.query.name;
+  console.log({user: req.user})
+  const customerId = req.user.customer.ID;
 
-  AccountModel.findAccountsByUserId(req.params.id, (err, data) => {
+  AccountModel.findAccountsByUserId(customerId, (err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving accounts.",
+        message:
+          err.message || "Some error occurred while retrieving accounts.",
       });
     else res.send(data);
   });

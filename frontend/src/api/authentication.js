@@ -67,7 +67,7 @@ export function isAuthenticatedEmployee() {
 const customerAxiosInstance = axios.create({ baseURL: BASE_URL });
 customerAxiosInstance.interceptors.request.use(
   function (config) {
-    const token = localStorage.getItem("employee-access-token");
+    const token = localStorage.getItem("customer-access-token");
     if (token) {
       config.headers["Authorization"] = "Bearer " + token;
     }

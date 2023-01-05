@@ -5,7 +5,7 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // user signup
-  router.post("/", users.create);
+  router.post("/",[jwtauth], users.create);
 
   // Get all users
   router.get("/", [jwtauth, isEmployee], users.findAll);

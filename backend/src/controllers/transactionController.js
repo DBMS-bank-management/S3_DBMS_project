@@ -67,7 +67,7 @@ exports.update = (req, res) => {
     });
   }
 
-  console.log(req.body);
+  // console.log(req.body);
 
   TransactionModel.updateById(req.params.id, new TransactionModel(req.body), (err, data) => {
     if (err) {
