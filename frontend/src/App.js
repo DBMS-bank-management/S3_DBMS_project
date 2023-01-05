@@ -33,6 +33,8 @@ import AddNormalApplication from "./pages/employeePortal/normalApplication/addNo
 import OnlineApplicationsList from "./pages/employeePortal/onlineApplication/onlineApplicationList";
 import { EditOnlineApplication } from "./pages/employeePortal/onlineApplication/editOnlineApplication";
 import AddOnlineApplication from "./pages/employeePortal/onlineApplication/addOnlineApplication";
+import AddAccount from "./pages/employeePortal/account/AddAccounts";
+import LoanList from "./pages/employeePortal/loan/LoanList";
 
 function App() {
   return (
@@ -86,10 +88,14 @@ function App() {
                 <Route path="" element={<AccountsList />} />
                 <Route
                   path="add"
-                  element={
-                    <OnlyManager>
-                    </OnlyManager>
-                  }
+                  element={<AddAccount/>}
+                />
+              </Route>
+
+              <Route path="loans/">
+                <Route path="" element={<LoanList />} />
+                <Route
+                  path="add"
                 />
               </Route>
 
@@ -142,14 +148,9 @@ function App() {
               <Route path="normal-applications/">
                 <Route path="" element={<NormalApplicationsList />} />
                 <Route
-                  path=":id"
-                  element={
-                    <OnlyManager>
-                      <EditNormalApplication />
-                    </OnlyManager>
-                  }
+                  path="add"
+                  element={<AddNormalApplication/>}
                 />      
-                <Route path="add" element={<AddNormalApplication />} />        
               </Route>
 
               <Route path="online-applications/">

@@ -67,10 +67,11 @@ const EmployeePageLayout = ({ children }) => {
       getItem("Installments", "10", "/installments"),
       getItem("Transactions", "11", "/transactions"),
       getItem("Fixed Deposits", "12", "/fixed-deposits"),
+      getItem("Loans", "13","/loans"),
     ]),
     getItem("Applications", "sub3", "/", <TeamOutlined />, [
-      getItem("Normal Applications", "13", "/normal-applications"),
-      getItem("Online Applications", "14", "/online-applications"),
+      getItem("Normal Applications", "15", "/normal-applications"),
+      getItem("Online Applications", "16", "/online-applications"),
     ]),
     getItem("Log", "9", "/activity-logs", <FileOutlined />),
   ];
