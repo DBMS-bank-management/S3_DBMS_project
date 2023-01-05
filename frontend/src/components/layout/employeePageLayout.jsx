@@ -16,6 +16,7 @@ import {
   isAuthenticatedEmployee,
   employeeLogout,
 } from "../../api/authentication";
+import { Profile } from "../profile";
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, path, icon, children) {
   return {
@@ -67,7 +68,7 @@ const EmployeePageLayout = ({ children }) => {
       getItem("Installments", "10", "/installments"),
       getItem("Transactions", "11", "/transactions"),
       getItem("Fixed Deposits", "12", "/fixed-deposits"),
-      getItem("Loans", "13","/loans"),
+      getItem("Loans", "13", "/loans"),
     ]),
     getItem("Applications", "sub3", "/", <TeamOutlined />, [
       getItem("Normal Applications", "15", "/normal-applications"),
@@ -108,13 +109,19 @@ const EmployeePageLayout = ({ children }) => {
             </Typography>
           </div>
           <div style={{ flex: 0.05 }}>
-            <Button
-              type="primary"
-              style={{ justifySelf: "flex-end" }}
-              onClick={employeeLogout}
-            >
-              Logout
-            </Button>
+            <Profile
+              type={"employee"}
+              LogoutButton={
+                <Button
+                  type="primary"
+                  style={{ justifySelf: "flex-end" }}
+                  onClick={employeeLogout}
+                >
+                  Logout
+                </Button>
+              }
+            />
+
             {/* TODO add profile view */}
           </div>
         </div>

@@ -6,6 +6,7 @@ import {
   customerLogout,
   isAuthenticatedCustomer,
 } from "../../api/authentication";
+import { Profile } from "../profile";
 
 const { Header, Content, Footer } = Layout;
 
@@ -44,13 +45,19 @@ const CustomerPageLayout = () => {
             />
           </div>
           <div style={{ flex: 0.05 }}>
-            <Button
-              type="primary"
-              style={{ justifySelf: "flex-end" }}
-              onClick={customerLogout}
-            >
-              Logout
-            </Button>
+            <Profile
+              type={"customer"}
+              LogoutButton={
+                <Button
+                  type="primary"
+                  style={{ justifySelf: "flex-end" }}
+                  onClick={customerLogout}
+                >
+                  Logout
+                </Button>
+              }
+            />
+
             {/* TODO add profile view */}
           </div>
         </div>
