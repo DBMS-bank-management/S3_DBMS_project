@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import { Typography, Layout, Card, Col, Row, Statistic, Divider } from "antd";
 import { isEmployee, isManager } from "../../api/authentication";
 import { CustomerPageHeading } from "../../components/layout/CustomerPageHeading";
@@ -10,13 +10,30 @@ export const CustomerDashboard = () => {
 
   const cols = [];
   const colCount = 2;
-  let colCode = "";  
+  let colCode = ""; 
+  
+  const [user, setUser] = useState({});
+  const { err, setErr } = useState();
+
+  const loadUserDetails = async () => {
+    try {
+      const user = await localStorage.getItem('customer');
+      setUser(JSON.parse(user));
+    } catch (err) {
+      setErr(err);
+    }
+  };
+
+  useEffect(() => {
+    loadUserDetails();
+  }, []);
+
   return (
     // <Card className="glass">
     <Layout style={{ height: "100%" }} className="transparent">
       {/* <Header> */}
       <CustomerPageHeading
-        text={"HI!"
+        text={`Hi! ${user.name}`
           // isManager()
           //   ? "Manager Dashboard"
           //   : isEmployee()
@@ -30,13 +47,13 @@ export const CustomerDashboard = () => {
         <Row gutter={[16, 16]}>
           {/* First square */}
             <Col span={12}>
-              {<Card className="glass center-content" hoverable bodyStyle={{width: '100%'}}>
+              {<Card title={"Accounts"} className="glass" hoverable bodyStyle={{width: '100%'}}>
                 <AccountsList />
               </Card> }
             </Col>
           {/* Second square */}
               <Col span={12}>
-              <Card className="glass center-content" hoverable bodyStyle={{width: '100%'}}>
+              <Card title={"Recent transactions"} className="glass" hoverable bodyStyle={{width: '100%'}}>
               <TransactionsList />
               </Card>
             </Col>

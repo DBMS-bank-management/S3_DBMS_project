@@ -86,8 +86,8 @@ const EmployeePageLayout = ({ children }) => {
     >
       <Header
         style={{
-          padding: 0,
-          width: "100%",
+          // padding: 0,
+          // width: "100%",
           // backgroundColor:'red'
         }}
       >
@@ -100,14 +100,10 @@ const EmployeePageLayout = ({ children }) => {
             width: "100%",
           }}
         >
-          <div style={{ flex: 0.95 }}>
-            <Typography
-              // style={{ justifySelf: "flex-start" }}
-              className="Header-text"
-            >
-              Employee Portal
-            </Typography>
+          <div style={{ color: "white", flex: 0.15, fontSize: 20 }}>
+            Employee portal
           </div>
+          <div style={{ flex: 0.8 }}></div>
           <div style={{ flex: 0.05 }}>
             <Profile
               type={"employee"}
