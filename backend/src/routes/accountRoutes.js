@@ -5,6 +5,13 @@ module.exports = (app) => {
 
   var router = require("express").Router();
 
+  // Get the accounts by id
+  router.get(
+    "/byUser",
+    [jwtauth, isCustomer],
+    accounts.getAccountsByCustomerId
+  );
+
   // user signup
   router.post("/", accounts.create);
 
@@ -21,13 +28,6 @@ module.exports = (app) => {
 
   // user signup
   router.post("/", accounts.create);
-
-  // Get the accounts by id
-  router.get(
-    "/byUser",
-    [jwtauth, isCustomer],
-    accounts.getAccountsByCustomerId
-  );
 
   app.use("/accounts", router);
 };
