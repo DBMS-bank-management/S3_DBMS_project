@@ -3,6 +3,7 @@ import { BASE_URL } from "./config";
 import { employeeAxios, customerAxios} from "./authentication";
 
 export function addAccount(data) {
+  console.log("Account added ", {data})
   return employeeAxios
     .post(`${BASE_URL}/accounts`, {
       account_id: data.account_id,

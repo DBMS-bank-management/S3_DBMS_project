@@ -28,6 +28,7 @@ let isManager = async (req, res, next) => {
 
 let isEmployee = async (req, res, next) => {
   try {
+    console.log({'role': req.user.role})
     if (req.user.role == "employee" || req.user.role == "manager") {
       next();
     } else {

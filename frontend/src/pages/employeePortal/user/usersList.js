@@ -9,7 +9,10 @@ const UsersList = () => {
   const [users, setUsers] = useState();
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => loadUsersList(), []);
+  useEffect(() => {
+    setLoading(true);
+    loadUsersList();
+  }, []);
 
   const onDelete = (id) => {
     deleteUser(id);
@@ -21,7 +24,8 @@ const UsersList = () => {
       .then((data) => {
         setUsers(data);
       })
-      .catch((err) => message.error(err));
+      .catch((err) => message.error(err))
+      .finally(() => setLoading(false));
   }
 
   const columns = [
@@ -65,11 +69,16 @@ const UsersList = () => {
   return (
     <div className="transparent">
       <EmployeePageHeading text={"Users"} />
-    <Card style={{ width: "100%" }}>
-     
-      {isManager() || true && <Button href="users/add">Add user</Button>}
-      <Table dataSource={users} columns={columns} bordered rowKey={"auth_ID"} />
-    </Card>
+      <Card style={{ width: "100%" }}>
+        {isManager() || (true && <Button href="users/add">Add user</Button>)}
+        <Table
+          loading={loading}
+          dataSource={users}
+          columns={columns}
+          bordered
+          rowKey={"auth_ID"}
+        />
+      </Card>
     </div>
   );
 };

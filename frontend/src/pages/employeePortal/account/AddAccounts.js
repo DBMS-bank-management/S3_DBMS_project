@@ -15,13 +15,23 @@ import {
 } from "antd";
 import { getCustomers } from "../../../api/customer";
 import { capitalize } from "../../../utils/string";
+import { getAccountPlans } from "../../../api/accountplan";
+import { responseErrorHandler } from "../../../utils/responseErrorHandler";
+import { addAccount } from "../../../api/account";
+import { getLoggedInEmployeeBranch } from "../../../api/authentication";
+import { useNavigate } from "react-router-dom";
 
 const AddAccount = () => {
   const [customers, setCustomers] = useState([]);
+  const [accountPlans, setAccountPlans] = useState([]);
   const [formValues, setFormValues] = useState({ plan: null, deposit: null });
   const [selectedCustomer, setSelectedCustomer] = useState();
+  const navigate = useNavigate()
 
-  useEffect(() => loadCustomersList(), []);
+  useEffect(() => {
+    loadCustomersList();
+    loadAccountPlansList();
+  }, []);
 
   function loadCustomersList() {
     getCustomers()
@@ -34,8 +44,30 @@ const AddAccount = () => {
           }))
         );
       })
-      .catch((err) => alert(err));
+      .catch(responseErrorHandler);
   }
+
+  const loadAccountPlansList = () => {
+    getAccountPlans()
+      .then((data) => {
+        setAccountPlans(data);
+      })
+      .catch(responseErrorHandler);
+  };
+
+  const onProcessDone = async () => {
+    const branchId = await getLoggedInEmployeeBranch();
+    addAccount({
+      account_id: Math.round(Math.random()*100000000),
+      balance: formValues.deposit,
+      plan_id: formValues.plan,
+      branch_id: branchId,
+      customer_id: selectedCustomer
+
+    }).then(() => {
+     navigate("/employee-portal/accounts")
+    });
+  };
 
   const onChange = (value) => {
     console.log(`selected ${value}`);
@@ -71,7 +103,7 @@ const AddAccount = () => {
               ]}
             >
               <Select
-              style={{width: 300}}
+                style={{ width: 300 }}
                 defaultValue={selectedCustomer}
                 showSearch
                 placeholder="Type username or name"
@@ -98,7 +130,7 @@ const AddAccount = () => {
       content: selectedCustomer && (
         <div className="center-content" style={{ flexDirection: "column" }}>
           <Form
-          size='large'
+            size="large"
             layout="vertical"
             name="basic"
             // labelCol={{
@@ -125,9 +157,11 @@ const AddAccount = () => {
               ]}
             >
               <Radio.Group>
-                <Radio.Button value="optional">Optional</Radio.Button>
-                <Radio.Button value>Required</Radio.Button>
-                <Radio.Button value={false}>Hidden</Radio.Button>
+                {accountPlans.map((plan) => (
+                  <Radio.Button
+                    value={plan.plan_ID}
+                  >{`${plan.plan_ID} (${plan.type})`}</Radio.Button>
+                ))}
               </Radio.Group>
             </Form.Item>
 
@@ -210,7 +244,7 @@ const AddAccount = () => {
           display: "flex",
           justifyContent: "space-between",
           flexDirection: "row-reverse",
-          padding: "0 100px"
+          padding: "0 100px",
         }}
       >
         {current < steps.length - 1 && (
@@ -228,9 +262,9 @@ const AddAccount = () => {
         )}
         {current === steps.length - 1 && (
           <Button
-            style={{backgroundColor: 'green'}}
+            style={{ backgroundColor: "green" }}
             type="primary"
-            onClick={() => message.success("Processing complete!")}
+            onClick={onProcessDone}
           >
             Done
           </Button>

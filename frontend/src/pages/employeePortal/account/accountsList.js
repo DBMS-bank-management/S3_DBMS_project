@@ -7,7 +7,9 @@ const AccountsList = () => {
   const [accounts, setAccounts] = useState();
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => loadAccountsList(), []);
+  useEffect(() => {
+    setLoading(true)
+    loadAccountsList()}, []);
 
   const onDelete = (id) => {
     deleteAccount(id);
@@ -19,7 +21,7 @@ const AccountsList = () => {
       .then((data) => {
         setAccounts(data);
       })
-      .catch((err) => message.error(err));
+      .catch((err) => message.error(err)).finally(() => setLoading(false));
   }
 
   const columns = [
@@ -70,7 +72,7 @@ const AccountsList = () => {
   return (
       <Card style={{ width: "100%" }}>
         <Button href="accounts/add">Add account</Button>
-        <Table dataSource={accounts} columns={columns} bordered />
+        <Table loading={loading} dataSource={accounts} columns={columns} bordered />
       </Card>
   );
 };

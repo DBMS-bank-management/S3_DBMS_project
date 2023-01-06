@@ -1,9 +1,9 @@
-// import axios from "axios";
-import { employeeAxios as axios } from './authentication';
+// import employeeAxios from "employeeAxios";
+import { employeeAxios as employeeAxios } from './authentication';
 import { BASE_URL } from "./config";
 
 export function addUser(data) {
-  return axios
+  return employeeAxios
     .post(`${BASE_URL}/users`, {
       password: data.password,
       role: "employee",
@@ -15,7 +15,7 @@ export function addUser(data) {
 }
 
 export const getUsers = () => {
-  return axios
+  return employeeAxios
     .get(`${BASE_URL}/users`)
     .then((response) => {
       return response.data;
@@ -24,7 +24,7 @@ export const getUsers = () => {
 };
 
 export const getUser = (id) => {
-  return axios
+  return employeeAxios
     .get(`${BASE_URL}/users/${id}`)
     .then((response) => {
       return response.data;
@@ -34,7 +34,7 @@ export const getUser = (id) => {
 
 export const updateUser = (data) => {
   console.log("update user", { data });
-  return axios
+  return employeeAxios
     .put(`${BASE_URL}/users/${data.auth_ID}`, data)
     .then((response) => {
       return response.data;
@@ -47,7 +47,7 @@ export const updateUser = (data) => {
 
 export const deleteUser = (id) => {
   console.log("update user", { id });
-  return axios
+  return employeeAxios
     .delete(`${BASE_URL}/users/${id}`)
     .then((response) => {
       return response.data;

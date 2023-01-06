@@ -120,3 +120,12 @@ export function isAuthenticatedCustomer() {
     localStorage.getItem("customer-access-token-expiration") > Date.now()
   );
 }
+
+export const getLoggedInEmployeeBranch = async () => {
+  try {
+    const user = await localStorage.getItem("employee")
+    return JSON.parse(user).branch_ID;
+  } catch (err) {
+    console.log(err);
+  }
+};
