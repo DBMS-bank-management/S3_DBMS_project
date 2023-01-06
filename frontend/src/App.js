@@ -38,6 +38,7 @@ import LoanList from "./pages/employeePortal/loan/LoanList";
 import AccountPlanList from "./pages/employeePortal/AccountPlans/AccountplanList";
 import LoanPlanList from "./pages/employeePortal/Loanplan/LoanplanList";
 import FdPlanList from "./pages/employeePortal/Fdplans/FdplanList";
+import AnimationLayout from "./components/RouterAnimation";
 
 function App() {
   return (
@@ -66,139 +67,113 @@ function App() {
               path="/employee-portal/"
               element={<EmployeePageLayout />}
             >
-              <Route exact path="" element={<Dashboard />} />
+              <Route element={<AnimationLayout />}>
+                <Route exact path="" element={<Dashboard />} />
 
-              <Route path="users/">
-                <Route path="" element={<UsersList />} />
-                <Route
-                  path=":id"
-                  element={
-                    <OnlyManager>
-                      <EditUser />
-                    </OnlyManager>
-                  }
-                />
-                <Route path="add" element={<AddUser />} />
-              </Route>
+                <Route path="users/">
+                  <Route path="" element={<UsersList />} />
+                  <Route
+                    path=":id"
+                    element={
+                      <OnlyManager>
+                        <EditUser />
+                      </OnlyManager>
+                    }
+                  />
+                  <Route path="add" element={<AddUser />} />
+                </Route>
 
-              <Route path="customers/">
-                <Route path="" element={<CustomersList />} />
-                <Route path=":id" element={<EditUser />} />
-                <Route path="add" element={<AddUser />} />
-              </Route>
+                <Route path="customers/">
+                  <Route path="" element={<CustomersList />} />
+                  <Route path=":id" element={<EditUser />} />
+                  <Route path="add" element={<AddUser />} />
+                </Route>
 
-              <Route path="accounts/">
-                <Route path="" element={<AccountsList />} />
-                <Route
-                  path="add"
-                  element={<AddAccount/>}
-                />
-              </Route>
+                <Route path="accounts/">
+                  <Route path="" element={<AccountsList />} />
+                  <Route path="add" element={<AddAccount />} />
+                </Route>
 
-              <Route path="loans/">
-                <Route path="" element={<LoanList />} />
-                <Route
-                  path="add"
-                />
-              </Route>
+                <Route path="loans/">
+                  <Route path="" element={<LoanList />} />
+                  <Route path="add" />
+                </Route>
 
-              <Route path="installments/">
-                <Route path="" element={<InstallmentList />} />
-                <Route
-                  path="add"
-                  element={
-                    <OnlyManager>
-                    </OnlyManager>
-                  }
-                />              
-              </Route>
+                <Route path="installments/">
+                  <Route path="" element={<InstallmentList />} />
+                  <Route path="add" element={<OnlyManager></OnlyManager>} />
+                </Route>
 
-              <Route path="branches/">
-                <Route path="" element={<BranchesList />} />
-                <Route
-                  path="add"
-                  element={
-                    <OnlyManager>
-                      <AddBranch />
-                    </OnlyManager>
-                  }
-                />
-              </Route>
+                <Route path="branches/">
+                  <Route path="" element={<BranchesList />} />
+                  <Route
+                    path="add"
+                    element={
+                      <OnlyManager>
+                        <AddBranch />
+                      </OnlyManager>
+                    }
+                  />
+                </Route>
 
-              <Route path="transactions/">
-                <Route path="" element={<TransactionList />} />
-                <Route
-                  path="add"
-                  element={
-                    
-                      <AddTransaction/>
-                    
-                  }
-                />
-              </Route>
-              
-              <Route path="fixed-deposits/">
-                <Route path="" element={<FDList />} />
-                <Route
-                  path="add"
-                  element={
-                    <OnlyManager>
-                    </OnlyManager>
-                  }
-                />
-              </Route>
+                <Route path="transactions/">
+                  <Route path="" element={<TransactionList />} />
+                  <Route path="add" element={<AddTransaction />} />
+                </Route>
 
-              <Route path="normal-applications/">
-                <Route path="" element={<NormalApplicationsList />} />
-                <Route
-                  path="add"
-                  element={<AddNormalApplication/>}
-                />      
-              </Route>
+                <Route path="fixed-deposits/">
+                  <Route path="" element={<FDList />} />
+                  <Route path="add" element={<OnlyManager></OnlyManager>} />
+                </Route>
 
-              <Route path="online-applications/">
-                <Route path="" element={<OnlineApplicationsList />} />
-                <Route
-                  path=":id"
-                  element={
-                    <OnlyManager>
-                      <EditOnlineApplication />
-                    </OnlyManager>
-                  }
-                />      
-                <Route path="add" element={<AddOnlineApplication />} />        
-              </Route>
+                <Route path="normal-applications/">
+                  <Route path="" element={<NormalApplicationsList />} />
+                  <Route path="add" element={<AddNormalApplication />} />
+                </Route>
 
-              <Route path="employees/">
-                <Route path="" element={<EmployeeList />} />
-                <Route
-                  path=":id"
-                  element={
-                    <OnlyManager>
-                      //<EditEmployee />
-                    </OnlyManager>
-                  }
-                />      
-                <Route path="add" element={<AddEmployee />} />
-              </Route>
+                <Route path="online-applications/">
+                  <Route path="" element={<OnlineApplicationsList />} />
+                  <Route
+                    path=":id"
+                    element={
+                      <OnlyManager>
+                        <EditOnlineApplication />
+                      </OnlyManager>
+                    }
+                  />
+                  <Route path="add" element={<AddOnlineApplication />} />
+                </Route>
 
-              <Route path="activity-logs/">
-                <Route path="" element={<LogsList />} />
-              </Route>
-              <Route path="account-plans/">
-                <Route path="" element={<AccountPlanList />} />
-              </Route>
-              <Route path="loan-plans/">
-                <Route path="" element={<LoanPlanList />} />
-              </Route>
+                <Route path="employees/">
+                  <Route path="" element={<EmployeeList />} />
+                  <Route
+                    path=":id"
+                    element={
+                      <OnlyManager>
+                        //
+                        <EditEmployee />
+                      </OnlyManager>
+                    }
+                  />
+                  <Route path="add" element={<AddEmployee />} />
+                </Route>
 
-              <Route path="fixed-deposit-plans/">
-                <Route path="" element={<FdPlanList />} />
-              </Route>
+                <Route path="activity-logs/">
+                  <Route path="" element={<LogsList />} />
+                </Route>
+                <Route path="account-plans/">
+                  <Route path="" element={<AccountPlanList />} />
+                </Route>
+                <Route path="loan-plans/">
+                  <Route path="" element={<LoanPlanList />} />
+                </Route>
 
+                <Route path="fixed-deposit-plans/">
+                  <Route path="" element={<FdPlanList />} />
+                </Route>
+              </Route>
             </Route>
 
-            
             {/* CUSTOMER PORTAL ROUTES */}
 
             <Route path="customer-portal" element={<CustomerPageLayout />}>
