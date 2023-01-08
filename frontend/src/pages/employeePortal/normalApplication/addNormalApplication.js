@@ -5,6 +5,7 @@ import { addNormalApplication } from "../../../api/normalApplication";
 import { getLoanPlans } from "../../../api/loanplan";
 import { getAccounts } from "../../../api/account";
 import { useNavigate } from "react-router-dom";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 
 const AddNormalApplication = () => {
   const [loanplans, setLoanPlans] = useState();
@@ -77,75 +78,78 @@ const AddNormalApplication = () => {
   /* eslint-enable no-template-curly-in-string */
 
   return (
-    <Form size="large" {...layout} name="nest-messages" onFinish={onFinish}>
-      <Form.Item
-        name={"acc_ID"}
-        label="Account ID"
-        rules={[
-          {
-            required: true,
-            message: "Account is required",
-          },
-        ]}
-      >
-        <Select
-          showSearch
-          placeholder="Select an account"
-          optionFilterProp="children"
-          filterOption={(input, option) =>
-            (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-          }
-          options={accounts}
-        />
-      </Form.Item>
-      <Form.Item
-        name={"amount"}
-        label="Amount"
-        rules={[
-          {
-            type: "number",
-            // min: 0,
-            // max: 9999,
-          },
-          {
-            required: "true",
-            message: "Amount is required",
-          },
-        ]}
-      >
-        <InputNumber />
-      </Form.Item>
-      <Form.Item
-        name={"plan_ID"}
-        label="Loan Plan"
-        rules={[
-          {
-            required: true,
-            message: "Plan is required",
-          },
-        ]}
-      >
-        <Select
-          showSearch
-          placeholder="Select a plan"
-          optionFilterProp="children"
-          filterOption={(input, option) =>
-            (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-          }
-          options={loanplans}
-        />
-      </Form.Item>
-      <Form.Item
-        wrapperCol={{
-          ...layout.wrapperCol,
-          offset: 8,
-        }}
-      >
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+    <>
+      <EmployeePageHeading text={"Loan application"} />
+      <Form size="large" {...layout} name="nest-messages" onFinish={onFinish}>
+        <Form.Item
+          name={"acc_ID"}
+          label="Account ID"
+          rules={[
+            {
+              required: true,
+              message: "Account is required",
+            },
+          ]}
+        >
+          <Select
+            showSearch
+            placeholder="Select an account"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            options={accounts}
+          />
+        </Form.Item>
+        <Form.Item
+          name={"amount"}
+          label="Amount"
+          rules={[
+            {
+              type: "number",
+              // min: 0,
+              // max: 9999,
+            },
+            {
+              required: "true",
+              message: "Amount is required",
+            },
+          ]}
+        >
+          <InputNumber />
+        </Form.Item>
+        <Form.Item
+          name={"plan_ID"}
+          label="Loan Plan"
+          rules={[
+            {
+              required: true,
+              message: "Plan is required",
+            },
+          ]}
+        >
+          <Select
+            showSearch
+            placeholder="Select a plan"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            options={loanplans}
+          />
+        </Form.Item>
+        <Form.Item
+          wrapperCol={{
+            ...layout.wrapperCol,
+            offset: 8,
+          }}
+        >
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </>
   );
 };
 export default AddNormalApplication;
