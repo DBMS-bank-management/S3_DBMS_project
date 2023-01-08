@@ -42,7 +42,7 @@ export const updateTransaction = (data) => {
       return response.data;
     })
     .catch((err) =>
-      Promise.reject("Failed to update intallment with id = " + data.trans_ID + "!")
+      Promise.reject("Failed to update installment with id = " + data.trans_ID + "!")
     );
 };
 

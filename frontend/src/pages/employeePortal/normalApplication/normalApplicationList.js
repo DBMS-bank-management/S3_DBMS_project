@@ -83,7 +83,7 @@ const NormalApplicationsList = () => {
       
     <Card style={{ width: "100%" }}>
      
-      <Button href="normalApplications/add">Add Normal Applicaion</Button>
+      <Button href="normal-applications/add">Add Normal Applicaion</Button>
       <Table dataSource={normalApplications} columns={columns} bordered />
     </Card>
   );

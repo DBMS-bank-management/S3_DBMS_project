@@ -33,9 +33,14 @@ export const Profile = ({ type, LogoutButton }) => {
       content={
         <>
           {user && (
-            <Descriptions title="User Details" bordered style={{paddingBottom: 10}}>
+            <Descriptions
+              title="User Details"
+              bordered
+              style={{ paddingBottom: 10 }}
+            >
               {Object.keys(user).map((key) => (
                 <Descriptions.Item
+                  key={key}
                   label={dashSeperatedToHumanReadble(key)}
                   span={4}
                 >

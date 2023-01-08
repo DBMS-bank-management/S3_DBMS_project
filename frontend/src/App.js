@@ -39,6 +39,7 @@ import AccountPlanList from "./pages/employeePortal/AccountPlans/AccountplanList
 import LoanPlanList from "./pages/employeePortal/Loanplan/LoanplanList";
 import FdPlanList from "./pages/employeePortal/Fdplans/FdplanList";
 import AnimationLayout from "./components/RouterAnimation";
+import AddCustomer from "./pages/employeePortal/customer/AddCustomer";
 
 function App() {
   return (
@@ -85,8 +86,8 @@ function App() {
 
                 <Route path="customers/">
                   <Route path="" element={<CustomersList />} />
-                  <Route path=":id" element={<EditUser />} />
-                  <Route path="add" element={<AddUser />} />
+                  {/* <Route path=":id" element={<EditUser />} /> */}
+                  <Route path="add" element={<AddCustomer />} />
                 </Route>
 
                 <Route path="accounts/">
