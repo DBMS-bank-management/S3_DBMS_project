@@ -115,6 +115,17 @@ Loan.getAll = (title, result) => {
     });
   };
 
+  Loan.findLoansByUserId=(id,result)=> {
+    sql.query("SELECT l.loan_ID, l.acc_ID, l.amount, l.plan_ID from loan l join account a on a.account_ID = l.acc_ID  where customer_ID = ?", id, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      // console.log("transactions: ", res);
+      result(null, res);
+    });
+  };
 
 module.exports = Loan;
   

@@ -99,3 +99,14 @@ exports.delete = (req, res) => {
   });
 };
 
+exports.getLoansByUserID= (req, res) => {
+  const name = null //req.query.name;
+
+  LoanModel.findLoansByUserId(req.params.id, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving loans.",
+      });
+    else res.send(data);
+  });
+};
