@@ -98,4 +98,16 @@ exports.delete = (req, res) => {
       }
     } else res.send({ message: `FD was deleted successfully!` });
   });
-};
+}
+
+  exports.getFixedDepositsByUserID= (req, res) => {
+    const name = null //req.query.name;
+  
+    FDModel.findFixedDepositsByUserId(req.params.id, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message: err.message || "Some error occurred while retrieving fixed deposits.",
+        });
+      else res.send(data);
+    });
+  };

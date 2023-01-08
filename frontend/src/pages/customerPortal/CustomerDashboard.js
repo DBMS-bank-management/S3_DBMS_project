@@ -4,6 +4,7 @@ import { isEmployee, isManager } from "../../api/authentication";
 import { CustomerPageHeading } from "../../components/layout/CustomerPageHeading";
 import AccountsList from "./Accounts/dashboardAccountList";
 import TransactionsList from "./Accounts/dashboardTransactionList";
+import FixedDepositsList from "./Accounts/dashboardFDList";
 const { Header, Footer, Sider, Content } = Layout;
 
 export const CustomerDashboard = () => {
@@ -59,7 +60,8 @@ export const CustomerDashboard = () => {
             </Col>
             {/* Third square */}
             <Col span={12}>
-              <Card className="glass center-content" hoverable>
+              <Card title ={"Fixed Deposits"}   className="glass  " hoverable>
+              <FixedDepositsList />
               </Card>
             </Col>
             {/* Fourth Square */}

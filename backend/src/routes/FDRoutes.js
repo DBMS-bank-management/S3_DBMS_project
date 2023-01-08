@@ -17,6 +17,9 @@ module.exports = (app) => {
     // Delete a fd with id
     router.delete("/:id", fd.delete);
   
+     // Get the transactions by id
+    router.get("/users/:id", fd.getFixedDepositsByUserID);
+
     app.use("/fd", router);
   };
   

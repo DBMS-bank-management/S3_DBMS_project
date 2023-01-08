@@ -57,3 +57,12 @@ export const deleteFD = (id) => {
       Promise.reject("Failed to delete fd with id = " + id + "!")
     );
 };
+
+export const getFixedDepositsByID = (id) => {
+  return axios
+    .get(`${BASE_URL}/fd/users/2`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Failed to get Fixed Deposits ID list!"));
+};
