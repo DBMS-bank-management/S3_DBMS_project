@@ -113,10 +113,22 @@ NormalApplication.removeAll = (result) => {
       result(null, err);
       return;
     }
-
     console.log(`deleted ${res.affectedRows} normal applications`);
     result(null, res);
   });
 };
+
+
+NormalApplication.approve = (application_id) => {
+  sql.query("call approve_normal_application(?);", application_id , (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+          result(null, err);
+          return;
+        }    
+        console.log(`Eligible for taking the loan`);
+        result(null, res);
+      });
+}
 
 module.exports = NormalApplication;

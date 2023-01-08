@@ -5,6 +5,9 @@ const { jwtauth } = require("../utils/jwt");
 module.exports = (app) => {
   var router = require("express").Router();
 
+  // normal application approval
+  router.post("/approve", normalapplications.approve);
+
   // normal applicatin signup
   router.post("/", [jwtauth, isEmployee], normalapplications.create);
 
