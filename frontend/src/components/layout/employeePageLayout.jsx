@@ -7,7 +7,7 @@ import {
   UserOutlined,
   BankOutlined,
   DollarOutlined,
-  UnorderedListOutlined
+  UnorderedListOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Typography, Button, Card } from "antd";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
@@ -71,7 +71,7 @@ const EmployeePageLayout = ({ children }) => {
       getItem("Fixed Deposits", "12", "/fixed-deposits"),
       getItem("Loans", "13", "/loans"),
     ]),
-    getItem("Plans", "accountplans", "/", <UnorderedListOutlined/>, [
+    getItem("Plans", "accountplans", "/", <UnorderedListOutlined />, [
       getItem("Account Plans", "17", "/account-plans"),
       getItem("Fixed deposit Plans", "18", "/fixed-deposit-plans"),
       getItem("Loan Plans", "19", "/loan-plans"),
@@ -91,11 +91,13 @@ const EmployeePageLayout = ({ children }) => {
       className="login"
     >
       <Header
-        style={{
-          // padding: 0,
-          // width: "100%",
-          // backgroundColor:'red'
-        }}
+        style={
+          {
+            // padding: 0,
+            // width: "100%",
+            // backgroundColor:'red'
+          }
+        }
       >
         <div
           style={{
@@ -106,7 +108,10 @@ const EmployeePageLayout = ({ children }) => {
             width: "100%",
           }}
         >
-          <div style={{ color: "white", flex: 0.15, fontSize: 20 }}>
+          <div
+            style={{ color: "white", flex: 0.15, fontSize: 20 }}
+            onClick={() => navigate("/employee-portal")}
+          >
             Employee portal
           </div>
           <div style={{ flex: 0.8 }}></div>
@@ -189,7 +194,11 @@ const EmployeePageLayout = ({ children }) => {
             // backgroundColor: 'green'
           }}
         >
-          <Card className="glass" style={{ minHeight: "100%"}} bodyStyle={{minHeight: '100%'}}>
+          <Card
+            className="glass"
+            style={{ minHeight: "100%" }}
+            bodyStyle={{ minHeight: "100%" }}
+          >
             <BreadcrumbsFromPath />
             <Outlet />
           </Card>

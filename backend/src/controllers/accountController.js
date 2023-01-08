@@ -107,10 +107,25 @@ exports.delete = (req, res) => {
 
 exports.getAccountsByCustomerId = (req, res) => {
   const name = null; //req.query.name;
-  console.log({user: req.user})
+  console.log({ user: req.user });
   const customerId = req.user.customer.ID;
 
   AccountModel.findAccountsByUserId(customerId, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving accounts.",
+      });
+    else res.send(data);
+  });
+};
+
+exports.getSavingsAccountsByCustomerId = (req, res) => {
+  const name = null; //req.query.name;
+  console.log({ user: req.user });
+  const customerId = req.user.customer.ID;
+
+  AccountModel.findSavingsAccountsByUserId(customerId, (err, data) => {
     if (err)
       res.status(500).send({
         message:

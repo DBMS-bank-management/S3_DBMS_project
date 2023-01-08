@@ -1,9 +1,9 @@
 // import employeeAxios from "employeeAxios";
 import { BASE_URL } from "./config";
-import { employeeAxios, customerAxios} from "./authentication";
+import { employeeAxios, customerAxios } from "./authentication";
 
 export function addAccount(data) {
-  console.log("Account added ", {data})
+  console.log("Account added ", { data });
   return employeeAxios
     .post(`${BASE_URL}/accounts`, {
       account_id: data.account_id,
@@ -33,7 +33,9 @@ export const getAccount = (id) => {
     .then((response) => {
       return response.data;
     })
-    .catch((err) => Promise.reject("Failed to get accounts with id =" + id + "!"));
+    .catch((err) =>
+      Promise.reject("Failed to get accounts with id =" + id + "!")
+    );
 };
 
 export const updateAccount = (data) => {
@@ -44,7 +46,9 @@ export const updateAccount = (data) => {
       return response.data;
     })
     .catch((err) =>
-      Promise.reject("Failed to update account with id = " + data.account_id + "!")
+      Promise.reject(
+        "Failed to update account with id = " + data.account_id + "!"
+      )
     );
 };
 
@@ -60,9 +64,18 @@ export const deleteAccount = (id) => {
     );
 };
 
-export const getAccountsByID = (id) => {
+export const getAccountsByID = () => {
   return customerAxios
     .get(`${BASE_URL}/accounts/byUser`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Failed to get customers accounts list!"));
+};
+
+export const getSavingsAccountsByCustomer = () => {
+  return customerAxios
+    .get(`${BASE_URL}/accounts/byUser/savings`)
     .then((response) => {
       return response.data;
     })

@@ -40,6 +40,7 @@ import LoanPlanList from "./pages/employeePortal/Loanplan/LoanplanList";
 import FdPlanList from "./pages/employeePortal/Fdplans/FdplanList";
 import AnimationLayout from "./components/RouterAnimation";
 import AddCustomer from "./pages/employeePortal/customer/AddCustomer";
+import { OnlineLoanApplication } from "./pages/customerPortal/OnlineLoanApplications";
 
 function App() {
   return (
@@ -178,7 +179,13 @@ function App() {
             {/* CUSTOMER PORTAL ROUTES */}
 
             <Route path="customer-portal" element={<CustomerPageLayout />}>
-              <Route path="" element={<CustomerDashboard />} />
+              <Route element={<AnimationLayout />}>
+                <Route path="" element={<CustomerDashboard />} />
+                <Route
+                  path="online-loan-application"
+                  element={<OnlineLoanApplication />}
+                />
+              </Route>
             </Route>
 
             {/* PUBLIC ROUTES */}

@@ -117,7 +117,19 @@ Account.getAll = (title, result) => {
   };
 
   Account.findAccountsByUserId=(id,result)=> {
-    sql.query("SELECT account_ID,branch_ID,balance,plan_ID from account where customer_ID = ?", id, (err, res) => {
+    sql.query("SELECT * from account a inner join account_plan p on a.plan_ID = p.plan_ID where customer_ID = ?", id, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("accounts: ", res);
+      result(null, res);
+    });
+  };
+
+  Account.findSavingsAccountsByUserId=(id,result)=> {
+    sql.query("SELECT * from account a inner join account_plan p on a.plan_ID = p.plan_ID where type='Savings' and customer_ID = ?", id, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);

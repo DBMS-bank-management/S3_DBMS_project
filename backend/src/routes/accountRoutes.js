@@ -12,6 +12,12 @@ module.exports = (app) => {
     accounts.getAccountsByCustomerId
   );
 
+  router.get(
+    "/byUser/savings",
+    [jwtauth, isCustomer],
+    accounts.getSavingsAccountsByCustomerId
+  );
+
   // user signup
   router.post("/", accounts.create);
 
