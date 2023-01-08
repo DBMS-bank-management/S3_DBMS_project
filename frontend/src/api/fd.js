@@ -64,5 +64,5 @@ export const getFixedDepositsByID = (id) => {
     .then((response) => {
       return response.data;
     })
-    .catch((err) => Promise.reject("Failed to get Fixed Deposits ID list!"));
+    .catch((err) => Promise.reject("Failed to get customers Fixed Deposits list!"));
 };

@@ -56,3 +56,12 @@ export const deleteLoan = (id) => {
       Promise.reject("Failed to delete loan with id = " + id + "!")
     );
 };
+
+export const getLoansByID = (id) => {
+  return axios
+    .get(`${BASE_URL}/loans/users/2`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Failed to get customers Loans list!"));
+};

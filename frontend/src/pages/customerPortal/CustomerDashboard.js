@@ -5,6 +5,7 @@ import { CustomerPageHeading } from "../../components/layout/CustomerPageHeading
 import AccountsList from "./Accounts/dashboardAccountList";
 import TransactionsList from "./Accounts/dashboardTransactionList";
 import FixedDepositsList from "./Accounts/dashboardFDList";
+import LoansList from "./Accounts/dashboardLoanList";
 const { Header, Footer, Sider, Content } = Layout;
 
 export const CustomerDashboard = () => {
@@ -66,7 +67,8 @@ export const CustomerDashboard = () => {
             </Col>
             {/* Fourth Square */}
             <Col span={12}>
-              <Card className="glass center-content" hoverable>
+              <Card title = {"Loans"} className= "glass" hoverable>
+              <LoansList />
               </Card>
             </Col>
         </Row>
