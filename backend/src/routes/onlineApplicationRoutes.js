@@ -2,7 +2,11 @@ module.exports = (app) => {
     const onlineapplications = require("../controllers/onlineApplicationController");
   
     var router = require("express").Router();
+
   
+    // // online application approval
+    // router.post("/", onlineapplications.addloan);
+
     // online applicatin signup
     router.post("/", onlineapplications.create);
   

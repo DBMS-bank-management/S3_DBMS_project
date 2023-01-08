@@ -101,3 +101,22 @@ exports.delete = (req, res) => {
     } else res.send({ message: `Online Application was deleted successfully!` });
   });
 };
+
+
+
+
+// exports.addloan = (req, res) => {
+//   OnlineApplicationModel.approve(req.params.id, (err, data) => {
+//     if (err) {
+//       if (err.kind === "not_found") {
+//         res.status(404).send({
+//           message: `Not found Online Application with id ${req.params.id}.`,
+//         });
+//       } else {
+//         res.status(500).send({
+//           message: "Could not check the eligibility for Online Applicatin with id " + req.params.id,
+//         });
+//       }
+//     } else res.send({ message: `Eligibility for loan was checked successfully!` });
+//   });
+// };

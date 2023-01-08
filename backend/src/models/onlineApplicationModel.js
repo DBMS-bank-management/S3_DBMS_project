@@ -11,7 +11,8 @@ const OnlineApplication = function (onlineApplication) {
 };
 
 OnlineApplication.create = (newOnlineApplication, result) => {
-  sql.query("INSERT INTO online_application SET ?", newOnlineApplication, (err, res) => {
+  
+  sql.query("call Creating_Online_application(?);", [newOnlineApplication.fd_ID,newOnlineApplication.acc_ID, newOnlineApplication.amount, newOnlineApplication.app_date] , (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -117,5 +118,20 @@ OnlineApplication.removeAll = (result) => {
     result(null, res);
   });
 };
+
+
+
+// OnlineApplication.approve = (application_id) => {
+//   sql.query("call approve_online_application(?);", application_id , (err, res) => {
+//         if (err) {
+//           console.log("error: ", err);
+//           result(null, err);
+//           return;
+//         }
+    
+//         console.log(`Eligible for taking the loan`);
+//         result(null, res);
+//       });
+// }
 
 module.exports = OnlineApplication;
