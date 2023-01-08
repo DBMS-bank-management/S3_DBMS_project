@@ -132,7 +132,7 @@ Transaction.removeAll = (result) => {
 
 Transaction.findTransactionsByUserId = (id, result) => {
   sql.query(
-    "SELECT timestamp,amount,description from transaction where acc_ID = ?",
+    "SELECT * from transaction t join account a on a.account_ID = t.acc_ID where customer_ID = ?",
     id,
     (err, res) => {
       if (err) {

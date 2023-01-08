@@ -11,11 +11,11 @@ exports.create = (req, res) => {
 
   // Create a FDModel
   const fd = new FDModel({
-    fd_ID:req.body.fd_ID, 
-    acc_ID :req.body.acc_ID, 
-    start_date:req.body.start_date, 
-    amount :req.body.amount, 
-    plan_ID:req.body.plan_ID,
+    fd_ID: req.body.fd_ID,
+    acc_ID: req.body.acc_ID,
+    start_date: req.body.start_date,
+    amount: req.body.amount,
+    plan_ID: req.body.plan_ID,
   });
 
   // Save FDModel in the database
@@ -98,16 +98,18 @@ exports.delete = (req, res) => {
       }
     } else res.send({ message: `FD was deleted successfully!` });
   });
-}
+};
 
-  exports.getFixedDepositsByUserID= (req, res) => {
-    const name = null //req.query.name;
+exports.getFixedDepositsByUserID = (req, res) => {
   
-    FDModel.findFixedDepositsByUserId(req.params.id, (err, data) => {
-      if (err)
-        res.status(500).send({
-          message: err.message || "Some error occurred while retrieving fixed deposits.",
-        });
-      else res.send(data);
-    });
-  };
+  const customerId = req.user.customer.ID;
+
+  FDModel.findFixedDepositsByUserId(customerId, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving fixed deposits.",
+      });
+    else res.send(data);
+  });
+};
