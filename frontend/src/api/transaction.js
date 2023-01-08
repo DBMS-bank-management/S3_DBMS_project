@@ -1,4 +1,5 @@
 import axios from "axios";
+import { customerAxios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addTransaction(data) {
@@ -63,8 +64,8 @@ export const deleteTransaction = (id) => {
 };
 
 export const getTransactionsByID = (id) => {
-  return axios
-    .get(`${BASE_URL}/transactions/users/2`)
+  return customerAxios
+    .get(`${BASE_URL}/transactions/byCustomer`)
     .then((response) => {
       return response.data;
     })

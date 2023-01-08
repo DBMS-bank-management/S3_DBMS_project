@@ -1,14 +1,15 @@
 import axios from "axios";
+import { customerAxios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addFD(data) {
   return axios
     .post(`${BASE_URL}/fd`, {
-        fd_ID:data.fd_ID, 
-        acc_ID :data.acc_ID, 
-        start_date:data.start_date, 
-        amount :data.amount, 
-        plan_ID:data.plan_ID,
+      fd_ID: data.fd_ID,
+      acc_ID: data.acc_ID,
+      start_date: data.start_date,
+      amount: data.amount,
+      plan_ID: data.plan_ID,
     })
     .then((response) => {
       return response.data;
@@ -42,7 +43,9 @@ export const updateFD = (data) => {
       return response.data;
     })
     .catch((err) =>
-      Promise.reject("Failed to update intallment with id = " + data.inst_ID + "!")
+      Promise.reject(
+        "Failed to update intallment with id = " + data.inst_ID + "!"
+      )
     );
 };
 
@@ -59,8 +62,8 @@ export const deleteFD = (id) => {
 };
 
 export const getFixedDepositsByID = (id) => {
-  return axios
-    .get(`${BASE_URL}/fd/users/2`)
+  return customerAxios
+    .get(`${BASE_URL}/fd/byCustomer`)
     .then((response) => {
       return response.data;
     })

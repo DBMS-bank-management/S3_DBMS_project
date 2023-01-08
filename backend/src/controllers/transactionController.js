@@ -110,9 +110,9 @@ exports.delete = (req, res) => {
 
 //find by account number???
 exports.getTransactionsByUserID = (req, res) => {
-  const name = null; //req.query.name;
+  const customerId = req.user.customer.ID;
 
-  TransactionModel.findTransactionsByUserId(req.params.id, (err, data) => {
+  TransactionModel.findTransactionsByUserId(customerId, (err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -123,7 +123,6 @@ exports.getTransactionsByUserID = (req, res) => {
 };
 
 exports.addTransfer = (req, res) => {
-
   TransactionModel.addTransfer(req.body, (err, data) => {
     if (err)
       res.status(500).send({
@@ -132,5 +131,4 @@ exports.addTransfer = (req, res) => {
       });
     else res.send(data);
   });
-
 };
