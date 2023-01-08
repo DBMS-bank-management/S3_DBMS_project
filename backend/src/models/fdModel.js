@@ -117,6 +117,19 @@ FD.getAll = (title, result) => {
     });
   };
   
+
+  FD.findFixedDepositsByUserId=(id,result)=> {
+    sql.query("SELECT fd.fd_ID, fd.acc_ID, fd.start_date, fd.amount, fd.plan_ID from fixed_deposit fd join account a on a.account_ID = fd.acc_ID  where customer_ID = ?", id, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      // console.log("transactions: ", res);
+      result(null, res);
+    });
+  };
+
   module.exports = FD;
   
   
