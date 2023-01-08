@@ -13,6 +13,10 @@ const NormalApplicationsList = () => {
   const [normalApplications, setNormalApplications] = useState();
   const [loading, setLoading] = useState(true);
 
+  const onApprove = (id) => {};
+
+  const onDecline = (id) => {};
+
   useEffect(() => {
     setLoading(true);
     loadNormalApplicationsList();
@@ -91,35 +95,33 @@ const NormalApplicationsList = () => {
       key: "loan_ID",
     },
 
-    {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle" key={record.app_ID}>
-          <Button href={`normalApplications/${record.app_ID}`} type="link">
-            Edit
-          </Button>
-          <ConfirmationDialog
-            buttonProps={{ type: "link", danger: true }}
-            onOk={() => {
-              onDelete(record.app_ID);
-            }}
-          />
-        </Space>
-      ),
-    },
+    // {
+    //   title: "Action",
+    //   key: "action",
+    //   render: (_, record) => (
+    //     <Space size="middle" key={record.app_ID}>
+    //       <Button href={`normalApplications/${record.app_ID}`} type="link">
+    //         Edit
+    //       </Button>
+    //       <ConfirmationDialog
+    //         buttonProps={{ type: "link", danger: true }}
+    //         onOk={() => {
+    //           onDelete(record.app_ID);
+    //         }}
+    //       />
+    //     </Space>
+    //   ),
+    // },
     {
       title: "Extra Action",
       key: "extra_action",
       render: (_, record) => (
         <Space size="middle" key={record.app_ID}>
           {record.is_approved == null && (
-            <Button href={`normalApplications/${record.app_ID}`}>
-              Approve
-            </Button>
+            <Button onClick={() => onApprove(record.app_ID)}>Approve</Button>
           )}
           {record.is_approved == null && (
-            <Button href={`normalApplications/${record.app_ID}`} danger>
+            <Button onClick={() => onDecline(record.app_ID)} danger>
               Decline
             </Button>
           )}
