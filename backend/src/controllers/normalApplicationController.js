@@ -102,3 +102,18 @@ exports.delete = (req, res) => {
     } else res.send({ message: `Normal Application was deleted successfully!` });
   });
 };
+exports.approve = (req, res) => {
+  NormalApplicationModel.approve(req.params.id, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Normal Application with id ${req.params.id}.`,
+        });
+      } else {
+        res.status(500).send({
+          message: "Could not check the eligibility for Normal Applicatin with id " + req.params.id,
+        });
+      }
+    } else res.send({ message: `Eligibility for loan was checked successfully!` });
+  });
+};
