@@ -1,17 +1,13 @@
 // import axios from "axios";
-import { employeeAxios as axios } from './authentication';
+import { employeeAxios as axios } from "./authentication";
 import { BASE_URL } from "./config";
 
-export function   addNormalApplication(data) {
+export function addNormalApplication(data) {
   return axios
     .post(`${BASE_URL}/normalApplications`, {
-      branch_ID: data.branch_ID,
       acc_ID: data.acc_ID,
       amount: data.amount,
-      is_approved: data.is_approved,
-      app_date: data.app_date,
-      loan_ID: data.loan_ID,
-      plan_ID: data.plan_ID
+      plan_ID: data.plan_ID,
     })
     .then((response) => {
       return response.data;
@@ -34,7 +30,9 @@ export const getNormalApplication = (id) => {
     .then((response) => {
       return response.data;
     })
-    .catch((err) => Promise.reject("Failed to get normal application with id =" + id + "!"));
+    .catch((err) =>
+      Promise.reject("Failed to get normal application with id =" + id + "!")
+    );
 };
 
 export const updateNormalApplication = (data) => {
@@ -45,7 +43,9 @@ export const updateNormalApplication = (data) => {
       return response.data;
     })
     .catch((err) =>
-      Promise.reject("Failed to update normal application with id = " + data.app_ID + "!")
+      Promise.reject(
+        "Failed to update normal application with id = " + data.app_ID + "!"
+      )
     );
   console.log({ data });
 };
@@ -58,6 +58,8 @@ export const deleteNormalApplication = (id) => {
       return response.data;
     })
     .catch((err) =>
-      Promise.reject("Failed to delete normal application with id = " + id + "!")
+      Promise.reject(
+        "Failed to delete normal application with id = " + id + "!"
+      )
     );
 };

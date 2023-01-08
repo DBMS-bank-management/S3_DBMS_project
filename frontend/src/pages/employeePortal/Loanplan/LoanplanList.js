@@ -38,7 +38,7 @@ const LoanPlanList = () => {
       title: "Duration",
       dataIndex: "duration",
       key: "duration",
-    }
+    },
   ];
 
   return (
@@ -46,7 +46,12 @@ const LoanPlanList = () => {
       <EmployeePageHeading text={"Loan Plans"} />
       <Card style={{ width: "100%" }}>
         <Button href="loanplan/add">Add LoanPlan</Button>
-        <Table dataSource={loanplans} columns={columns} bordered />
+        <Table
+          loading={loading}
+          dataSource={loanplans}
+          columns={columns}
+          bordered
+        />
       </Card>
     </div>
   );

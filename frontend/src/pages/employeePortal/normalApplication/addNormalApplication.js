@@ -1,100 +1,139 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Form, message,Input, InputNumber,Steps } from 'antd';
-import { Select } from 'antd';
-import { addNormalApplication } from '../../../api/normalApplication';
+import React, { useEffect, useState } from "react";
+import { Button, Form, message, Input, InputNumber, Steps } from "antd";
+import { Select } from "antd";
+import { addNormalApplication } from "../../../api/normalApplication";
+import { getLoanPlans } from "../../../api/loanplan";
+import { getAccounts } from "../../../api/account";
+import { useNavigate } from "react-router-dom";
 
+const AddNormalApplication = () => {
+  const [loanplans, setLoanPlans] = useState();
+  const [accounts, setAccounts] = useState();
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-const AddNormalApplication= () => {
-
-    const [formData, setFormData] = useState();
-  function submitData() {
-    addNormalApplication(formData)
+  function submitData(values) {
+    console.log("normal application values", values);
+    addNormalApplication(values)
+      .then(() => {
+        navigate("/employee-portal/normal-applications");
+      })
       .catch((err) => message.error(err));
   }
 
+  useEffect(() => {
+    setLoading(true);
+    loadLoanPlanList();
+    loadAccountsList();
+    setLoading(false);
+  }, []);
+
+  function loadLoanPlanList() {
+    getLoanPlans()
+      .then((data) => {
+        setLoanPlans(
+          data.map((plan) => ({ label: plan.plan_ID, value: plan.plan_ID }))
+        );
+      })
+      .catch((err) => message.error(err));
+  }
+
+  function loadAccountsList() {
+    getAccounts()
+      .then((data) => {
+        setAccounts(
+          data.map((acc) => ({ label: acc.account_ID, value: acc.account_ID }))
+        );
+      })
+      .catch((err) => message.error(err))
+      .finally(() => setLoading(false));
+  }
+
   const onFinish = (values) => {
-    submitData();
+    submitData(values);
     console.log("Success:", values);
   };
 
+  const layout = {
+    labelCol: {
+      span: 8,
+    },
+    wrapperCol: {
+      span: 8,
+    },
+  };
 
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-
-/* eslint-disable no-template-curly-in-string */
-const validateMessages = {
-  required: '${label} is required!',
-  types: {
-    email: '${label} is not a valid email!',
-    number: '${label} is not a valid number!',
-  },
-  number: {
-    range: '${label} must be between ${min} and ${max}',
-  },
-};
-/* eslint-enable no-template-curly-in-string */
+  // /* eslint-disable no-template-curly-in-string */
+  // const validateMessages = {
+  //   required: "${label} is required!",
+  //   types: {
+  //     email: "${label} is not a valid email!",
+  //     number: "${label} is not a valid number!",
+  //   },
+  //   number: {
+  //     range: "${label} must be between ${min} and ${max}",
+  //   },
+  // };
+  /* eslint-enable no-template-curly-in-string */
 
   return (
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} onValuesChange={(values) => {
-        console.log({values, formData})
-        setFormData({...formData, ...values})}}>
+    <Form size="large" {...layout} name="nest-messages" onFinish={onFinish}>
       <Form.Item
-        name={'acc_ID'}
+        name={"acc_ID"}
         label="Account ID"
         rules={[
           {
             required: true,
+            message: "Account is required",
           },
         ]}
       >
-        <Input />
+        <Select
+          showSearch
+          placeholder="Select an account"
+          optionFilterProp="children"
+          filterOption={(input, option) =>
+            (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+          }
+          options={accounts}
+        />
       </Form.Item>
       <Form.Item
-        name={'amount'}
+        name={"amount"}
         label="Amount"
         rules={[
           {
-            type: 'number',
+            type: "number",
             // min: 0,
             // max: 9999,
           },
-        ]}
-      >
-         <InputNumber/>
-      </Form.Item>
-      <Form.Item
-        name={'plan_ID'}
-        label="Loan Plan"
-        rules={[
           {
-           required: true,
+            required: "true",
+            message: "Amount is required",
           },
         ]}
       >
-         <Select
-    showSearch
-    placeholder="Select a person"
-    optionFilterProp="children"
-    filterOption={(input, option) =>
-      (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-    }
-    options={[
-      {
-        value: 'Housing',
-        label: 'housing',
-      },
-      {
-        value: 'Personal',
-        label: 'personal',
-      },
-    ]}
-  />
+        <InputNumber />
+      </Form.Item>
+      <Form.Item
+        name={"plan_ID"}
+        label="Loan Plan"
+        rules={[
+          {
+            required: true,
+            message: "Plan is required",
+          },
+        ]}
+      >
+        <Select
+          showSearch
+          placeholder="Select a plan"
+          optionFilterProp="children"
+          filterOption={(input, option) =>
+            (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+          }
+          options={loanplans}
+        />
       </Form.Item>
       <Form.Item
         wrapperCol={{
@@ -109,5 +148,4 @@ const validateMessages = {
     </Form>
   );
 };
-export default AddNormalApplication
-
+export default AddNormalApplication;

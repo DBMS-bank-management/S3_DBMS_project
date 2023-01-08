@@ -2,13 +2,13 @@ const sql = require("./database");
 
 // constructor
 const NormalApplication = function (normalApplication) {
-  this.app_ID = normalApplication.app_ID;
+  // this.app_ID = normalApplication.app_ID;
   this.branch_ID = normalApplication.branch_ID;
   this.acc_ID=normalApplication.acc_ID;
   this.amount=normalApplication.amount;
-  this.is_approved=normalApplication.is_approved;
-  this.app_date=normalApplication.app_date;
-  this.loan_ID=normalApplication.loan_ID;
+  this.is_approved=null;
+  // this.app_date=normalApplication.app_date;
+  // this.loan_ID=normalApplication.loan_ID;
 };
 
 NormalApplication.create = (newNormalApplication, result) => {
@@ -46,7 +46,7 @@ NormalApplication.findById = (id, result) => {
 
 //remove sql injection here
 NormalApplication.getAll = (name, result) => {
-  let query = "SELECT * FROM normal_application";
+  let query = "SELECT * FROM normal_application ORDER BY app_ID DESC";
 
   // if (name) {
   //   query += `WHERE title LIKE '%${name}%'`;
