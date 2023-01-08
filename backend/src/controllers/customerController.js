@@ -12,6 +12,7 @@ exports.create = (req, res) => {
 
   // Create a UserModel
   const customer = new CustomerModel({
+    ID: req.body.ID,
     name: req.body.name,
     type: req.body.type,
     auth_ID: req.body.auth_ID,

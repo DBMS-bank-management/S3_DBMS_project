@@ -7,7 +7,7 @@ const AddCustomer = () => {
   //   const [formData, setFormData] = useState({ password: "" });
   function submitData(values) {
     addCustomer(values)
-      .then((token) => (window.location = "/employee-portal/users"))
+      .then((token) => (window.location = "/employee-portal/customers"))
       .catch((err) => message.error(err));
   }
 
@@ -102,6 +102,19 @@ const AddCustomer = () => {
               {
                 required: true,
                 message: "Contact no. is required!",
+              },
+
+              {
+                pattern: /^(?:\d*)$/,
+                message: "Value should contain just number",
+              },
+              {
+                min: 10,
+                message: "Value should be 10 numbers",
+              },
+              {
+                max: 10,
+                message: "Value should be 10 numbers",
               },
             ]}
           >
