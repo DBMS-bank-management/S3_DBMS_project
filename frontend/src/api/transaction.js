@@ -4,11 +4,11 @@ import { BASE_URL } from "./config";
 export function addTransaction(data) {
   return axios
     .post(`${BASE_URL}/transactions`, {
-        trans_ID: data.trans_ID,
-        mode_ID: data.mode_ID,
-        amount: data.amount,
-        description: data.description,
-        acc_ID: data.acc_ID,
+      trans_ID: data.trans_ID,
+      mode_ID: data.mode_ID,
+      amount: data.amount,
+      description: data.description,
+      acc_ID: data.acc_ID,
     })
     .then((response) => {
       return response.data;
@@ -31,7 +31,9 @@ export const getTransaction = (id) => {
     .then((response) => {
       return response.data;
     })
-    .catch((err) => Promise.reject("Failed to get transactions with id =" + id + "!"));
+    .catch((err) =>
+      Promise.reject("Failed to get transactions with id =" + id + "!")
+    );
 };
 
 export const updateTransaction = (data) => {
@@ -42,7 +44,9 @@ export const updateTransaction = (data) => {
       return response.data;
     })
     .catch((err) =>
-      Promise.reject("Failed to update intallment with id = " + data.trans_ID + "!")
+      Promise.reject(
+        "Failed to update installment with id = " + data.trans_ID + "!"
+      )
     );
 };
 
@@ -65,4 +69,14 @@ export const getTransactionsByID = (id) => {
       return response.data;
     })
     .catch((err) => Promise.reject("Failed to get transactions ID list!"));
+};
+
+export const addTransfer = (data) => {
+  console.log("add transfer", { data });
+  return axios
+    .put(`${BASE_URL}/transactions/addTransfer`, data)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Failed to add transfer"));
 };

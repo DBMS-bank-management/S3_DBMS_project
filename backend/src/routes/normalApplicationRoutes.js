@@ -1,10 +1,15 @@
-module.exports = (app) => {
-  const normalapplications = require("../controllers/normalApplicationController");
+const { isEmployee } = require("../utils/middleware");
+const normalapplications = require("../controllers/normalApplicationController");
+const { jwtauth } = require("../utils/jwt");
 
+module.exports = (app) => {
   var router = require("express").Router();
 
+  // normal application approval
+  router.post("/approve", normalapplications.approve);
+
   // normal applicatin signup
-  router.post("/", normalapplications.create);
+  router.post("/", [jwtauth, isEmployee], normalapplications.create);
 
   // Get all activities
   router.get("/", normalapplications.findAll);

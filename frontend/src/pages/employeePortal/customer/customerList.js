@@ -2,6 +2,7 @@ import { Button, Card, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { deleteCustomer, getCustomers } from "../../../api/customer";
 import ConfirmationDialog from "../../../components/confirmationDialog";
+import { NavigateButton } from "../../../components/NavigateButton";
 
 const CustomersList = () => {
   const [customer, setCustomers] = useState();
@@ -70,7 +71,7 @@ const CustomersList = () => {
 
   return (
     <Card style={{ width: "100%" }}>
-      <Button href="customers/add">Add Customer</Button>
+      <NavigateButton href="add">Add Customer</NavigateButton>
       <Table dataSource={customer} columns={columns} bordered />
     </Card>
   );

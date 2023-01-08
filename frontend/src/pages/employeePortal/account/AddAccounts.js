@@ -20,13 +20,14 @@ import { responseErrorHandler } from "../../../utils/responseErrorHandler";
 import { addAccount } from "../../../api/account";
 import { getLoggedInEmployeeBranch } from "../../../api/authentication";
 import { useNavigate } from "react-router-dom";
+import { NavigateButton } from "../../../components/NavigateButton";
 
 const AddAccount = () => {
   const [customers, setCustomers] = useState([]);
   const [accountPlans, setAccountPlans] = useState([]);
   const [formValues, setFormValues] = useState({ plan: null, deposit: null });
   const [selectedCustomer, setSelectedCustomer] = useState();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadCustomersList();
@@ -58,14 +59,13 @@ const AddAccount = () => {
   const onProcessDone = async () => {
     const branchId = await getLoggedInEmployeeBranch();
     addAccount({
-      account_id: Math.round(Math.random()*100000000),
+      account_id: Math.round(Math.random() * 100000000),
       balance: formValues.deposit,
       plan_id: formValues.plan,
       branch_id: branchId,
-      customer_id: selectedCustomer
-
+      customer_id: selectedCustomer,
     }).then(() => {
-     navigate("/employee-portal/accounts")
+      navigate("/employee-portal/accounts");
     });
   };
 
@@ -117,6 +117,12 @@ const AddAccount = () => {
                 }
                 options={customers}
               />
+            </Form.Item>
+
+            <Form.Item label="Add customer (for new customers)">
+              <NavigateButton href="/employee-portal/customers/add">
+                Add Customer
+              </NavigateButton>
             </Form.Item>
           </Form>
           {/* <Typography className="center-content padding">

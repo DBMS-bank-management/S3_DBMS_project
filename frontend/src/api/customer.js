@@ -4,10 +4,11 @@ import { BASE_URL } from "./config";
 export function addCustomer(data) {
   return axios
     .post(`${BASE_URL}/customers`, {
+      ID: data.ID,
       name: data.name,
       type: data.type,
       auth_ID: data.auth_ID,
-      contact_no: data.contact_no
+      contact_no: data.contact_no,
     })
     .then((response) => {
       return response.data;
@@ -30,7 +31,9 @@ export const getCustomer = (id) => {
     .then((response) => {
       return response.data;
     })
-    .catch((err) => Promise.reject("Failed to get customer with id =" + id + "!"));
+    .catch((err) =>
+      Promise.reject("Failed to get customer with id =" + id + "!")
+    );
 };
 
 export const updateCustomer = (data) => {
@@ -41,7 +44,9 @@ export const updateCustomer = (data) => {
       return response.data;
     })
     .catch((err) =>
-      Promise.reject("Failed to update customer with id = " + data.auth_ID + "!")
+      Promise.reject(
+        "Failed to update customer with id = " + data.auth_ID + "!"
+      )
     );
   console.log({ data });
 };
@@ -57,4 +62,3 @@ export const deleteCustomer = (id) => {
       Promise.reject("Failed to delete customer with id = " + id + "!")
     );
 };
-

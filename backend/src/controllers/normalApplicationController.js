@@ -1,6 +1,5 @@
 const NormalApplicationModel = require("../models/normalApplicationModel.js");
 
-
 // Create and Save a new NormalApplicationModel
 exports.create = (req, res) => {
   // Validate request
@@ -10,23 +9,27 @@ exports.create = (req, res) => {
     });
   }
 
+  console.log({ user: req.user });
+  const branch_ID = req.user.employee.branch_ID;
+
   // Create a NormalApplicationModel
   const normalApplication = new NormalApplicationModel({
-    app_ID: req.body.app_ID,
-    branch_ID: req.body.branch_ID,
+    // app_ID: req.body.app_ID,
+    branch_ID: branch_ID,
     acc_ID: req.body.acc_ID,
     amount: req.body.amount,
-    is_approved: req.body.is_approved,
-    app_date: req.body.app_date,
-    loan_ID: req.body.loan_ID
+    is_approved: null,
+    // app_date: req.body.app_date,
+    // loan_ID: req.body.loan_ID,
   });
 
   // Save NormalApplicationModel in the database
-    NormalApplicationModel.create(normalApplication, (err, data) => {
+  NormalApplicationModel.create(normalApplication, (err, data) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the NormalApplicationModel.",
+          err.message ||
+          "Some error occurred while creating the NormalApplicationModel.",
       });
     else res.send(data);
   });
@@ -34,12 +37,14 @@ exports.create = (req, res) => {
 
 // Retrieve all NormalApplications from the database (with condition).
 exports.findAll = (req, res) => {
-  const name = null //req.query.name;
+  const name = null; //req.query.name;
 
   NormalApplicationModel.getAll(name, (err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving normal applications.",
+        message:
+          err.message ||
+          "Some error occurred while retrieving normal applications.",
       });
     else res.send(data);
   });
@@ -55,7 +60,8 @@ exports.findOne = (req, res) => {
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving NormalApplicationModel with id " + req.params.id,
+          message:
+            "Error retrieving NormalApplicationModel with id " + req.params.id,
         });
       }
     } else res.send(data);
@@ -72,19 +78,24 @@ exports.update = (req, res) => {
 
   console.log(req.body);
 
-  NormalApplicationModel.updateById(req.params.id, new NormalApplicationModel(req.body), (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found Normal Application with ID ${req.params.id}.`,
-        });
-      } else {
-        res.status(500).send({
-          message: "Error updating Normal Application with id " + req.params.id,
-        });
-      }
-    } else res.send(data);
-  });
+  NormalApplicationModel.updateById(
+    req.params.id,
+    new NormalApplicationModel(req.body),
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found Normal Application with ID ${req.params.id}.`,
+          });
+        } else {
+          res.status(500).send({
+            message:
+              "Error updating Normal Application with id " + req.params.id,
+          });
+        }
+      } else res.send(data);
+    }
+  );
 };
 
 exports.delete = (req, res) => {
@@ -96,9 +107,26 @@ exports.delete = (req, res) => {
         });
       } else {
         res.status(500).send({
-          message: "Could not delete Normal Applicatin with id " + req.params.id,
+          message:
+            "Could not delete Normal Applicatin with id " + req.params.id,
         });
       }
-    } else res.send({ message: `Normal Application was deleted successfully!` });
+    } else
+      res.send({ message: `Normal Application was deleted successfully!` });
+  });
+};
+exports.approve = (req, res) => {
+  NormalApplicationModel.approve(req.params.id, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Normal Application with id ${req.params.id}.`,
+        });
+      } else {
+        res.status(500).send({
+          message: "Could not check the eligibility for Normal Applicatin with id " + req.params.id,
+        });
+      }
+    } else res.send({ message: `Eligibility for loan was checked successfully!` });
   });
 };
