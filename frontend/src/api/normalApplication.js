@@ -77,3 +77,17 @@ export const declineNormalApplication = (id) => {
       )
     );
 };
+
+export const approveNormalApplication = (id) => {
+  console.log("approve normal application", id);
+  return employeeAxios
+    .post(`${BASE_URL}/normalApplications/approve/${id}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) =>
+      Promise.reject(
+        "Failed to approve normal application with id = " + id + "!"
+      )
+    );
+};

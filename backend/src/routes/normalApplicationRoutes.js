@@ -1,12 +1,9 @@
-const { isEmployee } = require("../utils/middleware");
+const { isEmployee, isManager } = require("../utils/middleware");
 const normalapplications = require("../controllers/normalApplicationController");
 const { jwtauth } = require("../utils/jwt");
 
 module.exports = (app) => {
   var router = require("express").Router();
-
-  // normal application approval
-  router.post("/approve", normalapplications.approve);
 
   // normal applicatin signup
   router.post("/", [jwtauth, isEmployee], normalapplications.create);
@@ -22,11 +19,10 @@ module.exports = (app) => {
   // Delete a normal application with id
   router.delete("/:id", normalapplications.delete);
 
-  router.post(
-    "/decline/:id",
-    [jwtauth, isEmployee],
-    normalapplications.decline
-  );
+  router.post("/decline/:id", [jwtauth, isManager], normalapplications.decline);
+  
+  // normal application approval
+  router.post("/approve/:id", [jwtauth, isManager], normalapplications.approve);
 
   app.use("/normalapplications", router);
 };

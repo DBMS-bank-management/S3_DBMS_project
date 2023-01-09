@@ -69,7 +69,7 @@ NormalApplication.getAll = (name, result) => {
       return;
     }
 
-    console.log("normalApplications: ", res);
+    // console.log("normalApplications: ", res);
     result(null, res);
   });
 };
@@ -143,7 +143,7 @@ NormalApplication.removeAll = (result) => {
   });
 };
 
-NormalApplication.approve = (application_id) => {
+NormalApplication.approve = (application_id, result) => {
   sql.query(
     "call approve_normal_application(?);",
     application_id,

@@ -1,6 +1,8 @@
 import { Button, Card, Space, Table, message, Tag } from "antd";
 import React, { useEffect, useState } from "react";
+import { isManager } from "../../../api/authentication";
 import {
+  approveNormalApplication,
   declineNormalApplication,
   deleteNormalApplication,
   getNormalApplications,
@@ -14,7 +16,14 @@ const NormalApplicationsList = () => {
   const [normalApplications, setNormalApplications] = useState();
   const [loading, setLoading] = useState(true);
 
-  const onApprove = (id) => {};
+  const onApprove = (id) => {
+    approveNormalApplication(id)
+      .then(() => message.success("Successfully approved normal application"))
+      .then(() => {
+        loadNormalApplicationsList();
+      })
+      .catch((err) => message.error("Error approving normal application!"));
+  };
 
   const onDecline = (id) => {
     declineNormalApplication(id)
@@ -120,22 +129,27 @@ const NormalApplicationsList = () => {
     //     </Space>
     //   ),
     // },
-    {
-      title: "Extra Action",
-      key: "extra_action",
-      render: (_, record) => (
-        <Space size="middle" key={record.app_ID}>
-          {record.is_approved == null && (
-            <Button onClick={() => onApprove(record.app_ID)}>Approve</Button>
-          )}
-          {record.is_approved == null && (
-            <Button onClick={() => onDecline(record.app_ID)} danger>
-              Decline
-            </Button>
-          )}
-        </Space>
-      ),
-    },
+
+    isManager()
+      ? {
+          title: "Extra Action",
+          key: "extra_action",
+          render: (_, record) => (
+            <Space size="middle" key={record.app_ID}>
+              {record.is_approved == null && (
+                <Button onClick={() => onApprove(record.app_ID)}>
+                  Approve
+                </Button>
+              )}
+              {record.is_approved == null && (
+                <Button onClick={() => onDecline(record.app_ID)} danger>
+                  Decline
+                </Button>
+              )}
+            </Space>
+          ),
+        }
+      : {},
   ];
 
   return (
