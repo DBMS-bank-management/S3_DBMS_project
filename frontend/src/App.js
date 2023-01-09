@@ -41,6 +41,9 @@ import FdPlanList from "./pages/employeePortal/Fdplans/FdplanList";
 import AnimationLayout from "./components/RouterAnimation";
 import AddCustomer from "./pages/employeePortal/customer/AddCustomer";
 import { OnlineLoanApplication } from "./pages/customerPortal/OnlineLoanApplications";
+import CustomerAccountsList from "./pages/customerPortal/AccountsList";
+import CustomerFixedDepositsList from "./pages/customerPortal/FixeDepositList";
+import CustomerLoansList from "./pages/customerPortal/CustomerLoansList";
 
 function App() {
   return (
@@ -184,6 +187,18 @@ function App() {
                 <Route
                   path="online-loan-application"
                   element={<OnlineLoanApplication />}
+                />
+                <Route
+                  path="accounts"
+                  element={<CustomerAccountsList />}
+                />
+                 <Route
+                  path="fd"
+                  element={<CustomerFixedDepositsList />}
+                />
+                <Route
+                  path="Loans"
+                  element={<CustomerLoansList />}
                 />
               </Route>
             </Route>

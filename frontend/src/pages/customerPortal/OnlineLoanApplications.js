@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getSavingsAccountsByCustomer } from "../../api/account";
 import { getFixedDepositsByID } from "../../api/fd";
 import { getLoanPlans } from "../../api/loanplan";
+import { addOnlineApplication } from "../../api/onlineApplication";
 // import { Form } from "react-router-dom";
 import { CustomerPageHeading } from "../../components/layout/CustomerPageHeading";
 
@@ -53,6 +54,13 @@ export const OnlineLoanApplication = () => {
 
   const onFinish = (values) => {
     console.log({ values });
+    addOnlineApplication(values)
+      .then(() => {
+        message.success("Successfully added online online loan");
+      })
+      .catch((err) => {
+        message.error("Error adding an online loan!");
+      });
   };
 
   return (

@@ -12,12 +12,11 @@ exports.create = (req, res) => {
 
   // Create a OnlineApplicationModel
   const onlineApplication = new OnlineApplicationModel({
-    app_ID: req.body.app_ID,
+    // app_ID: req.body.app_ID,
     fd_ID: req.body.fd_ID,
     acc_ID: req.body.acc_ID,
     amount: req.body.amount,
-    app_date: req.body.app_date,
-    loan_ID: req.body.loan_ID
+    loan_plan: req.body.loan_plan
   });
 
   // Save OnlineApplicationModel in the database

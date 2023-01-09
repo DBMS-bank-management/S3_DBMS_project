@@ -44,12 +44,14 @@ const CustomerPageLayout = () => {
         {
           label: "Accounts",
           key: "accounts",
-          onClick: () => {},
+          onClick: () => {
+            navigate("/customer-portal/accounts");
+          },
         },
         {
           label: "Fixed deposits",
           key: "fixedDeposits",
-          onClick: () => {},
+          onClick: () => {navigate("/customer-portal/fd")},
         },
       ],
     },

@@ -1,10 +1,9 @@
 import { Button, Card, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
-import { deleteAccount, getAccounts } from "../../../api/account";
-import ConfirmationDialog from "../../../components/confirmationDialog";
 import { getAccountsByID } from "../../api/account";
+import { CustomerPageHeading } from "../../components/layout/CustomerPageHeading";
 
-const AccountsList = () => {
+const CustomerAccountsList = () => {
   const [accounts, setAccounts] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -51,16 +50,20 @@ const AccountsList = () => {
   ];
 
   return (
-    <Card style={{ width: "100%" }}>
-      {/* <Button href="accounts/add">Add account</Button> */}
-      <Table
-        loading={loading}
-        dataSource={accounts}
-        columns={columns}
-        bordered
-      />
-    </Card>
+    <>
+      <CustomerPageHeading text={"Accounts"} />
+      <Card style={{ width: "100%" }}>
+        {/* <Button href="accounts/add">Add account</Button> */}
+
+        <Table
+          loading={loading}
+          dataSource={accounts}
+          columns={columns}
+          bordered
+        />
+      </Card>
+    </>
   );
 };
 
-export default AccountsList;
+export default CustomerAccountsList;

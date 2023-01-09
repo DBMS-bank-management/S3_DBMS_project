@@ -1,5 +1,5 @@
 // import axios from "axios";
-import { employeeAxios as axios } from './authentication';
+import { employeeAxios as axios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addOnlineApplication(data) {
@@ -8,8 +8,7 @@ export function addOnlineApplication(data) {
       fd_ID: data.fd_ID,
       acc_ID: data.acc_ID,
       amount: data.amount,
-      app_date: data.app_date,
-      loan_ID: data.loan_ID,
+      loan_plan: data.loan_plan,
     })
     .then((response) => {
       return response.data;
@@ -32,7 +31,9 @@ export const getOnlineApplication = (id) => {
     .then((response) => {
       return response.data;
     })
-    .catch((err) => Promise.reject("Failed to get online application with id =" + id + "!"));
+    .catch((err) =>
+      Promise.reject("Failed to get online application with id =" + id + "!")
+    );
 };
 
 export const updateOnlineApplication = (data) => {
@@ -43,7 +44,9 @@ export const updateOnlineApplication = (data) => {
       return response.data;
     })
     .catch((err) =>
-      Promise.reject("Failed to update online application with id = " + data.app_ID + "!")
+      Promise.reject(
+        "Failed to update online application with id = " + data.app_ID + "!"
+      )
     );
   console.log({ data });
 };
@@ -56,6 +59,8 @@ export const deleteOnlineApplication = (id) => {
       return response.data;
     })
     .catch((err) =>
-      Promise.reject("Failed to delete online application with id = " + id + "!")
+      Promise.reject(
+        "Failed to delete online application with id = " + id + "!"
+      )
     );
 };
