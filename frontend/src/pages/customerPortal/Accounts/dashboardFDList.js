@@ -1,16 +1,15 @@
 // import { Button, Card, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import ConfirmationDialog from "../../../components/confirmationDialog";
-import { Badge, Descriptions, Table } from 'antd';
+import { Badge, Descriptions, Table } from "antd";
 import { getFixedDepositsByID } from "../../../api/fd";
-
+import { formatDate } from "../../../utils";
 
 const FixedDepositsList = () => {
-  const [fixedDeposits, setFixedDeposits] = useState([] );
+  const [fixedDeposits, setFixedDeposits] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => loadFixedDepositsList(), []);
-
 
   function loadFixedDepositsList() {
     getFixedDepositsByID()
@@ -21,17 +20,17 @@ const FixedDepositsList = () => {
   }
 
   const columns = [
-    
     {
-        title: "Date",
-        dataIndex: "start_date",
-        key: "start_date",
-      },
+      title: "Date",
+      dataIndex: "start_date",
+      render: (date) => <div>{formatDate(date)}</div>,
+      key: "start_date",
+    },
     {
-        title: "Account ID",
-        dataIndex: "acc_ID",
-        key: "acc_ID",
-      },
+      title: "Account ID",
+      dataIndex: "acc_ID",
+      key: "acc_ID",
+    },
     {
       title: "Amount",
       dataIndex: "amount",
@@ -44,12 +43,17 @@ const FixedDepositsList = () => {
     // },
   ];
 
-  return(
-    <div style={{width: '100%'}}>
-      <Table style={{width:"100%"}} columns={columns} dataSource={fixedDeposits} pagination={false} />
-        {/* {accounts.map(account => <div style={{display: 'flex', flexDirection: 'row'}}><div>{account.balance}</div><div>{account.account_ID}</div></div> )} */}
+  return (
+    <div style={{ width: "100%" }}>
+      <Table
+        style={{ width: "100%" }}
+        columns={columns}
+        dataSource={fixedDeposits}
+        pagination={false}
+      />
+      {/* {accounts.map(account => <div style={{display: 'flex', flexDirection: 'row'}}><div>{account.balance}</div><div>{account.account_ID}</div></div> )} */}
     </div>
-  )
+  );
 };
 
 export default FixedDepositsList;

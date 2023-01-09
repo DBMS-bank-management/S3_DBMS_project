@@ -1,5 +1,5 @@
 // import axios from "axios";
-import { employeeAxios as axios } from "./authentication";
+import { employeeAxios as axios, employeeAxios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addNormalApplication(data) {
@@ -60,6 +60,20 @@ export const deleteNormalApplication = (id) => {
     .catch((err) =>
       Promise.reject(
         "Failed to delete normal application with id = " + id + "!"
+      )
+    );
+};
+
+export const declineNormalApplication = (id) => {
+  console.log("decline normal application", id);
+  return employeeAxios
+    .post(`${BASE_URL}/normalApplications/decline/${id}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) =>
+      Promise.reject(
+        "Failed to declined normal application with id = " + id + "!"
       )
     );
 };

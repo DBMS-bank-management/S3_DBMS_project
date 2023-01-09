@@ -22,5 +22,11 @@ module.exports = (app) => {
   // Delete a normal application with id
   router.delete("/:id", normalapplications.delete);
 
+  router.post(
+    "/decline/:id",
+    [jwtauth, isEmployee],
+    normalapplications.decline
+  );
+
   app.use("/normalapplications", router);
 };

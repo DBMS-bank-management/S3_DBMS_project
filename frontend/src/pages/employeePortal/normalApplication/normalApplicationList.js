@@ -1,6 +1,7 @@
 import { Button, Card, Space, Table, message, Tag } from "antd";
 import React, { useEffect, useState } from "react";
 import {
+  declineNormalApplication,
   deleteNormalApplication,
   getNormalApplications,
 } from "../../../api/normalApplication";
@@ -15,7 +16,14 @@ const NormalApplicationsList = () => {
 
   const onApprove = (id) => {};
 
-  const onDecline = (id) => {};
+  const onDecline = (id) => {
+    declineNormalApplication(id)
+      .then(() => message.success("Successfully declined normal application"))
+      .then(() => {
+        loadNormalApplicationsList();
+      })
+      .catch((err) => message.error("Error declining normal application!"));
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -86,7 +94,7 @@ const NormalApplicationsList = () => {
     {
       title: "App Date",
       dataIndex: "app_date",
-      render: (date) => <p>{formatDate(date)}</p>,
+      render: (date) => <div>{formatDate(date)}</div>,
       key: "app_date",
     },
     {

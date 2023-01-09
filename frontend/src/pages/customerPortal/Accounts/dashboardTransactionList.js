@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import ConfirmationDialog from "../../../components/confirmationDialog";
 import { Badge, Descriptions, Table } from 'antd';
 import { getTransactionsByID } from "../../../api/transaction";
+import { formatDate } from "../../../utils";
 
 
 const TransactionsList = () => {
@@ -25,6 +26,7 @@ const TransactionsList = () => {
     {
         title: "Date",
         dataIndex: "timestamp",
+        render: (date) => <div>{formatDate(date)}</div>,
         key: "timestamp",
       },
     // {

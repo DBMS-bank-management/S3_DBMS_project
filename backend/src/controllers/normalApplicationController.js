@@ -124,9 +124,31 @@ exports.approve = (req, res) => {
         });
       } else {
         res.status(500).send({
-          message: "Could not check the eligibility for Normal Applicatin with id " + req.params.id,
+          message:
+            "Could not check the eligibility for Normal Applicatin with id " +
+            req.params.id,
         });
       }
-    } else res.send({ message: `Eligibility for loan was checked successfully!` });
+    } else
+      res.send({ message: `Eligibility for loan was checked successfully!` });
+  });
+};
+
+exports.decline = (req, res) => {
+  NormalApplicationModel.decline(req.params.id, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Normal Application with id ${req.params.id}.`,
+        });
+      } else {
+        res.status(500).send({
+          message:
+            "could not decline normal application" +
+            req.params.id,
+        });
+      }
+    } else
+      res.send({ message: `Normal application was declined successfully!` });
   });
 };
