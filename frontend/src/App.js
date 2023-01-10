@@ -45,6 +45,8 @@ import CustomerAccountsList from "./pages/customerPortal/AccountsList";
 import CustomerFixedDepositsList from "./pages/customerPortal/FixeDepositList";
 import CustomerLoansList from "./pages/customerPortal/CustomerLoansList";
 import CustomerPendingApplicationsList from "./pages/customerPortal/pendingLoanApplicationsList";
+import WithdrawalList from "./pages/employeePortal/withdrawals/withdrawalList";
+import AddWithdrawal from "./pages/employeePortal/withdrawals/addWithdrawal";
 
 function App() {
   return (
@@ -127,6 +129,11 @@ function App() {
                   <Route path="add" element={<AddTransaction />} />
                 </Route>
 
+                <Route path="withdrawals/">
+                  <Route path="" element={<WithdrawalList />} />
+                  <Route path="add" element={<AddWithdrawal />} />
+                </Route>
+
                 <Route path="fixed-deposits/">
                   <Route path="" element={<FDList />} />
                   <Route path="add" element={<OnlyManager></OnlyManager>} />
@@ -177,9 +184,7 @@ function App() {
                 <Route path="fixed-deposit-plans/">
                   <Route path="" element={<FdPlanList />} />
                 </Route>
-                {/* <Route path="pending-normal-loans/">
-                  <Route path="" element={<CustomerPendingApplicationsList />} />
-                </Route> */}
+                
               </Route>
             </Route>
 

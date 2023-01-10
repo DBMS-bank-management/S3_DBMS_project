@@ -168,4 +168,24 @@ Transaction.addTransfer = (values, result) => {
   );
 };
 
+Transaction.addWithdrawal = (values, result) => {
+  console.log({ values }, [
+    values.fromAccount,
+    values.amount,
+  ]);
+  sql.query(
+    "call withdrawal(?, ? );",
+    [values.fromAccount, values.amount],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      console.log("withdrawals: ", res);
+      result(null, res);
+    }
+  );
+};
+
 module.exports = Transaction;
