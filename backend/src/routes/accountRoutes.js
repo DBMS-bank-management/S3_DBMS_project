@@ -25,21 +25,21 @@ module.exports = (app) => {
   );
 
   // user signup
-  router.post("/", accounts.create);
+  router.post("/", [jwtauth], accounts.create);
 
   // Get all accounts
-  router.get("/", accounts.findAll);
+  router.get("/", [jwtauth], accounts.findAll);
 
-  router.get("/:id", accounts.findOne);
+  router.get("/:id", [jwtauth], accounts.findOne);
 
   // Update a user with id
-  router.put("/:id", accounts.update);
+  router.put("/:id", [jwtauth], accounts.update);
 
   // Delete a user with id
-  router.delete("/:id", accounts.delete);
+  router.delete("/:id", [jwtauth], accounts.delete);
 
   // user signup
-  router.post("/", accounts.create);
+  router.post("/", [jwtauth], accounts.create);
 
   app.use("/accounts", router);
 };

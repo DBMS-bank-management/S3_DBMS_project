@@ -16,18 +16,18 @@ module.exports = (app) => {
   );
 
   // user signup
-  router.post("/", transactions.create);
+  router.post("/", [jwtauth], transactions.create);
 
   // Get all transactions
-  router.get("/", transactions.findAll);
+  router.get("/", [jwtauth], transactions.findAll);
 
-  router.get("/:id", transactions.findOne);
+  router.get("/:id", [jwtauth], transactions.findOne);
 
   // Update a user with id
-  router.put("/:id", transactions.update);
+  router.put("/:id", [jwtauth], transactions.update);
 
   // Delete a user with id
-  router.delete("/:id", transactions.delete);
+  router.delete("/:id", [jwtauth], transactions.delete);
 
   app.use("/transactions", router);
 };

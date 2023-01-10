@@ -4,7 +4,7 @@ module.exports = (app) => {
     var router = require("express").Router();
   
     // signup
-    router.post("/", loan_plans.create);
+    router.post("/",[jwtauth],  loan_plans.create);
   
     // Get all loan_plans
     router.get("/", loan_plans.findAll);
@@ -12,10 +12,10 @@ module.exports = (app) => {
     router.get("/:id", loan_plans.findOne);
   
     // Update a loan_plan with id
-    router.put("/:id", loan_plans.update);
+    router.put("/:id", [jwtauth], loan_plans.update);
   
     // Delete a loan_plan with id
-    router.delete("/:id", loan_plans.delete);
+    router.delete("/:id", [jwtauth], loan_plans.delete);
   
     app.use("/loanplans", router);
   };

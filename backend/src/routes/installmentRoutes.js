@@ -4,18 +4,18 @@ module.exports = (app) => {
     var router = require("express").Router();
   
     // user signup
-    router.post("/", installments.create);
+    router.post("/", [jwtauth], installments.create);
   
     // Get all installments
-    router.get("/", installments.findAll);
+    router.get("/", [jwtauth], installments.findAll);
   
-    router.get("/:id", installments.findOne);
+    router.get("/:id", [jwtauth], installments.findOne);
   
     // Update a user with id
-    router.put("/:id", installments.update);
+    router.put("/:id", [jwtauth], installments.update);
   
     // Delete a user with id
-    router.delete("/:id", installments.delete);
+    router.delete("/:id", [jwtauth], installments.delete);
   
     app.use("/installments", router);
   };

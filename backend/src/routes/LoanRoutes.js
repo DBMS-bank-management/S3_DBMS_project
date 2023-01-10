@@ -4,21 +4,21 @@ module.exports = (app) => {
     var router = require("express").Router();
   
     // user signup
-    router.post("/", loans.create);
+    router.post("/",[jwtauth],  loans.create);
   
     // Get all loans
-    router.get("/", loans.findAll);
+    router.get("/", [jwtauth], loans.findAll);
   
-    router.get("/:id", loans.findOne);
+    router.get("/:id", [jwtauth], loans.findOne);
   
     // Update a user with id
-    router.put("/:id", loans.update);
+    router.put("/:id", [jwtauth], loans.update);
   
     // Delete a user with id
-    router.delete("/:id", loans.delete);
+    router.delete("/:id", [jwtauth], loans.delete);
 
      // Get loans by id
-     router.get("/users/:id", loans.getLoansByUserID);
+     router.get("/users/:id", [jwtauth], loans.getLoansByUserID);
 
     app.use("/loans", router);
   };

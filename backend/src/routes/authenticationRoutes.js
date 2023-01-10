@@ -4,9 +4,9 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // user signup
-  router.post("/employee-login", authentication.employeeLogin);
+  router.post("/employee-login", [jwtauth], authentication.employeeLogin);
 
-  router.post("/customer-login", authentication.customerLogin);
+  router.post("/customer-login", [jwtauth], authentication.customerLogin);
 
   app.use("/auth", router);
 };

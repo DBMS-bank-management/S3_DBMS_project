@@ -8,18 +8,18 @@ module.exports = (app) => {
     // router.post("/", onlineapplications.addloan);
 
     // online applicatin signup
-    router.post("/", onlineapplications.create);
+    router.post("/", [jwtauth], onlineapplications.create);
   
     // Get all activities
-    router.get("/", onlineapplications.findAll);
+    router.get("/", [jwtauth], onlineapplications.findAll);
   
-    router.get("/:id", onlineapplications.findOne);
+    router.get("/:id", [jwtauth], onlineapplications.findOne);
   
     // Update a online application with id
-    router.put("/:id", onlineapplications.update);
+    router.put("/:id", [jwtauth], onlineapplications.update);
   
     // Delete a online application with id
-    router.delete("/:id", onlineapplications.delete);
+    router.delete("/:id", [jwtauth], onlineapplications.delete);
   
     app.use("/onlineapplications", router);
   };
