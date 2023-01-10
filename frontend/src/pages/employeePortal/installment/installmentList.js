@@ -2,6 +2,7 @@ import { Button, Card, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { deleteInstallment, getInstallments } from "../../../api/installment";
 import ConfirmationDialog from "../../../components/confirmationDialog";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 
 const InstallmentList = () => {
   const [installments, setInstallments] = useState();
@@ -73,10 +74,13 @@ const InstallmentList = () => {
   ];
 
   return (
+    <div className="transparent">
+      <EmployeePageHeading text={"Installments"} />
       <Card style={{ width: "100%" }}>
         <Button href="installments/add">Add installment</Button>
         <Table dataSource={installments} columns={columns} bordered />
       </Card>
+      </div>
   );
 };
 

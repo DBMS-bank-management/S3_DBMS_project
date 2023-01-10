@@ -153,6 +153,8 @@ const NormalApplicationsList = () => {
   ];
 
   return (
+    <div className="transparent">
+    <EmployeePageHeading text={"Normal Applications"} />
     <Card style={{ width: "100%" }}>
       <NavigateButton href="add">Add Normal Application</NavigateButton>
       <Table
@@ -162,6 +164,7 @@ const NormalApplicationsList = () => {
         bordered
       />
     </Card>
+  </div>
   );
 };
 

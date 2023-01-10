@@ -76,12 +76,13 @@ const OnlineApplicationsList = () => {
   ];
 
   return (
-      
+    <div className="transparent">
+    <EmployeePageHeading text={"Online Applications"} />
     <Card style={{ width: "100%" }}>
-     
       <Button href="onlineApplicatins/add">Add Online Applicaion</Button>
       <Table dataSource={onlineApplications} columns={columns} bordered />
     </Card>
+  </div>
   );
 };
 
