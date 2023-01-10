@@ -263,7 +263,7 @@ export const Dashboard = () => {
                 className="glass center-content"
                 hoverable
                 onClick={() => {
-                  navigate("/employee-portal/transactions/add");
+                  navigate("/employee-portal/withdrawals/add");
                 }}
               >
                 Withdrawals

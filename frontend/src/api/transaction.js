@@ -81,3 +81,13 @@ export const addTransfer = (data) => {
     })
     .catch((err) => Promise.reject("Failed to add transfer"));
 };
+
+export const addWithdraw = (data) => {
+  console.log("add withdrawal", { data });
+  return axios
+    .put(`${BASE_URL}/transactions/withdrawal/addWithdrawal`, data)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Failed to add withdrawal"));
+};

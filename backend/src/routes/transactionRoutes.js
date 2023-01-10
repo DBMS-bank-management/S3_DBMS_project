@@ -6,6 +6,8 @@ module.exports = (app) => {
 
   var router = require("express").Router();
 
+  router.post("/withdrawal/addWithdrawal", transactions.addWithdrawal);
+
   router.post("/transfer/add", transactions.addTransfer);
 
   // Get the transactions by id
