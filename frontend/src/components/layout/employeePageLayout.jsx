@@ -18,6 +18,7 @@ import {
   employeeLogout,
 } from "../../api/authentication";
 import { Profile } from "../profile";
+import { Logo } from "../logo";
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, path, icon, children) {
   return {
@@ -93,7 +94,7 @@ const EmployeePageLayout = ({ children }) => {
       <Header
         style={
           {
-            // padding: 0,
+            padding: 0,
             // width: "100%",
             // backgroundColor:'red'
           }
@@ -105,16 +106,19 @@ const EmployeePageLayout = ({ children }) => {
             alignContent: "center",
             flexDirection: "row",
             flex: 1,
-            width: "100%",
+            width: "100vw",
           }}
         >
+          <div style={{ color: "white", flex: 0.30, fontSize: 25 }}>
+            <Logo />
+          </div>
           <div
             style={{ color: "white", flex: 0.15, fontSize: 20 }}
             onClick={() => navigate("/employee-portal")}
           >
             Employee portal
           </div>
-          <div style={{ flex: 0.8 }}></div>
+          <div style={{ flex: 0.50 }}></div>
           <div style={{ flex: 0.05 }}>
             <Profile
               type={"employee"}

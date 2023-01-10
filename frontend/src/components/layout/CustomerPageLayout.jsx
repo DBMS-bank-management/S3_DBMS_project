@@ -7,7 +7,7 @@ import {
   HomeOutlined,
   DollarOutlined,
   MoneyCollectOutlined,
-} from "@ant-design/icons"; 
+} from "@ant-design/icons";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
 import {
@@ -15,6 +15,7 @@ import {
   isAuthenticatedCustomer,
 } from "../../api/authentication";
 import { Profile } from "../profile";
+import { Logo } from "../logo";
 
 const { Header, Content, Footer } = Layout;
 
@@ -51,7 +52,9 @@ const CustomerPageLayout = () => {
         {
           label: "Fixed deposits",
           key: "fixedDeposits",
-          onClick: () => {navigate("/customer-portal/fd")},
+          onClick: () => {
+            navigate("/customer-portal/fd");
+          },
         },
       ],
     },
@@ -63,12 +66,16 @@ const CustomerPageLayout = () => {
         {
           label: "Loans",
           key: "loans",
-          onClick: () => {navigate("/customer-portal/loans")},
+          onClick: () => {
+            navigate("/customer-portal/loans");
+          },
         },
         {
           label: "Pending loan applications",
           key: "pendingLoanApplications",
-          onClick: () => {navigate("pending-normal-loans")},
+          onClick: () => {
+            navigate("pending-normal-loans");
+          },
         },
       ],
     },
@@ -91,24 +98,28 @@ const CustomerPageLayout = () => {
 
   return authenticated ? (
     <Layout className="layout login" style={{ minHeight: "100vh" }}>
-      <Header>
-        <div className="logo" />
+      <Header style={{padding: 0}}>
+        {/* <div className="logo" /> */}
         <div
           style={{
             display: "flex",
             alignContent: "center",
             flexDirection: "row",
             flex: 1,
-            width: "100%",
+            width: "100vw",
           }}
         >
+          {" "}
+          <div style={{ color: "white", flex: 0.3, fontSize: 25 }}>
+            <Logo />
+          </div>
           <div
             style={{ color: "white", flex: 0.15, fontSize: 20 }}
             onClick={() => navigate("/customer-portal")}
           >
             Customer portal
           </div>
-          <div style={{ flex: 0.85, justifyContent: "center" }}>
+          <div style={{ flex: 0.55, justifyContent: "center" }}>
             <Menu
               onClick={onClick}
               selectedKeys={[current]}
