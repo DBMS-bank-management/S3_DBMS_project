@@ -1,5 +1,5 @@
 // import axios from "axios";
-import { employeeAxios as axios, employeeAxios } from "./authentication";
+import { customerAxios, employeeAxios as axios, employeeAxios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addNormalApplication(data) {
@@ -90,4 +90,13 @@ export const approveNormalApplication = (id) => {
         "Failed to approve normal application with id = " + id + "!"
       )
     );
+};
+
+export const getPendingLoanApplicationsByID = () => {
+  return customerAxios
+    .get(`${BASE_URL}/normalApplications/pending/byUser`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Failed to get pending loans list!"));
 };

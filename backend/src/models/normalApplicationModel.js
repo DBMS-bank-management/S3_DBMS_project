@@ -175,4 +175,16 @@ NormalApplication.decline = (application_id, result) => {
   );
 };
 
+NormalApplication.findPendingLoanApplicationsByUserId=(id,result)=> {
+  sql.query("SELECT na.app_ID, na.branch_ID,na.acc_ID,na.amount,na.is_approved, na.app_date,na.loan_ID from normal_application na join account acc on na.acc_ID = acc.account_ID where is_approved is null and customer_ID = ?", id, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    console.log("accounts: ", res);
+    result(null, res);
+  });
+};
+
 module.exports = NormalApplication;
