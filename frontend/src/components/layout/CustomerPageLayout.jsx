@@ -7,7 +7,7 @@ import {
   HomeOutlined,
   DollarOutlined,
   MoneyCollectOutlined,
-} from "@ant-design/icons";
+} from "@ant-design/icons"; 
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
 import {
@@ -63,12 +63,12 @@ const CustomerPageLayout = () => {
         {
           label: "Loans",
           key: "loans",
-          onClick: () => {},
+          onClick: () => {navigate("/loans")},
         },
         {
           label: "Pending loan applications",
           key: "pendingLoanApplications",
-          onClick: () => {},
+          onClick: () => {navigate("pending-normal-loans")},
         },
       ],
     },

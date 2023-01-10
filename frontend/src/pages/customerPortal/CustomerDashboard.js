@@ -6,6 +6,7 @@ import AccountsList from "./Accounts/dashboardAccountList";
 import TransactionsList from "./Accounts/dashboardTransactionList";
 import FixedDepositsList from "./Accounts/dashboardFDList";
 import LoansList from "./Accounts/dashboardLoanList";
+
 const { Header, Footer, Sider, Content } = Layout;
 
 export const CustomerDashboard = () => {

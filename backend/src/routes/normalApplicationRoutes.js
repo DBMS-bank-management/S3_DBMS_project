@@ -1,9 +1,15 @@
-const { isEmployee, isManager } = require("../utils/middleware");
+const { isEmployee, isManager, isCustomer } = require("../utils/middleware");
 const normalapplications = require("../controllers/normalApplicationController");
 const { jwtauth } = require("../utils/jwt");
 
 module.exports = (app) => {
   var router = require("express").Router();
+
+  router.get(
+    "/pending/byUser",
+    [jwtauth, isCustomer],
+    normalapplications.getPendingLoanApplicationsByCustomerId
+  );
 
   // normal applicatin signup
   router.post("/", [jwtauth, isEmployee], normalapplications.create);

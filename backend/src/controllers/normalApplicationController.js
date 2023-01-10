@@ -152,3 +152,18 @@ exports.decline = (req, res) => {
       res.send({ message: `Normal application was declined successfully!` });
   });
 };
+
+exports.getPendingLoanApplicationsByCustomerId = (req, res) => {
+  const name = null; //req.query.name;
+  console.log({ user: req.user });
+  const customerId = req.user.customer.ID;
+
+  NormalApplicationModel.findPendingLoanApplicationsByUserId(customerId, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving pending loan applications.",
+      });
+    else res.send(data);
+  });
+};

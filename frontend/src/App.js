@@ -44,6 +44,7 @@ import { OnlineLoanApplication } from "./pages/customerPortal/OnlineLoanApplicat
 import CustomerAccountsList from "./pages/customerPortal/AccountsList";
 import CustomerFixedDepositsList from "./pages/customerPortal/FixeDepositList";
 import CustomerLoansList from "./pages/customerPortal/CustomerLoansList";
+import CustomerPendingApplicationsList from "./pages/customerPortal/pendingLoanApplicationsList";
 
 function App() {
   return (
@@ -176,6 +177,9 @@ function App() {
                 <Route path="fixed-deposit-plans/">
                   <Route path="" element={<FdPlanList />} />
                 </Route>
+                {/* <Route path="pending-normal-loans/">
+                  <Route path="" element={<CustomerPendingApplicationsList />} />
+                </Route> */}
               </Route>
             </Route>
 
@@ -199,6 +203,10 @@ function App() {
                 <Route
                   path="Loans"
                   element={<CustomerLoansList />}
+                />
+                <Route 
+                  path="pending-normal-loans"
+                  element={<CustomerPendingApplicationsList />} 
                 />
               </Route>
             </Route>
