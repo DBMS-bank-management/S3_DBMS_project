@@ -140,3 +140,21 @@ exports.addTransfer = (req, res) => {
     }
   );
 };
+
+exports.addWithdrawal = (req, res) => {
+  console.log({ body: req.body });
+  TransactionModel.addWithdrawal(
+    {
+      fromAccount: req.body.FromAccount,
+      amount: req.body.Amount,
+    },
+    (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving withdrawals.",
+        });
+      else res.send(data);
+    }
+  );
+};
