@@ -63,7 +63,7 @@ const CustomerPageLayout = () => {
         {
           label: "Loans",
           key: "loans",
-          onClick: () => {navigate("/loans")},
+          onClick: () => {navigate("/customer-portal/loans")},
         },
         {
           label: "Pending loan applications",

@@ -11,22 +11,13 @@ import {
 import { addTransaction, addTransfer } from "../../../api/transaction";
 import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 import { getAccounts } from "../../../api/account";
+import { useNavigate } from "react-router-dom";
 
 const handleChange = (value) => {
   console.log(`selected ${value}`);
 };
 
-const onFinish = (formValues) => {
-  addTransfer(formValues)
-    .then(() => {
-      message.success("Transfer done");
-    })
-    .catch((err) => {
-      console.log({ err });
-      message.error("Transfer Error!");
-    });
-  console.log({ formValues });
-};
+
 
 const AddTransaction = () => {
   const [accounts, setAccounts] = useState();
@@ -36,6 +27,22 @@ const AddTransaction = () => {
     setLoading(true);
     loadAccountsList();
   }, []);
+
+  const navigate = useNavigate()
+
+  const onFinish = (formValues) => {
+    addTransfer(formValues)
+      .then(() => {
+        message.success("Transfer done");
+      })
+      .then(() => navigate('/employee-portal/transactions'))
+      .catch((err) => {
+        console.log({ err });
+        message.error("Transfer Error!");
+      });
+    console.log({ formValues });
+    
+  };
 
   function loadAccountsList() {
     getAccounts()

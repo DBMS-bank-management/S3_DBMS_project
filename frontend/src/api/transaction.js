@@ -75,7 +75,7 @@ export const getTransactionsByID = (id) => {
 export const addTransfer = (data) => {
   console.log("add transfer", { data });
   return axios
-    .put(`${BASE_URL}/transactions/addTransfer`, data)
+    .post(`${BASE_URL}/transactions/transfer/add`, data)
     .then((response) => {
       return response.data;
     })

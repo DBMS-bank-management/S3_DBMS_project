@@ -123,12 +123,20 @@ exports.getTransactionsByUserID = (req, res) => {
 };
 
 exports.addTransfer = (req, res) => {
-  TransactionModel.addTransfer(req.body, (err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving transactions.",
-      });
-    else res.send(data);
-  });
+  console.log({ body: req.body });
+  TransactionModel.addTransfer(
+    {
+      fromAccount: req.body.FromAccount,
+      toAccount: req.body.ToAccount,
+      amount: req.body.Amount,
+    },
+    (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving transactions.",
+        });
+      else res.send(data);
+    }
+  );
 };

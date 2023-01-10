@@ -50,7 +50,7 @@ Transaction.findById = (id, result) => {
 
 //remove sql injection here
 Transaction.getAll = (title, result) => {
-  let query = "SELECT * FROM transaction";
+  let query = "SELECT * FROM transaction ORDER BY trans_ID DESC";
 
   if (title) {
     query += `WHERE title LIKE '%${title}%'`;
@@ -147,20 +147,25 @@ Transaction.findTransactionsByUserId = (id, result) => {
 };
 
 Transaction.addTransfer = (values, result) => {
-  console.log({values})
-  // sql.query(
-  //   "",
-  //   id,
-  //   (err, res) => {
-  //     if (err) {
-  //       console.log("error: ", err);
-  //       result(err, null);
-  //       return;
-  //     }
-  //     // console.log("transactions: ", res);
-  //     result(null, res);
-  //   }
-  // );
+  console.log({ values }, [
+    values.fromAccount,
+    values.toAccount,
+    values.amount,
+    "online",
+  ]);
+  sql.query(
+    "call Transaction_Procedure(?, ? ,?, ? );",
+    [values.fromAccount, values.toAccount, values.amount, "online"],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      console.log("transactions: ", res);
+      result(null, res);
+    }
+  );
 };
 
 module.exports = Transaction;
