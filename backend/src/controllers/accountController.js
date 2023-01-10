@@ -134,3 +134,13 @@ exports.getSavingsAccountsByCustomerId = (req, res) => {
     else res.send(data);
   });
 };
+
+exports.updateInterests = (req, res) => {
+  AccountModel.updateInterests((err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while updating interests.",
+      });
+    else res.send(data);
+  });
+};

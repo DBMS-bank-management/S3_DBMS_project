@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const accounts = require("../controllers/accountController");
   const { jwtauth } = require("../utils/jwt.js");
-  const { addBranch, isCustomer } = require("../utils/middleware");
+  const { addBranch, isCustomer, isManager } = require("../utils/middleware");
 
   var router = require("express").Router();
 
@@ -16,6 +16,12 @@ module.exports = (app) => {
     "/byUser/savings",
     [jwtauth, isCustomer],
     accounts.getSavingsAccountsByCustomerId
+  );
+
+  router.get(
+    "/updateInterests",
+    [jwtauth, isManager],
+    accounts.updateInterests
   );
 
   // user signup

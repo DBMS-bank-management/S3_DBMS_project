@@ -1,5 +1,15 @@
 import React from "react";
-import { Typography, Layout, Card, Col, Row, Statistic, Divider } from "antd";
+import {
+  Typography,
+  Layout,
+  Card,
+  Col,
+  Row,
+  Statistic,
+  Divider,
+  Button,
+  message,
+} from "antd";
 import { isEmployee, isManager } from "../../api/authentication.js";
 import {
   BarChart,
@@ -15,6 +25,9 @@ import {
   Area,
 } from "recharts";
 import { EmployeePageHeading } from "../../components/layout/employeePageHeading";
+import { calculateAndAddInterestsForMonth } from "../../api/account.js";
+import NormalApplicationsList from "./normalApplication/normalApplicationList.js";
+import { useNavigate } from "react-router-dom";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -109,6 +122,7 @@ const user_growth_data = [
 ];
 
 export const Dashboard = () => {
+  const navigate = useNavigate();
   const charts = [
     {
       title: "User growth",
@@ -199,11 +213,63 @@ export const Dashboard = () => {
             : null
         }
       />
+
+      {isManager() && (
+        <>
+          <Divider />
+          <Button
+            // disabled={isManager()}
+            color="primary"
+            onClick={() =>
+              calculateAndAddInterestsForMonth()
+                .then(() => message.success("Successfully updated insterests"))
+                .catch((err) => message.error("Failed to update interests!"))
+            }
+          >
+            Calculate and add interests for the month
+          </Button>
+        </>
+      )}
+
       {/* </Header> */}
       <Divider />
       <Content className="transparent">
-        <Row gutter={16}>
-          <Col span={6}>
+        {isEmployee() && (
+          <Row gutter={[16,16]}>
+            <Col span={12}>
+              <Card
+                className="glass center-content"
+                hoverable
+                onClick={() => {
+                  navigate("/employee-portal/normal-applications/add");
+                }}
+              >
+                Create Normal Loan Application
+              </Card>
+            </Col>
+            <Col span={12}>
+              <Card
+                className="glass center-content"
+                hoverable
+                onClick={() => {
+                  navigate("/employee-portal/transactions/add");
+                }}
+              >
+                Transfers
+              </Card>
+            </Col>
+            <Col span={12}>
+              <Card
+                className="glass center-content"
+                hoverable
+                onClick={() => {
+                  navigate("/employee-portal/transactions/add");
+                }}
+              >
+                Withdrawals
+              </Card>
+            </Col>
+            {/* <Col span={6}>
             <Card className="glass center-content" hoverable>
               <Statistic title="Customers" value={10} />
             </Card>
@@ -212,21 +278,24 @@ export const Dashboard = () => {
             <Card className="glass center-content" hoverable>
               <Statistic title="Total in accounts" value={112893} />
             </Card>
-          </Col>
-          <Col span={6}>
-            <Card className="glass center-content" hoverable>
-              <Statistic title="Customers" value={10} />
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card className="glass center-content" hoverable>
-              <Statistic title="Total in accounts" value={112893} />
-            </Card>
-          </Col>
-        </Row>
+          </Col> */}
+          </Row>
+        )}
         <Divider />
+
         <Row gutter={[16, 16]} style={{ paddingTop: 0 }}>
-          {cols}
+          {/* {cols} */}
+          {isManager() && (
+            <Col span={24}>
+              <Card
+                className="glass"
+                hoverable
+                title={"Normal loan applications"}
+              >
+                <NormalApplicationsList />
+              </Card>
+            </Col>
+          )}
         </Row>
       </Content>
     </Layout>

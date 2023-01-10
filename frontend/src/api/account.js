@@ -81,3 +81,12 @@ export const getSavingsAccountsByCustomer = () => {
     })
     .catch((err) => Promise.reject("Failed to get customers accounts list!"));
 };
+
+export const calculateAndAddInterestsForMonth = () => {
+  return employeeAxios
+    .get(`${BASE_URL}/accounts/updateInterests`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Failed to update interests for the month"));
+};
