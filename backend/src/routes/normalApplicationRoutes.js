@@ -15,15 +15,15 @@ module.exports = (app) => {
   router.post("/", [jwtauth, isEmployee], normalapplications.create);
 
   // Get all activities
-  router.get("/", normalapplications.findAll);
+  router.get("/", [jwtauth], normalapplications.findAll);
 
-  router.get("/:id", normalapplications.findOne);
+  router.get("/:id", [jwtauth], normalapplications.findOne);
 
   // Update a normal application with id
-  router.put("/:id", normalapplications.update);
+  router.put("/:id", [jwtauth], normalapplications.update);
 
   // Delete a normal application with id
-  router.delete("/:id", normalapplications.delete);
+  router.delete("/:id", [jwtauth], normalapplications.delete);
 
   router.post("/decline/:id", [jwtauth, isManager], normalapplications.decline);
   

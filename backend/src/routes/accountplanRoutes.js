@@ -4,7 +4,7 @@ module.exports = (app) => {
     var router = require("express").Router();
   
     // signup
-    router.post("/", account_plans.create);
+    router.post("/", [jwtauth], account_plans.create);
   
     // Get all account_plans
     router.get("/", account_plans.findAll);
@@ -12,10 +12,10 @@ module.exports = (app) => {
     router.get("/:id", account_plans.findOne);
   
     // Update a accountplan with id
-    router.put("/:id", account_plans.update);
+    router.put("/:id", [jwtauth], account_plans.update);
   
     // Delete a accountplan with id
-    router.delete("/:id", account_plans.delete);
+    router.delete("/:id", [jwtauth], account_plans.delete);
   
     app.use("/accountplans", router);
   };

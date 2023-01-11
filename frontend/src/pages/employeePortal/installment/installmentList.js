@@ -6,7 +6,9 @@ import {
   payInstallmentByCash,
 } from "../../../api/installment";
 import ConfirmationDialog from "../../../components/confirmationDialog";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 import LoanPaymentDialog from "../../../components/LoanPaymentDialog";
+
 
 const InstallmentList = () => {
   const [installments, setInstallments] = useState();
@@ -103,6 +105,7 @@ const InstallmentList = () => {
 
   return (
     <Card style={{ width: "100%" }}>
+     <EmployeePageHeading text={"Installments"} />
       {/* <Button href="installments/add">Add installment</Button> */}
       <Table dataSource={installments} columns={columns} bordered />
     </Card>

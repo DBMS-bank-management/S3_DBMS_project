@@ -2,6 +2,7 @@ import { Button, Card, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { deleteLoan, getLoans } from "../../../api/Loan";
 import ConfirmationDialog from "../../../components/confirmationDialog";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 
 const LoanList = () => {
   const [loans, setLoans] = useState();
@@ -63,10 +64,13 @@ const LoanList = () => {
   ];
 
   return (
+    <div className="transparent">
+      <EmployeePageHeading text={"Loans"} />
       <Card style={{ width: "100%" }}>
         <Button href="loans/add">Add loan</Button>
         <Table dataSource={loans} columns={columns} bordered />
       </Card>
+    </div>
   );
 };
 

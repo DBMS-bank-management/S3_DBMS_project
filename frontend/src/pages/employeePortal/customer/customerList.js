@@ -2,6 +2,7 @@ import { Button, Card, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { deleteCustomer, getCustomers } from "../../../api/customer";
 import ConfirmationDialog from "../../../components/confirmationDialog";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 import { NavigateButton } from "../../../components/NavigateButton";
 
 const CustomersList = () => {
@@ -70,10 +71,13 @@ const CustomersList = () => {
   ];
 
   return (
+    <div className="transparent">
+      <EmployeePageHeading text={"Customers"} />
     <Card style={{ width: "100%" }}>
       <NavigateButton href="add">Add Customer</NavigateButton>
       <Table dataSource={customer} columns={columns} bordered />
     </Card>
+    </div>
   );
 };
 

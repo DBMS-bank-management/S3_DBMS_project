@@ -11,18 +11,18 @@ module.exports = (app) => {
   router.get("/byCustomer", [jwtauth, isCustomer], fd.getFixedDepositsByUserID);
 
   // fd signup
-  router.post("/", fd.create);
+  router.post("/", [jwtauth], fd.create);
 
   // Get all fd
-  router.get("/", fd.findAll);
+  router.get("/", [jwtauth], fd.findAll);
 
-  router.get("/:id", fd.findOne);
+  router.get("/:id", [jwtauth], fd.findOne);
 
   // Update a fd with id
-  router.put("/:id", fd.update);
+  router.put("/:id", [jwtauth], fd.update);
 
   // Delete a fd with id
-  router.delete("/:id", fd.delete);
+  router.delete("/:id", [jwtauth], fd.delete);
 
   app.use("/fd", router);
 };

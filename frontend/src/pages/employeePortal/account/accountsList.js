@@ -2,6 +2,8 @@ import { Button, Card, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { deleteAccount, getAccounts } from "../../../api/account";
 import ConfirmationDialog from "../../../components/confirmationDialog";
+import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
+
 
 const AccountsList = () => {
   const [accounts, setAccounts] = useState();
@@ -70,10 +72,13 @@ const AccountsList = () => {
   ];
 
   return (
+    <div className="transparent">
+      <EmployeePageHeading text={"Accounts"}/>
       <Card style={{ width: "100%" }}>
         <Button href="accounts/add">Add account</Button>
         <Table loading={loading} dataSource={accounts} columns={columns} bordered />
       </Card>
+    </div>
   );
 };
 
