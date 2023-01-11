@@ -1,4 +1,5 @@
 import axios from "axios";
+import { customerAxios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addLoan(data) {
@@ -58,8 +59,8 @@ export const deleteLoan = (id) => {
 };
 
 export const getLoansByID = (id) => {
-  return axios
-    .get(`${BASE_URL}/loans/users/2`)
+  return customerAxios
+    .get(`${BASE_URL}/loans/byUser`)
     .then((response) => {
       return response.data;
     })

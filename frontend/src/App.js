@@ -45,6 +45,9 @@ import CustomerAccountsList from "./pages/customerPortal/AccountsList";
 import CustomerFixedDepositsList from "./pages/customerPortal/FixeDepositList";
 import CustomerLoansList from "./pages/customerPortal/CustomerLoansList";
 import CustomerPendingApplicationsList from "./pages/customerPortal/pendingLoanApplicationsList";
+import WithdrawalList from "./pages/employeePortal/withdrawals/withdrawalList";
+import AddWithdrawal from "./pages/employeePortal/withdrawals/addWithdrawal";
+import { LoanPayment } from "./pages/customerPortal/LoanPayment";
 
 function App() {
   return (
@@ -107,7 +110,8 @@ function App() {
 
                 <Route path="installments/">
                   <Route path="" element={<InstallmentList />} />
-                  <Route path="add" element={<OnlyManager></OnlyManager>} />
+                  {/* <Route path="add" element={<OnlyManager></OnlyManager>} /> */}
+                  {/* <Route path="pay" element={}/> */}
                 </Route>
 
                 <Route path="branches/">
@@ -125,6 +129,11 @@ function App() {
                 <Route path="transactions/">
                   <Route path="" element={<TransactionList />} />
                   <Route path="add" element={<AddTransaction />} />
+                </Route>
+
+                <Route path="withdrawals/">
+                  <Route path="" element={<WithdrawalList />} />
+                  <Route path="add" element={<AddWithdrawal />} />
                 </Route>
 
                 <Route path="fixed-deposits/">
@@ -156,7 +165,6 @@ function App() {
                     path=":id"
                     element={
                       <OnlyManager>
-                        //
                         <EditEmployee />
                       </OnlyManager>
                     }
@@ -177,9 +185,6 @@ function App() {
                 <Route path="fixed-deposit-plans/">
                   <Route path="" element={<FdPlanList />} />
                 </Route>
-                {/* <Route path="pending-normal-loans/">
-                  <Route path="" element={<CustomerPendingApplicationsList />} />
-                </Route> */}
               </Route>
             </Route>
 
@@ -192,22 +197,14 @@ function App() {
                   path="online-loan-application"
                   element={<OnlineLoanApplication />}
                 />
+                <Route path="accounts" element={<CustomerAccountsList />} />
+                <Route path="fd" element={<CustomerFixedDepositsList />} />
+                <Route path="Loans" element={<CustomerLoansList />} />
                 <Route
-                  path="accounts"
-                  element={<CustomerAccountsList />}
-                />
-                 <Route
-                  path="fd"
-                  element={<CustomerFixedDepositsList />}
-                />
-                <Route
-                  path="Loans"
-                  element={<CustomerLoansList />}
-                />
-                <Route 
                   path="pending-normal-loans"
-                  element={<CustomerPendingApplicationsList />} 
+                  element={<CustomerPendingApplicationsList />}
                 />
+                <Route path="loan-payment" element={<LoanPayment />} />
               </Route>
             </Route>
 

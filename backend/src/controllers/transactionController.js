@@ -123,11 +123,49 @@ exports.getTransactionsByUserID = (req, res) => {
 };
 
 exports.addTransfer = (req, res) => {
-  TransactionModel.addTransfer(req.body, (err, data) => {
+  console.log({ body: req.body });
+  TransactionModel.addTransfer(
+    {
+      fromAccount: req.body.FromAccount,
+      toAccount: req.body.ToAccount,
+      amount: req.body.Amount,
+    },
+    (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving transactions.",
+        });
+      else res.send(data);
+    }
+  );
+};
+
+exports.addWithdrawal = (req, res) => {
+  console.log({ body: req.body });
+  TransactionModel.addWithdrawal(
+    {
+      fromAccount: req.body.FromAccount,
+      amount: req.body.Amount,
+    },
+    (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving withdrawals.",
+        });
+      else res.send(data);
+    }
+  );
+};
+
+exports.getWithdrawalCount = (req, res) => {
+  // console.log({ body: req.body });
+  TransactionModel.getWithdrawalCount(req.body.account, (err, data) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving transactions.",
+          err.message || "Some error occurred while retrieving withdrawals.",
       });
     else res.send(data);
   });

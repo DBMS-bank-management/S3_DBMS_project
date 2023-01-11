@@ -7,42 +7,41 @@ import {
   Checkbox,
   Form,
   Input,
+  Typography,
 } from "antd";
-import { addTransaction, addTransfer } from "../../../api/transaction";
+import { addWithdrawal, addWithdraw } from "../../../api/withdrawal";
 import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 import { getAccounts } from "../../../api/account";
-import { useNavigate } from "react-router-dom";
+import { getWithdrawalsCount } from "../../../api/transaction";
 
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
+const onFinish = (formValues) => {
+  addWithdraw(formValues)
+    .then(() => {
+      message.success("Withdrawal done");
+    })
+    .catch((err) => {
+      console.log({ err });
+      message.error("Withdrawal Error!");
+    });
+  console.log({ formValues });
 };
 
-
-
-const AddTransaction = () => {
+const AddWithdrawal = () => {
   const [accounts, setAccounts] = useState();
   const [loading, setLoading] = useState(true);
+  const [withdrawalCount, setWithdrawalCount] = useState();
+
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+    getWithdrawalsCount(value)
+      .then((data) => setWithdrawalCount(data))
+      .catch((err) => message.error("Error retrieving withdrawals count"));
+  };
 
   useEffect(() => {
     setLoading(true);
     loadAccountsList();
   }, []);
-
-  const navigate = useNavigate()
-
-  const onFinish = (formValues) => {
-    addTransfer(formValues)
-      .then(() => {
-        message.success("Transfer done");
-      })
-      .then(() => navigate('/employee-portal/transactions'))
-      .catch((err) => {
-        console.log({ err });
-        message.error("Transfer Error!");
-      });
-    console.log({ formValues });
-    
-  };
 
   function loadAccountsList() {
     getAccounts()
@@ -54,6 +53,8 @@ const AddTransaction = () => {
       .catch((err) => message.error(err))
       .finally(() => setLoading(false));
   }
+
+  console.log(withdrawalCount);
 
   return (
     <div>
@@ -70,7 +71,7 @@ const AddTransaction = () => {
         <Form.Item
           label="From Account "
           name="FromAccount"
-          rules={[{ required: true, message: "Please input your sending account" }]}
+          rules={[{ required: true, message: "Please input your password!" }]}
         >
           <Select
             // initialValues="lucy"
@@ -86,7 +87,7 @@ const AddTransaction = () => {
             options={accounts}
           />
         </Form.Item>
-        <Form.Item
+        {/* <Form.Item
           label="To Account"
           name="ToAccount"
           rules={[
@@ -106,7 +107,7 @@ const AddTransaction = () => {
             }
             options={accounts}
           />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item
           label="Amount"
@@ -115,6 +116,8 @@ const AddTransaction = () => {
         >
           <InputNumber />
         </Form.Item>
+        <Typography type="danger">{`Withdrawals count: ${withdrawalCount?.count}`}</Typography>
+
         <Form.Item
           wrapperCol={{
             offset: 8,
@@ -130,4 +133,4 @@ const AddTransaction = () => {
   );
 };
 
-export default AddTransaction;
+export default AddWithdrawal;

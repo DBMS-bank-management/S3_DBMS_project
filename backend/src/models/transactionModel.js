@@ -50,7 +50,7 @@ Transaction.findById = (id, result) => {
 
 //remove sql injection here
 Transaction.getAll = (title, result) => {
-  let query = "SELECT * FROM transaction";
+  let query = "SELECT * FROM transaction ORDER BY timestamp DESC";
 
   if (title) {
     query += `WHERE title LIKE '%${title}%'`;
@@ -132,7 +132,7 @@ Transaction.removeAll = (result) => {
 
 Transaction.findTransactionsByUserId = (id, result) => {
   sql.query(
-    "SELECT * from transaction t join account a on a.account_ID = t.acc_ID where customer_ID = ?",
+    "SELECT * from transaction t join account a on a.account_ID = t.acc_ID where customer_ID = ? ORDER BY timestamp DESC",
     id,
     (err, res) => {
       if (err) {
@@ -147,20 +147,58 @@ Transaction.findTransactionsByUserId = (id, result) => {
 };
 
 Transaction.addTransfer = (values, result) => {
-  console.log({values})
-  // sql.query(
-  //   "",
-  //   id,
-  //   (err, res) => {
-  //     if (err) {
-  //       console.log("error: ", err);
-  //       result(err, null);
-  //       return;
-  //     }
-  //     // console.log("transactions: ", res);
-  //     result(null, res);
-  //   }
-  // );
+  console.log({ values }, [
+    values.fromAccount,
+    values.toAccount,
+    values.amount,
+    "online",
+  ]);
+  sql.query(
+    "call Transaction_Procedure(?, ? ,?, ? );",
+    [values.fromAccount, values.toAccount, values.amount, "online"],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      console.log("transactions: ", res);
+      result(null, res);
+    }
+  );
+};
+
+Transaction.addWithdrawal = (values, result) => {
+  console.log({ values }, [values.fromAccount, values.amount]);
+  sql.query(
+    "call withdrawal(?, ? );",
+    [values.fromAccount, values.amount],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      console.log("withdrawals: ", res);
+      result(null, res);
+    }
+  );
+};
+
+Transaction.getWithdrawalCount = (account, result) => {
+  sql.query(
+    "select count(*) as count from transaction where acc_ID=? and description='withdrawal' and month(timestamp)=month(now()) and year(timestamp)=year(now());",
+    [account],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      console.log("withdrawals: ", res ? res[0] : 0);
+      result(null, res ? res[0] : { count: null });
+    }
+  );
 };
 
 module.exports = Transaction;

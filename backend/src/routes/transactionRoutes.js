@@ -1,12 +1,14 @@
 const { jwtauth } = require("../utils/jwt");
-const { isCustomer } = require("../utils/middleware");
+const { isCustomer, isEmployee } = require("../utils/middleware");
 
 module.exports = (app) => {
   const transactions = require("../controllers/transactionController");
 
   var router = require("express").Router();
 
-  router.post("/addTransfer", transactions.addTransfer);
+  router.post("/withdrawal/addWithdrawal", transactions.addWithdrawal);
+
+  router.post("/transfer/add", transactions.addTransfer);
 
   // Get the transactions by id
   router.get(
@@ -28,6 +30,12 @@ module.exports = (app) => {
 
   // Delete a user with id
   router.delete("/:id", [jwtauth], transactions.delete);
+
+  router.post(
+    "/withdrawals/count",
+    [jwtauth, isEmployee],
+    transactions.getWithdrawalCount
+  );
 
   app.use("/transactions", router);
 };

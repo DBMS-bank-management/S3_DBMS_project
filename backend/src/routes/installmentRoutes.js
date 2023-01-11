@@ -1,22 +1,37 @@
+const { jwtauth } = require("../utils/jwt");
+const { isCustomer, isEmployee } = require("../utils/middleware");
+
 module.exports = (app) => {
-    const installments = require("../controllers/installmentController");
-  
-    var router = require("express").Router();
-  
-    // user signup
-    router.post("/", [jwtauth], installments.create);
-  
-    // Get all installments
-    router.get("/", [jwtauth], installments.findAll);
-  
-    router.get("/:id", [jwtauth], installments.findOne);
-  
-    // Update a user with id
-    router.put("/:id", [jwtauth], installments.update);
-  
-    // Delete a user with id
-    router.delete("/:id", [jwtauth], installments.delete);
-  
-    app.use("/installments", router);
-  };
-  
+
+  const installments = require("../controllers/installmentController");
+
+  var router = require("express").Router();
+
+  // Get all installments
+  router.get("/byUser", [jwtauth, isCustomer], installments.getByCustomerId);
+
+  // pay using account
+  router.post(
+    "/pay/usingAccount",
+    [jwtauth, isCustomer],
+    installments.payUsingAccount
+  );
+
+  router.post("/pay/byCash", [jwtauth, isEmployee], installments.payByCash);
+
+  // user signup
+  router.post("/", installments.create);
+
+  // Get all installments
+  router.get("/", installments.findAll);
+
+  router.get("/:id", installments.findOne);
+
+  // Update a user with id
+  router.put("/:id", installments.update);
+
+  // Delete a user with id
+  router.delete("/:id", installments.delete);
+
+  app.use("/installments", router);
+};

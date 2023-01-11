@@ -55,7 +55,7 @@ Account.getAll = (title, result) => {
       return;
     }
 
-    console.log("Account: ", res);
+    // console.log("Account: ", res);
     result(null, res);
   });
 };
