@@ -19,7 +19,7 @@ export function addInstallment(data) {
 }
 
 export const getInstallments = () => {
-  return axios
+  return employeeAxios
     .get(`${BASE_URL}/installments`)
     .then((response) => {
       return response.data;

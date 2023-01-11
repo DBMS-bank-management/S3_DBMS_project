@@ -1,4 +1,5 @@
 import axios from "axios";
+import { employeeAxios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addEmployee(data) {
@@ -16,7 +17,7 @@ export function addEmployee(data) {
 }
 
 export const getEmployees = () => {
-  return axios
+  return employeeAxios
     .get(`${BASE_URL}/employees`)
     .then((response) => {
       return response.data;
