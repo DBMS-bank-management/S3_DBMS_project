@@ -13,8 +13,8 @@ exports.create = (req, res) => {
   const loan = new LoanModel({
     loan_ID: req.body.loan_id,
     acc_ID: req.body.branch_id,
-    amount : req.body.balance,
-    plan_id: req.body.plan_id,  
+    amount: req.body.balance,
+    plan_id: req.body.plan_id,
   });
 
   // Save LoanModel in the database
@@ -99,10 +99,10 @@ exports.delete = (req, res) => {
   });
 };
 
-exports.getLoansByUserID= (req, res) => {
-  const name = null //req.query.name;
+exports.getLoansByUserID = (req, res) => {
+  const customer_ID = req.user.customer.ID; //req.query.name;
 
-  LoanModel.findLoansByUserId(req.params.id, (err, data) => {
+  LoanModel.findLoansByUserId(customer_ID, (err, data) => {
     if (err)
       res.status(500).send({
         message: err.message || "Some error occurred while retrieving loans.",

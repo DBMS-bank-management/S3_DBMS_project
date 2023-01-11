@@ -80,6 +80,15 @@ const CustomerPageLayout = () => {
       ],
     },
     {
+      label: "Pay for loan",
+      key: "loanPayment",
+      icon: <AppstoreOutlined />,
+      // disabled: true,
+      onClick: () => {
+        navigate("/customer-portal/loan-payment");
+      },
+    },
+    {
       label: "Apply for a loan",
       key: "onlineLoanApplication",
       icon: <AppstoreOutlined />,
@@ -98,7 +107,7 @@ const CustomerPageLayout = () => {
 
   return authenticated ? (
     <Layout className="layout login" style={{ minHeight: "100vh" }}>
-      <Header style={{padding: 0}}>
+      <Header style={{ padding: 0 }}>
         {/* <div className="logo" /> */}
         <div
           style={{

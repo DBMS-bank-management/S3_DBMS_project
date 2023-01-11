@@ -13,8 +13,8 @@ exports.create = (req, res) => {
   const installment = new InstallmentModel({
     inst_ID: req.body.inst_ID,
     loan_ID: req.body.loan_ID,
-    amount : req.body.amount,
-    due_date: req.body.due_date,  
+    amount: req.body.amount,
+    due_date: req.body.due_date,
     is_paid: req.body.is_paid,
     trans_ID: req.body.trans_ID,
   });
@@ -24,7 +24,8 @@ exports.create = (req, res) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the InstallmentModel.",
+          err.message ||
+          "Some error occurred while creating the InstallmentModel.",
       });
     else res.send(data);
   });
@@ -37,7 +38,8 @@ exports.findAll = (req, res) => {
   InstallmentModel.getAll(title, (err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving Installment.",
+        message:
+          err.message || "Some error occurred while retrieving Installment.",
       });
     else res.send(data);
   });
@@ -70,19 +72,23 @@ exports.update = (req, res) => {
 
   console.log(req.body);
 
-  InstallmentModel.updateById(req.params.id, new InstallmentModel(req.body), (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found Installment with inst_ID ${req.params.id}.`,
-        });
-      } else {
-        res.status(500).send({
-          message: "Error updating Installment with inst_ID " + req.params.id,
-        });
-      }
-    } else res.send(data);
-  });
+  InstallmentModel.updateById(
+    req.params.id,
+    new InstallmentModel(req.body),
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found Installment with inst_ID ${req.params.id}.`,
+          });
+        } else {
+          res.status(500).send({
+            message: "Error updating Installment with inst_ID " + req.params.id,
+          });
+        }
+      } else res.send(data);
+    }
+  );
 };
 
 exports.delete = (req, res) => {
@@ -98,5 +104,30 @@ exports.delete = (req, res) => {
         });
       }
     } else res.send({ message: `Installment was deleted successfully!` });
+  });
+};
+
+exports.getByCustomerId = (req, res) => {
+  const customer_ID = req.user.customer.ID;
+
+  InstallmentModel.getByCustomerID(customer_ID, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving Installment.",
+      });
+    else res.send(data);
+  });
+};
+
+exports.payUsingAccount = (req, res) => {
+  // const customer_ID = req.user.customer.ID; //req.query.name;
+
+  InstallmentModel.payUsingAccount(req.data, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving loans.",
+      });
+    else res.send(data);
   });
 };

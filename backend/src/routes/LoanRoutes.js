@@ -1,25 +1,27 @@
+const { jwtauth } = require("../utils/jwt");
+const { isCustomer } = require("../utils/middleware");
+
 module.exports = (app) => {
-    const loans = require("../controllers/LoanController");
+  const loans = require("../controllers/LoanController");
 
-    var router = require("express").Router();
-  
-    // user signup
-    router.post("/", loans.create);
-  
-    // Get all loans
-    router.get("/", loans.findAll);
-  
-    router.get("/:id", loans.findOne);
-  
-    // Update a user with id
-    router.put("/:id", loans.update);
-  
-    // Delete a user with id
-    router.delete("/:id", loans.delete);
+  var router = require("express").Router();
 
-     // Get loans by id
-     router.get("/users/:id", loans.getLoansByUserID);
+  // Get loans by id
+  router.get("/byUser", [jwtauth, isCustomer], loans.getLoansByUserID);
 
-    app.use("/loans", router);
-  };
-  
+  // user signup
+  router.post("/", loans.create);
+
+  // Get all loans
+  router.get("/", loans.findAll);
+
+  router.get("/:id", loans.findOne);
+
+  // Update a user with id
+  router.put("/:id", loans.update);
+
+  // Delete a user with id
+  router.delete("/:id", loans.delete);
+
+  app.use("/loans", router);
+};

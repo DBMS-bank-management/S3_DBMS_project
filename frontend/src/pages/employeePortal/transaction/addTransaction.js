@@ -70,7 +70,7 @@ const AddTransaction = () => {
         <Form.Item
           label="From Account "
           name="FromAccount"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          rules={[{ required: true, message: "Please input your sending account" }]}
         >
           <Select
             // initialValues="lucy"
