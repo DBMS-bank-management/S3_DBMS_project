@@ -10,18 +10,18 @@ module.exports = (app) => {
   router.get("/byUser", [jwtauth, isCustomer], loans.getLoansByUserID);
 
   // user signup
-  router.post("/", loans.create);
+  router.post("/", [jwtauth], loans.create);
 
   // Get all loans
-  router.get("/", loans.findAll);
+  router.get("/", [jwtauth], loans.findAll);
 
-  router.get("/:id", loans.findOne);
+  router.get("/:id", [jwtauth], loans.findOne);
 
   // Update a user with id
-  router.put("/:id", loans.update);
+  router.put("/:id", [jwtauth], loans.update);
 
   // Delete a user with id
-  router.delete("/:id", loans.delete);
+  router.delete("/:id", [jwtauth], loans.delete);
 
   app.use("/loans", router);
 };

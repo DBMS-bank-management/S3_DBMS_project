@@ -1,3 +1,5 @@
+const { jwtauth } = require("../utils/jwt");
+
 module.exports = (app) => {
     const account_plans = require("../controllers/accountplanController");
   

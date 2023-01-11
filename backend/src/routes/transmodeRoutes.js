@@ -1,3 +1,5 @@
+const { jwtauth } = require("../utils/jwt");
+
 module.exports = (app) => {
     const transaction_modes = require("../controllers/transmodeController");
   
