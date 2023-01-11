@@ -131,3 +131,15 @@ exports.payUsingAccount = (req, res) => {
     else res.send(data);
   });
 };
+
+exports.payByCash = (req, res) => {
+  // const customer_ID = req.user.customer.ID; //req.query.name;
+
+  InstallmentModel.payByCash(req.body, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving loans.",
+      });
+    else res.send(data);
+  });
+};

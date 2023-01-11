@@ -119,7 +119,7 @@ const CustomerPageLayout = () => {
           }}
         >
           {" "}
-          <div style={{ color: "white", flex: 0.3, fontSize: 25 }}>
+          <div style={{ color: "white", flex: 0.3, fontSize: 22 }}>
             <Logo />
           </div>
           <div

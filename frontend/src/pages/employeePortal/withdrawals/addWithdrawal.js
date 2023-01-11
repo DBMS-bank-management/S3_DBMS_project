@@ -7,14 +7,12 @@ import {
   Checkbox,
   Form,
   Input,
+  Typography,
 } from "antd";
 import { addWithdrawal, addWithdraw } from "../../../api/withdrawal";
 import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 import { getAccounts } from "../../../api/account";
-
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
-};
+import { getWithdrawalsCount } from "../../../api/transaction";
 
 const onFinish = (formValues) => {
   addWithdraw(formValues)
@@ -31,6 +29,14 @@ const onFinish = (formValues) => {
 const AddWithdrawal = () => {
   const [accounts, setAccounts] = useState();
   const [loading, setLoading] = useState(true);
+  const [withdrawalCount, setWithdrawalCount] = useState();
+
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+    getWithdrawalsCount(value)
+      .then((data) => setWithdrawalCount(data))
+      .catch((err) => message.error("Error retrieving withdrawals count"));
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -47,6 +53,8 @@ const AddWithdrawal = () => {
       .catch((err) => message.error(err))
       .finally(() => setLoading(false));
   }
+
+  console.log(withdrawalCount);
 
   return (
     <div>
@@ -108,6 +116,8 @@ const AddWithdrawal = () => {
         >
           <InputNumber />
         </Form.Item>
+        <Typography type="danger">{`Withdrawals count: ${withdrawalCount?.count}`}</Typography>
+
         <Form.Item
           wrapperCol={{
             offset: 8,

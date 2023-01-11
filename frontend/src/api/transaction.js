@@ -1,5 +1,5 @@
 import axios from "axios";
-import { customerAxios } from "./authentication";
+import { customerAxios, employeeAxios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addTransaction(data) {
@@ -90,4 +90,13 @@ export const addWithdraw = (data) => {
       return response.data;
     })
     .catch((err) => Promise.reject("Failed to add withdrawal"));
+};
+
+export const getWithdrawalsCount = (account) => {
+  return employeeAxios
+    .post(`${BASE_URL}/transactions/withdrawals/count`, account)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Failed to get withdrawalcount"));
 };

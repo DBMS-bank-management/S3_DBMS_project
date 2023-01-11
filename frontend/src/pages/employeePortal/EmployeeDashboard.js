@@ -235,18 +235,7 @@ export const Dashboard = () => {
       <Divider />
       <Content className="transparent">
         {isEmployee() && (
-          <Row gutter={[16,16]}>
-            <Col span={12}>
-              <Card
-                className="glass center-content"
-                hoverable
-                onClick={() => {
-                  navigate("/employee-portal/normal-applications/add");
-                }}
-              >
-                Create Normal Loan Application
-              </Card>
-            </Col>
+          <Row gutter={[16, 16]}>
             <Col span={12}>
               <Card
                 className="glass center-content"
@@ -269,16 +258,28 @@ export const Dashboard = () => {
                 Withdrawals
               </Card>
             </Col>
-            {/* <Col span={6}>
-            <Card className="glass center-content" hoverable>
-              <Statistic title="Customers" value={10} />
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card className="glass center-content" hoverable>
-              <Statistic title="Total in accounts" value={112893} />
-            </Card>
-          </Col> */}
+            <Col span={12}>
+              <Card
+                className="glass center-content"
+                hoverable
+                onClick={() => {
+                  navigate("/employee-portal/normal-applications/add");
+                }}
+              >
+                Create Normal Loan Application
+              </Card>
+            </Col>
+            <Col span={12}>
+              <Card
+                className="glass center-content"
+                hoverable
+                onClick={() => {
+                  navigate("/employee-portal/installments/pay");
+                }}
+              >
+                Installment payments
+              </Card>
+            </Col>
           </Row>
         )}
         <Divider />

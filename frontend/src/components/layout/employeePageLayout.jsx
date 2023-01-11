@@ -109,7 +109,7 @@ const EmployeePageLayout = ({ children }) => {
             width: "100vw",
           }}
         >
-          <div style={{ color: "white", flex: 0.30, fontSize: 25 }}>
+          <div style={{ color: "white", flex: 0.30, fontSize: 22 }}>
             <Logo />
           </div>
           <div

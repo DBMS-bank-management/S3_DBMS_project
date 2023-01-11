@@ -110,7 +110,8 @@ function App() {
 
                 <Route path="installments/">
                   <Route path="" element={<InstallmentList />} />
-                  <Route path="add" element={<OnlyManager></OnlyManager>} />
+                  {/* <Route path="add" element={<OnlyManager></OnlyManager>} /> */}
+                  {/* <Route path="pay" element={}/> */}
                 </Route>
 
                 <Route path="branches/">
@@ -164,7 +165,6 @@ function App() {
                     path=":id"
                     element={
                       <OnlyManager>
-                        //
                         <EditEmployee />
                       </OnlyManager>
                     }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { customerAxios } from "./authentication";
+import { customerAxios, employeeAxios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addInstallment(data) {
@@ -79,5 +79,15 @@ export const payInstallmentByAccount = (data) => {
     .then((response) => {
       return response.data;
     })
-    .catch((err) => Promise.reject("Failed to add installment!"));
+    .catch((err) => Promise.reject("Failed to pay installment!"));
+};
+
+export const payInstallmentByCash = (id) => {
+  console.log("Installemtn paymment ", id)
+  return employeeAxios
+    .post(`${BASE_URL}/installments/pay/byCash`, { inst_id: id })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Failed to pay installment!"));
 };

@@ -158,3 +158,15 @@ exports.addWithdrawal = (req, res) => {
     }
   );
 };
+
+exports.getWithdrawalCount = (req, res) => {
+  // console.log({ body: req.body });
+  TransactionModel.getWithdrawalCount(req.body.account, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving withdrawals.",
+      });
+    else res.send(data);
+  });
+};

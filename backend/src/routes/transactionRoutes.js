@@ -1,5 +1,5 @@
 const { jwtauth } = require("../utils/jwt");
-const { isCustomer } = require("../utils/middleware");
+const { isCustomer, isEmployee } = require("../utils/middleware");
 
 module.exports = (app) => {
   const transactions = require("../controllers/transactionController");
@@ -30,6 +30,12 @@ module.exports = (app) => {
 
   // Delete a user with id
   router.delete("/:id", transactions.delete);
+
+  router.post(
+    "/withdrawals/count",
+    [jwtauth, isEmployee],
+    transactions.getWithdrawalCount
+  );
 
   app.use("/transactions", router);
 };

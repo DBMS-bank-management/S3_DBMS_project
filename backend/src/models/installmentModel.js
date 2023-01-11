@@ -141,7 +141,7 @@ Installment.getByCustomerID = (customer_ID, result) => {
   });
 };
 
-Installment.payUsingAccount = (data) => {
+Installment.payUsingAccount = (data, result) => {
   sql.query("", (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -152,6 +152,24 @@ Installment.payUsingAccount = (data) => {
     console.log("Installments by customer: ", res);
     result(null, res);
   });
+};
+
+Installment.payByCash = (data, result) => {
+  console.log({ data });
+  sql.query(
+    "UPDATE installment SET is_paid = 1 WHERE inst_ID = ?",
+    [data.inst_id],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      console.log("Installments by customer: ", res);
+      result(null, res);
+    }
+  );
 };
 
 module.exports = Installment;

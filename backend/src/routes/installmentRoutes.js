@@ -1,5 +1,5 @@
 const { jwtauth } = require("../utils/jwt");
-const { isCustomer } = require("../utils/middleware");
+const { isCustomer, isEmployee } = require("../utils/middleware");
 
 module.exports = (app) => {
   const installments = require("../controllers/installmentController");
@@ -10,7 +10,13 @@ module.exports = (app) => {
   router.get("/byUser", [jwtauth, isCustomer], installments.getByCustomerId);
 
   // pay using account
-  router.post("/pay/usingAccount",[jwtauth, isCustomer], installments.payUsingAccount);
+  router.post(
+    "/pay/usingAccount",
+    [jwtauth, isCustomer],
+    installments.payUsingAccount
+  );
+
+  router.post("/pay/byCash", [jwtauth, isEmployee], installments.payByCash);
 
   // user signup
   router.post("/", installments.create);
