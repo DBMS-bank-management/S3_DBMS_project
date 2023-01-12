@@ -16,7 +16,9 @@ const GeneralPageLayout = () => {
   };
 
   return (
-    <Layout className="layout" style={{}}>
+    <Layout className="App layout login" style={{
+      minHeight: "100vh",
+    }}>
       <Header>
         <div className="logo" />
         <div
@@ -91,14 +93,18 @@ const GeneralPageLayout = () => {
           padding: 50,
           backgroundColor: "#FFFFFFd",
           minHeight: "100%",
+          display: 'grid'
         }}
       >
         {/* <BreadcrumbsFromPath /> */}
         <Outlet />
       </Content>
       <Footer
+      // className="transparent"
         style={{
           textAlign: "center",
+          backgroundColor:'transparent',
+          color: 'white'
         }}
       >
         Created by CSE DBMS group - for BANK A

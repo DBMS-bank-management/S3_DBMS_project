@@ -71,6 +71,11 @@ const EmployeePageLayout = ({ children }) => {
         ),
       ]),
     getItem("Branches", "2", "/branches", <BankOutlined />),
+    isManager() && getItem("Reports", "sub2", "/", <FormOutlined />, [
+      getItem("Total transactions report", "total-transactions-report", "/total-transactions-report"),
+      getItem("Late installements report", "late-installments-report", "/late-installments-report"),
+
+    ]),
     // getItem("User", "sub1", "/", <UserOutlined />, [
     //   getItem("Tom", "3", "/'"),
     //   getItem("Bill", "4", "/"),
@@ -176,8 +181,8 @@ const EmployeePageLayout = ({ children }) => {
               collapsed
                 ? []
                 : items
-                    .filter((item) => !!item.children)
-                    .map((item) => item.key)
+                  .filter((item) => !!item.children)
+                  .map((item) => item.key)
             }
             // className="glass"
             //  inlineIndent={}
@@ -189,8 +194,8 @@ const EmployeePageLayout = ({ children }) => {
                 return a.path == "/"
                   ? window.location.pathname == "/employee-portal/"
                   : window.location.pathname.includes(
-                      "/employee-portal" + a.path
-                    );
+                    "/employee-portal" + a.path
+                  );
               })
               .map((a) => a.key)}
             // disabled={collapsed}
@@ -200,7 +205,7 @@ const EmployeePageLayout = ({ children }) => {
             onClick={onClick}
             triggerSubMenuAction="hover"
             subMenuCloseDelay={0}
-            // inlineCollapsed={true}
+          // inlineCollapsed={true}
           />
         </Sider>
         <Content

@@ -4,7 +4,7 @@ import { Navigate, useLocation } from "react-router-dom";
 export function OnlyManager({ children }) {
   let location = useLocation();
 
-  if (localStorage.getItem("role") != "manager") {
+  if (localStorage.getItem("employee-role") != "manager") {
     return <Navigate to="/employee-portal/" state={{ from: location }} />;
   }
 

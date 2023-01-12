@@ -48,6 +48,8 @@ import CustomerPendingApplicationsList from "./pages/customerPortal/pendingLoanA
 import WithdrawalList from "./pages/employeePortal/withdrawals/withdrawalList";
 import AddWithdrawal from "./pages/employeePortal/withdrawals/addWithdrawal";
 import { LoanPayment } from "./pages/customerPortal/LoanPayment";
+import LateInstallmentsReport from "./pages/employeePortal/reports/LateInstallamentsReport";
+import TotalTransactionsReport from "./pages/employeePortal/reports/TotalTransactionsReport";
 
 function App() {
   return (
@@ -69,6 +71,7 @@ function App() {
     >
       <BrowserRouter>
         <Routes>
+
           <Route path="/">
             {/* EMPLOYEE PORTAL ROUTES*/}
             <Route
@@ -186,6 +189,9 @@ function App() {
                   <Route path="" element={<FdPlanList />} />
                 </Route>
               </Route>
+
+              <Route path="total-transactions-report" element={<OnlyManager><TotalTransactionsReport /></OnlyManager>} />
+              <Route path="late-installments-report" element={<OnlyManager><LateInstallmentsReport /></OnlyManager>} />
             </Route>
 
             {/* CUSTOMER PORTAL ROUTES */}
@@ -209,13 +215,16 @@ function App() {
             </Route>
 
             {/* PUBLIC ROUTES */}
-            <Route exact path="employee-login" element={<EmployeeLogin />} />
-            <Route path="customer-login" element={<CustomerLogin />} />
-            <Route exact path="/" element={<GeneralPageLayout />}>
-              <Route path="/" element={<Home />} />
-              <Route path="contact" element={<Contact />} />
+            <Route element={<AnimationLayout />}>
+              <Route exact path="employee-login" element={<EmployeeLogin />} />
+              <Route path="customer-login" element={<CustomerLogin />} />
+              <Route exact path="/" element={<GeneralPageLayout />}>
+
+                <Route path="/" element={<Home />} />
+                <Route path="contact" element={<Contact />} />
+              </Route>
+              <Route path="*" element={<p>Invalid Route</p>} />
             </Route>
-            <Route path="*" element={<p>Invalid Route</p>} />
           </Route>
         </Routes>
       </BrowserRouter>
