@@ -8,6 +8,7 @@ import {
   BankOutlined,
   DollarOutlined,
   UnorderedListOutlined,
+  FormOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Typography, Button, Card } from "antd";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
@@ -16,6 +17,7 @@ import { flatternList } from "../../utils/list";
 import {
   isAuthenticatedEmployee,
   employeeLogout,
+  isManager,
 } from "../../api/authentication";
 import { Profile } from "../profile";
 import { Logo } from "../logo";
@@ -55,6 +57,19 @@ const EmployeePageLayout = ({ children }) => {
   }
   const items = [
     getItem("Dashboard", "1", "/", <PieChartOutlined />),
+    isManager() &&
+      getItem("Reports", "reports", "/", <FormOutlined />, [
+        getItem(
+          "Total transactions",
+          "total-transactions",
+          "/reports//total-transactions-report"
+        ),
+        getItem(
+          "Late installments",
+          "late-installments",
+          "/reports//late-installments-report"
+        ),
+      ]),
     getItem("Branches", "2", "/branches", <BankOutlined />),
     // getItem("User", "sub1", "/", <UserOutlined />, [
     //   getItem("Tom", "3", "/'"),
@@ -92,13 +107,11 @@ const EmployeePageLayout = ({ children }) => {
       className="login"
     >
       <Header
-        style={
-          {
-            padding: 0,
-            // width: "100%",
-            // backgroundColor:'red'
-          }
-        }
+        style={{
+          padding: 0,
+          // width: "100%",
+          // backgroundColor:'red'
+        }}
       >
         <div
           style={{
@@ -109,7 +122,7 @@ const EmployeePageLayout = ({ children }) => {
             width: "100vw",
           }}
         >
-          <div style={{ color: "white", flex: 0.30, fontSize: 22 }}>
+          <div style={{ color: "white", flex: 0.3, fontSize: 22 }}>
             <Logo />
           </div>
           <div
@@ -118,7 +131,7 @@ const EmployeePageLayout = ({ children }) => {
           >
             Employee portal
           </div>
-          <div style={{ flex: 0.50 }}></div>
+          <div style={{ flex: 0.5 }}></div>
           <div style={{ flex: 0.05 }}>
             <Profile
               type={"employee"}

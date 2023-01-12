@@ -97,7 +97,7 @@ export const LoanPayment = () => {
       render: (_, record) => (
         <Space size="middle" key={record.app_ID}>
           {!record.is_paid && (
-            <LoanPaymentDialog accounts={accounts} installment={record}/>
+            <LoanPaymentDialog accounts={accounts} installment={record} onSuccess={loadInstallmentList}/>
           )}
         </Space>
       ),

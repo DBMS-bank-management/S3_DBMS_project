@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Avatar, Descriptions, Popover } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { dashSeperatedToHumanReadble } from "../utils/string";
+import { isCustomer, isEmployee, isManager } from "../api/authentication";
 
 export const Profile = ({ type, LogoutButton }) => {
   const [user, setUser] = useState({});
@@ -23,6 +24,8 @@ export const Profile = ({ type, LogoutButton }) => {
   if (err) {
     return <LogoutButton />;
   }
+
+  console.log({ user });
 
   return (
     <Popover
@@ -54,7 +57,27 @@ export const Profile = ({ type, LogoutButton }) => {
       }
       trigger="hover"
     >
-      <Avatar style={{ backgroundColor: "#87d068" }} icon={<UserOutlined />} />
+      <Avatar
+        style={{
+          backgroundColor: 
+            isManager()
+              ? "#f56a00"
+              : isEmployee()
+              ? "#ffbf00"
+              : isCustomer()
+              ? "#00a2ae"
+              : "#f56a00"
+          ,
+        }}
+      >
+        {isManager()
+          ? "M"
+          : isEmployee()
+          ? "E"
+          : isCustomer()
+          ? "C"
+          : "G"}
+      </Avatar>
     </Popover>
   );
 };

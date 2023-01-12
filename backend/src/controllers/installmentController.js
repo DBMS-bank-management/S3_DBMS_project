@@ -123,7 +123,7 @@ exports.getByCustomerId = (req, res) => {
 exports.payUsingAccount = (req, res) => {
   // const customer_ID = req.user.customer.ID; //req.query.name;
 
-  InstallmentModel.payUsingAccount(req.data, (err, data) => {
+  InstallmentModel.payUsingAccount(req.body.data, (err, data) => {
     if (err)
       res.status(500).send({
         message: err.message || "Some error occurred while retrieving loans.",
