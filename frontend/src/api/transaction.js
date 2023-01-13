@@ -74,7 +74,17 @@ export const getTransactionsByID = (id) => {
 
 export const addTransfer = (data) => {
   console.log("add transfer", { data });
-  return axios
+  return employeeAxios
+    .post(`${BASE_URL}/transactions/transfer/add`, data)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Failed to add transfer"));
+};
+
+export const addTransferByCustomer = (data) => {
+  console.log("add transfer", { data });
+  return customerAxios
     .post(`${BASE_URL}/transactions/transfer/add`, data)
     .then((response) => {
       return response.data;

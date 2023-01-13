@@ -50,6 +50,7 @@ import AddWithdrawal from "./pages/employeePortal/withdrawals/addWithdrawal";
 import { LoanPayment } from "./pages/customerPortal/LoanPayment";
 import LateInstallmentsReport from "./pages/employeePortal/reports/LateInstallamentsReport";
 import TotalTransactionsReport from "./pages/employeePortal/reports/TotalTransactionsReport";
+import Transfer from "./pages/customerPortal/Transfer";
 
 function App() {
   return (
@@ -224,6 +225,7 @@ function App() {
                   element={<CustomerPendingApplicationsList />}
                 />
                 <Route path="loan-payment" element={<LoanPayment />} />
+                <Route path="transfer" element={<Transfer />} />
               </Route>
             </Route>
 

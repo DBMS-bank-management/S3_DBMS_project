@@ -79,23 +79,40 @@ const CustomerPageLayout = () => {
         },
       ],
     },
+
     {
-      label: "Pay for loan",
-      key: "loanPayment",
+      label: "Services",
+      key: "submenuservices",
       icon: <AppstoreOutlined />,
-      // disabled: true,
-      onClick: () => {
-        navigate("/customer-portal/loan-payment");
-      },
-    },
-    {
-      label: "Apply for a loan",
-      key: "onlineLoanApplication",
-      icon: <AppstoreOutlined />,
-      // disabled: true,
-      onClick: () => {
-        navigate("/customer-portal/online-loan-application");
-      },
+      children: [
+        {
+          label: "Transfer money",
+          key: "loanPayment",
+          // icon: <AppstoreOutlined />,
+          // disabled: true,
+          onClick: () => {
+            navigate("/customer-portal/transfer");
+          },
+        },
+        {
+          label: "Pay for loan",
+          key: "loanPayment",
+          // icon: <AppstoreOutlined />,
+          // disabled: true,
+          onClick: () => {
+            navigate("/customer-portal/loan-payment");
+          },
+        },
+        {
+          label: "Apply for a loan",
+          key: "onlineLoanApplication",
+          // icon: <AppstoreOutlined />,
+          // disabled: true,
+          onClick: () => {
+            navigate("/customer-portal/online-loan-application");
+          },
+        },
+      ],
     },
   ];
 
