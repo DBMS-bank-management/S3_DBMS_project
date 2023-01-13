@@ -3,7 +3,7 @@ import { employeeAxios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addCustomer(data) {
-  return axios
+  return employeeAxios
     .post(`${BASE_URL}/customers`, {
       ID: data.ID,
       name: data.name,
@@ -54,12 +54,23 @@ export const updateCustomer = (data) => {
 
 export const deleteCustomer = (id) => {
   console.log("update customer", { id });
-  return axios
+  return employeeAxios
     .delete(`${BASE_URL}/customers/${id}`)
     .then((response) => {
       return response.data;
     })
     .catch((err) =>
       Promise.reject("Failed to delete customer with id = " + id + "!")
+    );
+};
+
+export const createOnlineAccount = (data) => {
+  return employeeAxios
+    .post(`${BASE_URL}/customers/linkOnlineAccount`, data)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) =>
+      Promise.reject("Failed to link customer to online acccount")
     );
 };

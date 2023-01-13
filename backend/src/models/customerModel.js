@@ -4,9 +4,9 @@ const sql = require("./database");
 const Customer = function (customer) {
   this.ID = customer.ID;
   this.name = customer.name;
-  this.type=customer.type;
-  this.auth_ID=customer.auth_ID;
-  this.contact_no=customer.contact_no;
+  this.type = customer.type;
+  this.auth_ID = customer.auth_ID;
+  this.contact_no = customer.contact_no;
 };
 
 Customer.create = (newCustomer, result) => {
@@ -41,7 +41,6 @@ Customer.findById = (id, result) => {
   });
 };
 
-
 //remove sql injection here
 Customer.getAll = (name, result) => {
   let query = "SELECT * FROM customer";
@@ -65,7 +64,7 @@ Customer.getAll = (name, result) => {
 Customer.updateById = (id, customer, result) => {
   sql.query(
     "UPDATE customer SET name = ?, type = ?, auth_ID, contact_no = ? = ? WHERE ID = ?",
-    [customer.name, customer.type,customer.auth_ID,customer.contact_no, id],
+    [customer.name, customer.type, customer.auth_ID, customer.contact_no, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -108,7 +107,7 @@ Customer.removeAll = (result) => {
   sql.query("DELETE FROM customer", (err, res) => {
     if (err) {
       console.log("error: ", err);
-      result(null, err);
+      result(err, null);
       return;
     }
 
@@ -117,6 +116,22 @@ Customer.removeAll = (result) => {
   });
 };
 
+Customer.linkAuthAccount = (ID, auth_ID, result) => {
+  console.log({auth_ID,ID})
+  sql.query(
+    "UPDATE customer SET auth_ID = ? WHERE ID = ?",
+    [auth_ID, ID],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
 
+      console.log(`edited ${res.affectedRows} customers`);
+      result(null, res);
+    }
+  );
+};
 
 module.exports = Customer;
