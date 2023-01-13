@@ -4,6 +4,9 @@ import { Button, Checkbox, Form, Input, Card, message } from "antd";
 import logo from "../../logo.svg";
 import { navigateToHome } from "../../utils/navigation";
 import bgImage from "../../images/employeePortal/EmployeeLogin.jpg";
+import { EmployeePageHeading } from "../../components/layout/employeePageHeading.jsx";
+import { Logo } from "../../components/logo.jsx";
+import LogoImg from "../../images/banklogo.png"
 
 const clamp = (min, max, val) => Math.max(min, Math.min(val, max));
 
@@ -49,13 +52,20 @@ const EmployeeLogin = () => {
         width: "100%",
         height: "100vh",
         backgroundColor: "#ececec",
+        flexDirection: 'column',
+        justifyContent: 'space-evenly'
         // background-color: #21D4FD;
         // backgroundImage: "linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)",
       }}
     >
+      <div style={{ fontSize: 50 }}>
+        <Logo />
+      </div>
       <Card className="glass padding rounded">
+        {/* <img src={LogoImg} className="App-logo" alt="logo" /> */}
+        <EmployeePageHeading text="Employee portal" />
         {/* <div className="glass"> */}
-        <img src={logo} className="App-logo" alt="logo" />
+
         <Form
           name="basic"
           labelCol={{

@@ -152,3 +152,40 @@
   /* text-shadow:  5px #ffee10; */
 }
 
+section {
+  /* color: #fff; */
+  text-align: center;
+}
+
+.div {
+  height: 100%;
+}
+
+.article {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 20px;
+}
+
+/* Pattern styles */
+.container {
+  display: table;
+  width: 100%;
+}
+
+.left-half {
+  /* background-color: transparent; */
+  position: absolute;
+  left: 0px;
+  width: 50%;
+}
+
+.right-half {
+  /* background-color: transparent; */
+  position: absolute;
+  right: 0px;
+  width: 50%;
+}

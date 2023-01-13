@@ -4,6 +4,8 @@ import { Button, Checkbox, Form, Input, Card, message } from "antd";
 import logo from "../../logo.svg";
 import { navigateToHome } from "../../utils/navigation";
 import bgImage from "../../images/employeePortal/EmployeeLogin.jpg";
+import { CustomerPageHeading } from "../../components/layout/CustomerPageHeading.jsx";
+import { Logo } from "../../components/logo.jsx";
 
 const clamp = (min, max, val) => Math.max(min, Math.min(val, max));
 
@@ -39,6 +41,114 @@ const CustomerLogin = () => {
     inputRefs.current[nextIndex].focus();
   };
 
+
+  if (true) {
+    return (
+      <div className="login">
+        <div className="div left-half">
+          <div className="article">
+
+          </div>
+        </div>
+        <div className="div right-half glass">
+          <div className="article padding">
+            <div >
+              {/* <div className="transaparent padding" style={{ fontSize: 50, textAlign: 'center' }}>
+                <Logo />
+              </div> */}
+
+            </div>
+            <div className="transparent" style={{width: '100%' }}>
+              <CustomerPageHeading text={"Customer portal"} />
+              <Form
+                name="basic"
+                labelCol={{
+                  span: 8,
+                }}
+                wrapperCol={{
+                  span: 8,
+                }}
+                initialValues={{
+                  remember: true,
+                }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+              >
+                <Form.Item
+                  label="Username"
+                  name="username"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Username is required!",
+                    },
+                  ]}
+                >
+                  <Input
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                    }}
+                    onKeyPress={() => handleKeyPress(0)}
+                    inputRef={(ref) => (inputRefs.current[0] = ref)}
+                  />
+                </Form.Item>
+
+                <Form.Item
+                  label="Password"
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Password is required!",
+                    },
+                  ]}
+                >
+                  <Input.Password
+                    onChange={(e) => setPassword(e.target.value)}
+                    inputRef={(ref) => (inputRefs.current[1] = ref)}
+                  />
+                </Form.Item>
+
+                <div
+                  // wrapperCol={{
+                  //   offset: 8,
+                  //   span: 16,
+
+                  // }}
+                  style={{
+                    // width: "100%",
+                    justifyContent: "space-around",
+                    flexDirection: "row",
+                    display: "flex",
+                  }}
+                >
+                  <Button
+                    type="primary"
+                    // disabled={!username || !password}
+                    onClick={navigateToHome}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type={"primary"}
+                    loading={processing}
+                    htmlType="submit"
+                    disabled={!username || !password}
+                    onClick={() => setProcessing(true)}
+                  >
+                    Login
+                  </Button>
+                </div>
+              </Form>
+              {/* </div> */}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div
       className="login"
@@ -49,10 +159,16 @@ const CustomerLogin = () => {
         width: "100%",
         height: "100vh",
         backgroundColor: "#ececec",
+        flexDirection: 'column'
         // background-color: #21D4FD;
         // backgroundImage: "linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)",
       }}
     >
+      <div style={{}}>
+
+      </div>
+      <Logo />
+      <CustomerPageHeading text={"Customer portal"} />
       <Card className="glass padding rounded">
         {/* <div className="glass"> */}
         <img src={logo} className="App-logo" alt="logo" />

@@ -31,9 +31,10 @@ const InstallmentList = () => {
 
   const onLoanPay = (id) => {
     payInstallmentByCash(id)
-      .then(() =>{ 
+      .then(() => {
         loadInstallmentList()
-        message.success("Installment payment successful")})
+        message.success("Installment payment successful")
+      })
       .catch((err) => {
         console.error(err);
         message.error("Couldn't complete installment payment!");
@@ -97,7 +98,8 @@ const InstallmentList = () => {
       key: "extra_action",
       render: (_, record) => (
         <Space size="middle" key={record.inst_id}>
-          <Button onClick={() => onLoanPay(record.inst_ID)}>pay</Button>
+          {!record.is_paid &&
+            <Button onClick={() => onLoanPay(record.inst_ID)}>pay</Button>}
         </Space>
       ),
     },
@@ -105,7 +107,7 @@ const InstallmentList = () => {
 
   return (
     <Card style={{ width: "100%" }}>
-     <EmployeePageHeading text={"Installments"} />
+      <EmployeePageHeading text={"Installments"} />
       {/* <Button href="installments/add">Add installment</Button> */}
       <Table dataSource={installments} columns={columns} bordered />
     </Card>

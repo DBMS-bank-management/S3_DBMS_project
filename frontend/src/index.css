@@ -6,6 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
+  background-image: url("./images/employeePortal/bg1.jpeg");
+  background-size: cover;
 }
 
 code {
