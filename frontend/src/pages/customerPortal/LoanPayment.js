@@ -5,6 +5,7 @@ import { getInstallmentsByCustomerId } from "../../api/installment";
 import ConfirmationDialog from "../../components/confirmationDialog";
 import { CustomerPageHeading } from "../../components/layout/CustomerPageHeading";
 import LoanPaymentDialog from "../../components/LoanPaymentDialog";
+import SearchableTable from "../../components/SearchableTable";
 import { formatDate } from "../../utils";
 
 export const LoanPayment = () => {
@@ -112,7 +113,7 @@ export const LoanPayment = () => {
     <>
       <CustomerPageHeading text={"Loan payments"} />
       <Card style={{ width: "100%" }}>
-        <Table
+        <SearchableTable
           loading={loading}
           dataSource={installments}
           columns={columns}

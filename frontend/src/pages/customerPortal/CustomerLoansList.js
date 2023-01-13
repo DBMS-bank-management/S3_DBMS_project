@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Badge, Descriptions, Table } from "antd";
 import { getLoansByID } from "../../api/Loan";
 import { CustomerPageHeading } from "../../components/layout/CustomerPageHeading";
+import SearchableTable from "../../components/SearchableTable";
 
 const CustomerLoansList = () => {
   const [loans, setLoans] = useState([]);
@@ -52,7 +53,7 @@ const CustomerLoansList = () => {
     <>
       <CustomerPageHeading text={"Loans"} />
       <div style={{ width: "100%" }}>
-        <Table
+        <SearchableTable
           style={{ width: "100%" }}
           columns={columns}
           dataSource={loans}

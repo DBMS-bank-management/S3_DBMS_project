@@ -12,8 +12,8 @@ const LoanPaymentDialog = ({ installment, accounts, onSuccess }) => {
     })
       .then(() => {
         setModalOpen(false);
-        message.success("Successfully paid loan instalment");
-        onSuccess()
+        // message.success("Successfully paid loan instalment");
+        onSuccess();
       })
       .catch((err) => {
         setModalOpen(false);
