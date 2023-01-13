@@ -45,7 +45,7 @@ const LoanPlanList = () => {
     <div className="transparent">
       <EmployeePageHeading text={"Loan Plans"} />
       <Card style={{ width: "100%" }}>
-        <Button href="loanplan/add">Add LoanPlan</Button>
+        {/* <Button href="loanplan/add">Add LoanPlan</Button> */}
         <Table
           loading={loading}
           dataSource={loanplans}

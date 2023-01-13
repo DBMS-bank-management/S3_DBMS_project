@@ -12,6 +12,7 @@ import {
   Radio,
   Descriptions,
   Divider,
+  InputNumber,
 } from "antd";
 import { getCustomers } from "../../../api/customer";
 import { capitalize } from "../../../utils/string";
@@ -27,6 +28,7 @@ const AddAccount = () => {
   const [accountPlans, setAccountPlans] = useState([]);
   const [formValues, setFormValues] = useState({ plan: null, deposit: null });
   const [selectedCustomer, setSelectedCustomer] = useState();
+  const [selectedPlan, setSelectedPlan] = useState()
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -83,6 +85,10 @@ const AddAccount = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  const min = selectedPlan && accountPlans.filter(pl => pl.plan_ID == selectedPlan)[0]?.min_amount || 0
+
+  console.log({selectedPlan, min})
 
   const steps = [
     {
@@ -162,7 +168,9 @@ const AddAccount = () => {
                 },
               ]}
             >
-              <Radio.Group>
+              <Radio.Group
+                onChange={(val) => setSelectedPlan(val.target.value)}
+              >
                 {accountPlans.map((plan) => (
                   <Radio.Button
                     value={plan.plan_ID}
@@ -176,12 +184,16 @@ const AddAccount = () => {
               name="deposit"
               rules={[
                 {
+                  type: 'number',
+                },
+                {
                   required: true,
                   message: "Please input the initial deposit!",
                 },
+                // { min: min }
               ]}
             >
-              <Input type="numeric" />
+              <InputNumber min={min}/>
             </Form.Item>
           </Form>
         </div>

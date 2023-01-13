@@ -57,7 +57,7 @@ const CustomersList = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          {isManager() && (
+          {true && (
             <>
               {!record.auth_ID ? (
                 <CustomerLoginCreateDialog
