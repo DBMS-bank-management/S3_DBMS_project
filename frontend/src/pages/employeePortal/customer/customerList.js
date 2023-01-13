@@ -1,4 +1,4 @@
-import { Button, Card, Space, Table } from "antd";
+import { Button, Card, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { isManager } from "../../../api/authentication";
 import { deleteCustomer, getCustomers } from "../../../api/customer";
@@ -59,7 +59,20 @@ const CustomersList = () => {
         <Space size="middle">
           {isManager() && (
             <>
-              <CustomerLoginCreateDialog customer={record} onSuccess={loadCustomersList}/>
+              {!record.auth_ID ? (
+                <CustomerLoginCreateDialog
+                  customer={record}
+                  onSuccess={loadCustomersList}
+                />
+              ) : (
+                <Button
+                  onClick={() => {
+                    message.warning("this feature is not implemented yet!");
+                  }}
+                >
+                  Update Password
+                </Button>
+              )}
               <Button href={`customers/${record.auth_ID}`} type="link">
                 Edit
               </Button>
