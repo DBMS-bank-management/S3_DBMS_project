@@ -142,16 +142,21 @@ Installment.getByCustomerID = (customer_ID, result) => {
 };
 
 Installment.payUsingAccount = (data, result) => {
-  sql.query("", (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
+  console.log({ data });
+  sql.query(
+    "call pay_installment_from_id(?, ? );",
+    [data.installment, data.account],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
 
-    console.log("Installments by customer: ", res);
-    result(null, res);
-  });
+      console.log("Installments by customer: ", res);
+      result(null, res);
+    }
+  );
 };
 
 Installment.payByCash = (data, result) => {

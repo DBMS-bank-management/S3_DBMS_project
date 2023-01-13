@@ -2,18 +2,26 @@ import React, { useState } from "react";
 import { Button, Form, message, Modal, Select } from "antd";
 import { payInstallmentByAccount } from "../api/installment";
 
-const LoanPaymentDialog = ({ installment, accounts }) => {
+const LoanPaymentDialog = ({ installment, accounts, onSuccess }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const onPay = (values) => {
-    payInstallmentByAccount({account: values.account, installment: installment.inst_ID})
+    payInstallmentByAccount({
+      account: values.account,
+      installment: installment.inst_ID,
+    })
       .then(() => {
-        message.success("Successfully paid loan instalment");
-      })
-      .catch((err) => message.error("Error paying the loan installment"))
-      .finally(() => {
         setModalOpen(false);
+        message.success("Successfully paid loan instalment");
+        onSuccess()
+      })
+      .catch((err) => {
+        setModalOpen(false);
+        message.error("Error paying the loan installment");
       });
+    // .finally(() => {
+    //   setModalOpen(false);
+    // });
   };
 
   return (
@@ -56,7 +64,7 @@ const LoanPaymentDialog = ({ installment, accounts }) => {
                 (input, option) => option.label === input
                 // (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
               }
-            //   onChange={handleChange}
+              //   onChange={handleChange}
               options={accounts}
             />
           </Form.Item>

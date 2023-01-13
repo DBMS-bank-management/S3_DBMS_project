@@ -8,7 +8,7 @@ import {
   BankOutlined,
   DollarOutlined,
   UnorderedListOutlined,
-  FormOutlined
+  FormOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Typography, Button, Card } from "antd";
 import { BreadcrumbsFromPath } from "../breadCrumbsFromPath";
@@ -22,15 +22,6 @@ import {
 import { Profile } from "../profile";
 import { Logo } from "../logo";
 const { Header, Content, Footer, Sider } = Layout;
-function getItem(label, key, path, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    path,
-  };
-}
 
 const EmployeePageLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -57,6 +48,19 @@ const EmployeePageLayout = ({ children }) => {
   }
   const items = [
     getItem("Dashboard", "1", "/", <PieChartOutlined />),
+    isManager() &&
+      getItem("Reports", "reports", "/", <FormOutlined />, [
+        getItem(
+          "Total transactions",
+          "total-transactions",
+          "/reports//total-transactions-report"
+        ),
+        getItem(
+          "Late installments",
+          "late-installments",
+          "/reports//late-installments-report"
+        ),
+      ]),
     getItem("Branches", "2", "/branches", <BankOutlined />),
     isManager() && getItem("Reports", "sub2", "/", <FormOutlined />, [
       getItem("Total transactions report", "total-transactions-report", "/total-transactions-report"),
@@ -99,13 +103,11 @@ const EmployeePageLayout = ({ children }) => {
       className="login"
     >
       <Header
-        style={
-          {
-            padding: 0,
-            // width: "100%",
-            // backgroundColor:'red'
-          }
-        }
+        style={{
+          padding: 0,
+          // width: "100%",
+          // backgroundColor:'red'
+        }}
       >
         <div
           style={{
@@ -116,7 +118,7 @@ const EmployeePageLayout = ({ children }) => {
             width: "100vw",
           }}
         >
-          <div style={{ color: "white", flex: 0.30, fontSize: 22 }}>
+          <div style={{ color: "white", flex: 0.3, fontSize: 22 }}>
             <Logo />
           </div>
           <div
@@ -125,7 +127,7 @@ const EmployeePageLayout = ({ children }) => {
           >
             Employee portal
           </div>
-          <div style={{ flex: 0.50 }}></div>
+          <div style={{ flex: 0.5 }}></div>
           <div style={{ flex: 0.05 }}>
             <Profile
               type={"employee"}

@@ -234,6 +234,33 @@ export const Dashboard = () => {
       {/* </Header> */}
       <Divider />
       <Content className="transparent">
+        {isManager() && (
+          <Row gutter={[16, 16]}>
+            <Col span={12}>
+              <Card
+                className="glass center-content"
+                hoverable
+                onClick={() => {
+                  navigate("/employee-portal/reports/total-transactions-report");
+                }}
+              >
+                Total transaction report
+              </Card>
+            </Col>
+            <Col span={12}>
+              <Card
+                className="glass center-content"
+                hoverable
+                onClick={() => {
+                  navigate("/employee-portal/reports/late-installments-report");
+                }}
+              >
+                Late installments report
+              </Card>
+            </Col>
+          </Row>
+        )}
+
         {isEmployee() && (
           <Row gutter={[16, 16]}>
             <Col span={12}>

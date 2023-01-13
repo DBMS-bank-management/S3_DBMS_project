@@ -15,9 +15,7 @@ export const Logo = () => {
       <div style={{ color: "white", paddingRight: 10, paddingLeft: 10 }}>
         S E N A C{" "}
       </div>
-      <div style={{ color: "red" }}>
-        B A N K
-      </div>
+      <div style={{ color: "red" }}>B A N K</div>
     </div>
   );
 };

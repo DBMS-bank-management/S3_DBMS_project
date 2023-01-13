@@ -5,6 +5,7 @@ import { getInstallmentsByCustomerId } from "../../api/installment";
 import ConfirmationDialog from "../../components/confirmationDialog";
 import { CustomerPageHeading } from "../../components/layout/CustomerPageHeading";
 import LoanPaymentDialog from "../../components/LoanPaymentDialog";
+import { formatDate } from "../../utils";
 
 export const LoanPayment = () => {
   const [installments, setInstallments] = useState();
@@ -48,6 +49,7 @@ export const LoanPayment = () => {
       title: "loan ID",
       dataIndex: "loan_ID",
       key: "loan_ID",
+      sorter: (a, b) => a.loan_ID - b.loan_ID,
     },
     {
       title: "Amount",
@@ -58,6 +60,8 @@ export const LoanPayment = () => {
       title: "Due date",
       dataIndex: "due_date",
       key: "due_date",
+      render: (date) => <div>{formatDate(date)}</div>,
+
     },
     {
       title: "Status",
@@ -97,7 +101,7 @@ export const LoanPayment = () => {
       render: (_, record) => (
         <Space size="middle" key={record.app_ID}>
           {!record.is_paid && (
-            <LoanPaymentDialog accounts={accounts} installment={record}/>
+            <LoanPaymentDialog accounts={accounts} installment={record} onSuccess={loadInstallmentList}/>
           )}
         </Space>
       ),

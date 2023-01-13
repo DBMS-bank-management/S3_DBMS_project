@@ -1,4 +1,5 @@
 import axios from "axios";
+import { employeeAxios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addCustomer(data) {
@@ -17,7 +18,7 @@ export function addCustomer(data) {
 }
 
 export const getCustomers = () => {
-  return axios
+  return employeeAxios
     .get(`${BASE_URL}/customers`)
     .then((response) => {
       return response.data;
