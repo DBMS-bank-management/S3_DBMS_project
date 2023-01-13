@@ -48,19 +48,6 @@ const EmployeePageLayout = ({ children }) => {
   }
   const items = [
     getItem("Dashboard", "1", "/", <PieChartOutlined />),
-    isManager() &&
-      getItem("Reports", "reports", "/", <FormOutlined />, [
-        getItem(
-          "Total transactions",
-          "total-transactions",
-          "/reports//total-transactions-report"
-        ),
-        getItem(
-          "Late installments",
-          "late-installments",
-          "/reports//late-installments-report"
-        ),
-      ]),
     getItem("Branches", "2", "/branches", <BankOutlined />),
     isManager() && getItem("Reports", "sub2", "/", <FormOutlined />, [
       getItem("Total transactions report", "total-transactions-report", "/total-transactions-report"),

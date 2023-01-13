@@ -241,7 +241,7 @@ export const Dashboard = () => {
                 className="glass center-content"
                 hoverable
                 onClick={() => {
-                  navigate("/employee-portal/reports/total-transactions-report");
+                  navigate("/employee-portal/total-transactions-report");
                 }}
               >
                 Total transaction report
@@ -252,7 +252,7 @@ export const Dashboard = () => {
                 className="glass center-content"
                 hoverable
                 onClick={() => {
-                  navigate("/employee-portal/reports/late-installments-report");
+                  navigate("/employee-portal/late-installments-report");
                 }}
               >
                 Late installments report
