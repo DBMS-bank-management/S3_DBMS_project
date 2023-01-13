@@ -55,7 +55,7 @@ const LoansList = () => {
 
   return(
     <div style={{width: '100%'}}>
-      <Table style={{width:"100%"}} columns={columns} dataSource={loans} pagination={false} />
+      <Table scroll={{y: 200}} style={{width:"100%"}} columns={columns} dataSource={loans} pagination={false} />
         {/* {accounts.map(account => <div style={{display: 'flex', flexDirection: 'row'}}><div>{account.balance}</div><div>{account.account_ID}</div></div> )} */}
     </div>
   )

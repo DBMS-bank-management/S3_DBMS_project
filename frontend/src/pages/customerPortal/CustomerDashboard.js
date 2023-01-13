@@ -62,7 +62,7 @@ export const CustomerDashboard = () => {
             </Col>
             {/* Third square */}
             <Col span={12}>
-              <Card title ={"Fixed Deposits"}   className="glass  " hoverable>
+              <Card title ={"Fixed Deposits"} className="glass  " hoverable>
               <FixedDepositsList />
               </Card>
             </Col>

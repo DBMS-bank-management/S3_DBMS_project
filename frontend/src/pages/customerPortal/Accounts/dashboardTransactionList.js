@@ -35,6 +35,11 @@ const TransactionsList = () => {
     //     key: "branch_ID",
     //   },
     {
+      title: "Account",
+      dataIndex: "acc_ID",
+      key: "account",
+    },
+    {
       title: "Amount",
       dataIndex: "amount",
       key: "amount",
@@ -48,7 +53,7 @@ const TransactionsList = () => {
 
   return(
     <div style={{width: '100%'}}>
-      <Table style={{width:"100%"}} columns={columns} dataSource={transactions} pagination={false} />
+      <Table scroll={{y: 200}} style={{width:"100%"}} columns={columns} dataSource={transactions} pagination={false} />
         {/* {accounts.map(account => <div style={{display: 'flex', flexDirection: 'row'}}><div>{account.balance}</div><div>{account.account_ID}</div></div> )} */}
     </div>
   )

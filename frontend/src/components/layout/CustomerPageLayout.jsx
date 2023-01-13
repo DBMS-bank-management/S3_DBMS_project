@@ -96,7 +96,7 @@ const CustomerPageLayout = () => {
         },
         {
           label: "Pay for loan",
-          key: "loanPayment",
+          key: "transfers",
           // icon: <AppstoreOutlined />,
           // disabled: true,
           onClick: () => {

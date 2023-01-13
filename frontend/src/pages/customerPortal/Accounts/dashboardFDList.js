@@ -46,6 +46,7 @@ const FixedDepositsList = () => {
   return (
     <div style={{ width: "100%" }}>
       <Table
+        scroll={{ y: 200 }}
         style={{ width: "100%" }}
         columns={columns}
         dataSource={fixedDeposits}
