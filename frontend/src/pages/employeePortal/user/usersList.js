@@ -34,43 +34,43 @@ const UsersList = () => {
       dataIndex: "auth_ID",
       key: "auth_ID",
     },
-    {
-      title: "Password",
-      dataIndex: "password",
-      key: "password",
-    },
+    // {
+    //   title: "Password",
+    //   dataIndex: "password",
+    //   key: "password",
+    // },
     {
       title: "Role",
       dataIndex: "role",
       key: "role",
     },
-    {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle" key={record.auth_ID}>
-          <Button href={`users/${record.auth_ID}`} type="link">
-            Edit
-          </Button>
-          {isManager() && (
-            <ConfirmationDialog
-              key={record.auth_ID}
-              buttonProps={{ type: "link", danger: true }}
-              onOk={() => {
-                onDelete(record.auth_ID);
-              }}
-            />
-          )}
-        </Space>
-      ),
-    },
+    // {
+    //   title: "Action",
+    //   key: "action",
+    //   render: (_, record) => (
+    //     <Space size="middle" key={record.auth_ID}>
+    //       <Button href={`users/${record.auth_ID}`} type="link">
+    //         Edit
+    //       </Button>
+    //       {isManager() && (
+    //         <ConfirmationDialog
+    //           key={record.auth_ID}
+    //           buttonProps={{ type: "link", danger: true }}
+    //           onOk={() => {
+    //             onDelete(record.auth_ID);
+    //           }}
+    //         />
+    //       )}
+    //     </Space>
+    //   ),
+    // },
   ];
 
   return (
     <div className="transparent">
       <EmployeePageHeading text={"Users"} />
       <Card style={{ width: "100%" }}>
-        {isManager() || (true && <Button href="users/add">Add user</Button>)}
+        {/* {isManager() && <Button href="users/add">Add user</Button>} */}
         <Table
           loading={loading}
           dataSource={users}

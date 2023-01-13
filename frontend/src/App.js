@@ -71,7 +71,6 @@ function App() {
     >
       <BrowserRouter>
         <Routes>
-
           <Route path="/">
             {/* EMPLOYEE PORTAL ROUTES*/}
             <Route
@@ -164,15 +163,15 @@ function App() {
 
                 <Route path="employees/">
                   <Route path="" element={<EmployeeList />} />
-                  <Route
+                  <Route path="add" element={<AddEmployee />} />
+                  {/* <Route
                     path=":id"
                     element={
                       <OnlyManager>
                         <EditEmployee />
                       </OnlyManager>
                     }
-                  />
-                  <Route path="add" element={<AddEmployee />} />
+                  /> */}
                 </Route>
 
                 <Route path="activity-logs/">
@@ -190,8 +189,22 @@ function App() {
                 </Route>
               </Route>
 
-              <Route path="total-transactions-report" element={<OnlyManager><TotalTransactionsReport /></OnlyManager>} />
-              <Route path="late-installments-report" element={<OnlyManager><LateInstallmentsReport /></OnlyManager>} />
+              <Route
+                path="total-transactions-report"
+                element={
+                  <OnlyManager>
+                    <TotalTransactionsReport />
+                  </OnlyManager>
+                }
+              />
+              <Route
+                path="late-installments-report"
+                element={
+                  <OnlyManager>
+                    <LateInstallmentsReport />
+                  </OnlyManager>
+                }
+              />
             </Route>
 
             {/* CUSTOMER PORTAL ROUTES */}
@@ -219,7 +232,6 @@ function App() {
               <Route exact path="employee-login" element={<EmployeeLogin />} />
               <Route path="customer-login" element={<CustomerLogin />} />
               <Route exact path="/" element={<GeneralPageLayout />}>
-
                 <Route path="/" element={<Home />} />
                 <Route path="contact" element={<Contact />} />
               </Route>

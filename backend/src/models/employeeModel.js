@@ -2,6 +2,7 @@ const sql = require("./database");
 
 // constructor
 const Employee = function (model) {
+  this.emp_ID= model.emp_ID,
   this.emp_name = model.emp_name;
   this.branch_ID = model.branch_ID;
   this.Is_manager = model.Is_manager;
@@ -9,15 +10,15 @@ const Employee = function (model) {
 };
 
 Employee.create = (newObject, result) => {
-  sql.query("INSERT INTO employee SET ?", newUser, (err, res) => {
+  sql.query("INSERT INTO employee SET ?", newObject, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("created model: ", { id: res.insertId, ...newUser });
-    result(null, { id: res.insertId, ...newUser });
+    console.log("created model: ", { id: res.insertId, ...newObject });
+    result(null, { id: res.insertId, ...newObject });
   });
 };
 

@@ -1,4 +1,6 @@
 const EmployeeModel = require("../models/employeeModel.js");
+const UserModel = require("../models/userModel");
+const { generatePasswordHash } = require("../utils/hash.js");
 
 // Create and Save a new EmployeeModel
 exports.create = (req, res) => {
@@ -9,23 +11,42 @@ exports.create = (req, res) => {
     });
   }
 
-  // Create a EmployeeModel
-  const employee = new EmployeeModel({
-    emp_name: req.body.emp_name,
-    branch_ID: req.body.branch_ID,
-    Is_manager: req.body.Is_manager,
-    auth_ID: req.body.auth_ID,
+  const user = new UserModel({
+    password: generatePasswordHash(req.body.password),
+    role: req.body.Is_Manager ? "manager" : 'employee',
   });
 
-  // Save EmployeeModel in the database
-  EmployeeModel.create(employee, (err, data) => {
+  UserModel.create(user, (err, data) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the EmployeeModel.",
+          err.message || "Some error occurred while creating the UserModel.",
       });
-    else res.send(data);
+    else {
+      const auth_ID = data.id;
+
+      const employee = new EmployeeModel({
+        emp_ID: req.body.emp_ID,
+        emp_name: req.body.emp_name,
+        branch_ID: req.body.branch_ID,
+        Is_manager: req.body.Is_Manager,
+        auth_ID: auth_ID,
+      });
+
+      EmployeeModel.create(employee, (err, data) => {
+        if (err)
+          res.status(500).send({
+            message:
+              err.message ||
+              "Some error occurred while creating the EmployeeModel.",
+          });
+        else res.send(data);
+      });
+
+    }
   });
+
+  // Save EmployeeModel in the database
 };
 
 // Retrieve all Employees from the database (with condition).
@@ -35,7 +56,8 @@ exports.findAll = (req, res) => {
   EmployeeModel.getAll(title, (err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving Employees.",
+        message:
+          err.message || "Some error occurred while retrieving Employees.",
       });
     else res.send(data);
   });
@@ -68,19 +90,23 @@ exports.update = (req, res) => {
 
   console.log(req.body);
 
-  EmployeeModel.updateById(req.params.id, new EmployeeModel(req.body), (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found Employee with auth_ID ${req.params.id}.`,
-        });
-      } else {
-        res.status(500).send({
-          message: "Error updating Employee with id " + req.params.id,
-        });
-      }
-    } else res.send(data);
-  });
+  EmployeeModel.updateById(
+    req.params.id,
+    new EmployeeModel(req.body),
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found Employee with auth_ID ${req.params.id}.`,
+          });
+        } else {
+          res.status(500).send({
+            message: "Error updating Employee with id " + req.params.id,
+          });
+        }
+      } else res.send(data);
+    }
+  );
 };
 
 exports.delete = (req, res) => {

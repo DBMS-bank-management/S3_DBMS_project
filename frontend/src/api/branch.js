@@ -1,4 +1,5 @@
 import axios from "axios";
+import { employeeAxios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addBranch(data) {
@@ -15,7 +16,7 @@ export function addBranch(data) {
 }
 
 export const getBranches = () => {
-  return axios
+  return employeeAxios
     .get(`${BASE_URL}/branches`)
     .then((response) => {
       return response.data;

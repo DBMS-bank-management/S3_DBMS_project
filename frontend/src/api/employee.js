@@ -3,13 +3,8 @@ import { employeeAxios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addEmployee(data) {
-  return axios
-    .post(`${BASE_URL}/employees`, {
-      emp_name: data.emp_name,
-      branch_ID: data.branch_ID,
-      Is_manager: data.Is_manager,
-      auth_ID: data.auth_ID
-    })
+  return employeeAxios
+    .post(`${BASE_URL}/employees`, data)
     .then((response) => {
       return response.data;
     })
@@ -31,7 +26,9 @@ export const getEmployee = (id) => {
     .then((response) => {
       return response.data;
     })
-    .catch((err) => Promise.reject("Failed to get employee with id =" + id + "!"));
+    .catch((err) =>
+      Promise.reject("Failed to get employee with id =" + id + "!")
+    );
 };
 
 export const updateEmployee = (data) => {
@@ -42,7 +39,9 @@ export const updateEmployee = (data) => {
       return response.data;
     })
     .catch((err) =>
-      Promise.reject("Failed to update employee with id = " + data.auth_ID + "!")
+      Promise.reject(
+        "Failed to update employee with id = " + data.auth_ID + "!"
+      )
     );
   console.log({ data });
 };

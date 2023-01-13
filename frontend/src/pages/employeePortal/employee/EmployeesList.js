@@ -1,5 +1,6 @@
 import { Button, Card, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
+import { isManager } from "../../../api/authentication";
 import { deleteEmployee, getEmployees } from "../../../api/employee";
 import ConfirmationDialog from "../../../components/confirmationDialog";
 import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
@@ -16,7 +17,7 @@ const EmployeeList = () => {
   };
 
   function loadEmployeeList() {
-     getEmployees()
+    getEmployees()
       .then((data) => {
         setEmployee(data);
       })
@@ -73,7 +74,7 @@ const EmployeeList = () => {
     <div className="transparent">
       <EmployeePageHeading text={"Employees"} />
       <Card style={{ width: "100%" }}>
-        <Button href="employees/add-employee">Add Employee</Button>
+        {isManager() && <Button href="employees/add">Add Employee</Button>}
         <Table dataSource={Employee} columns={columns} bordered />
       </Card>
     </div>
