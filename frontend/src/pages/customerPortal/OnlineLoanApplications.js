@@ -139,7 +139,7 @@ export const OnlineLoanApplication = () => {
 
         <Form.Item
           label="Amount (Please select a fixed deposit first)"
-          name="Amount"
+          name="amount"
           rules={[
             { required: true, message: "Please input amount" },
             // {

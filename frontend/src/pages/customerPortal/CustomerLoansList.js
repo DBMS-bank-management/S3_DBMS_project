@@ -23,6 +23,7 @@ const CustomerLoansList = () => {
       title: "Id",
       dataIndex: "loan_ID",
       key: "loan_ID",
+      sorter: (a, b) => a.loan_ID - b.loan_ID,
     },
     {
       title: "Account ID",
@@ -38,6 +39,7 @@ const CustomerLoansList = () => {
       title: "Plan ID",
       dataIndex: "plan_ID",
       key: "plan_ID",
+      sorter: (a, b) => a.plan_ID - b.plan_ID,
     },
     // {
     //     title: "Description",

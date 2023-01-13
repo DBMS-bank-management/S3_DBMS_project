@@ -22,15 +22,6 @@ import {
 import { Profile } from "../profile";
 import { Logo } from "../logo";
 const { Header, Content, Footer, Sider } = Layout;
-function getItem(label, key, path, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    path,
-  };
-}
 
 const EmployeePageLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(true);

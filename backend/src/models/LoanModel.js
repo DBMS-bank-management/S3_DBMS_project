@@ -116,7 +116,7 @@ Loan.removeAll = (result) => {
 
 Loan.findLoansByUserId = (id, result) => {
   sql.query(
-    "select * from installment where loan_ID in (select loan_ID from loan where acc_ID in (select account_ID from account where customer_ID=?)) ORDER BY due_date;",
+    "select * from loan where acc_ID in (select account_ID from account where customer_ID=?) ORDER by loan_ID DESC;",
     id,
     (err, res) => {
       if (err) {
