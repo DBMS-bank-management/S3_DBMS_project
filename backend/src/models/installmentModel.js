@@ -136,7 +136,7 @@ Installment.getByCustomerID = (customer_ID, result) => {
       return;
     }
 
-    console.log("Installments by customer: ", res);
+    // console.log("Installments by customer: ", res);
     result(null, res);
   });
 };
