@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { deleteLoan, getLoans } from "../../../api/Loan";
 import ConfirmationDialog from "../../../components/confirmationDialog";
 import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
+import SearchableTable from "../../../components/SearchableTable";
 
 const LoanList = () => {
   const [loans, setLoans] = useState();
@@ -40,27 +41,27 @@ const LoanList = () => {
       key: "amount",
     },
     {
-        title: "Plan ID",
-        dataIndex: "plan_ID",
-        key: "plan_ID",
-      },
-    {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <Button href={`loans/${record.account_id}`} type="link">
-            Edit
-          </Button>
-          <ConfirmationDialog
-            buttonProps={{ type: "link", danger: true }}
-            onOk={() => {
-              onDelete(record.loan_ID);
-            }}
-          />
-        </Space>
-      ),
+      title: "Plan ID",
+      dataIndex: "plan_ID",
+      key: "plan_ID",
     },
+    // {
+    //   title: "Action",
+    //   key: "action",
+    //   render: (_, record) => (
+    //     <Space size="middle">
+    //       <Button href={`loans/${record.account_id}`} type="link">
+    //         Edit
+    //       </Button>
+    //       <ConfirmationDialog
+    //         buttonProps={{ type: "link", danger: true }}
+    //         onOk={() => {
+    //           onDelete(record.loan_ID);
+    //         }}
+    //       />
+    //     </Space>
+    //   ),
+    // },
   ];
 
   return (
@@ -68,7 +69,7 @@ const LoanList = () => {
       <EmployeePageHeading text={"Loans"} />
       <Card style={{ width: "100%" }}>
         <Button href="loans/add">Add loan</Button>
-        <Table dataSource={loans} columns={columns} bordered />
+        <SearchableTable dataSource={loans} columns={columns} bordered />
       </Card>
     </div>
   );

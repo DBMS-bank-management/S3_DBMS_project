@@ -1,5 +1,5 @@
 import axios from "axios";
-import { customerAxios } from "./authentication";
+import { customerAxios, employeeAxios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addFD(data) {
@@ -18,7 +18,7 @@ export function addFD(data) {
 }
 
 export const getFDs = () => {
-  return axios
+  return employeeAxios
     .get(`${BASE_URL}/fd`)
     .then((response) => {
       return response.data;

@@ -8,7 +8,7 @@ import {
 import ConfirmationDialog from "../../../components/confirmationDialog";
 import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
 import LoanPaymentDialog from "../../../components/LoanPaymentDialog";
-
+import SearchableTable from "../../../components/SearchableTable";
 
 const InstallmentList = () => {
   const [installments, setInstallments] = useState();
@@ -26,14 +26,15 @@ const InstallmentList = () => {
       .then((data) => {
         setInstallments(data);
       })
-      .catch((err) => message.error(err));
+      .catch((err) => message.error(err))
+      .finally(() => setLoading(false));
   }
 
   const onLoanPay = (id) => {
     payInstallmentByCash(id)
       .then(() => {
-        loadInstallmentList()
-        message.success("Installment payment successful")
+        loadInstallmentList();
+        message.success("Installment payment successful");
       })
       .catch((err) => {
         console.error(err);
@@ -98,8 +99,9 @@ const InstallmentList = () => {
       key: "extra_action",
       render: (_, record) => (
         <Space size="middle" key={record.inst_id}>
-          {!record.is_paid &&
-            <Button onClick={() => onLoanPay(record.inst_ID)}>pay</Button>}
+          {!record.is_paid && (
+            <Button onClick={() => onLoanPay(record.inst_ID)}>pay</Button>
+          )}
         </Space>
       ),
     },
@@ -109,7 +111,7 @@ const InstallmentList = () => {
     <Card style={{ width: "100%" }}>
       <EmployeePageHeading text={"Installments"} />
       {/* <Button href="installments/add">Add installment</Button> */}
-      <Table dataSource={installments} columns={columns} bordered />
+      <SearchableTable loading={loading} dataSource={installments} columns={columns} bordered />
     </Card>
   );
 };

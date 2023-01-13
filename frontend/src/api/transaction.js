@@ -18,7 +18,7 @@ export function addTransaction(data) {
 }
 
 export const getTransactions = () => {
-  return axios
+  return employeeAxios
     .get(`${BASE_URL}/transactions`)
     .then((response) => {
       return response.data;
@@ -27,7 +27,7 @@ export const getTransactions = () => {
 };
 
 export const getTransaction = (id) => {
-  return axios
+  return employeeAxios
     .get(`${BASE_URL}/transactions/${id}`)
     .then((response) => {
       return response.data;

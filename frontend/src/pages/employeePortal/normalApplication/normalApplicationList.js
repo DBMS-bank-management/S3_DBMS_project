@@ -156,7 +156,7 @@ const NormalApplicationsList = () => {
     <div className="transparent">
     <EmployeePageHeading text={"Normal Applications"} />
     <Card style={{ width: "100%" }}>
-      <NavigateButton href="add">Add Normal Application</NavigateButton>
+      <NavigateButton href="/employee-portal/normal-applications/add">Add Normal Application</NavigateButton>
       <Table
         loading={loading}
         dataSource={normalApplications}

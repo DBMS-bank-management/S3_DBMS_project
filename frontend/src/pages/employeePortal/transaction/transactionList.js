@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { deleteTransaction, getTransactions } from "../../../api/transaction";
 import ConfirmationDialog from "../../../components/confirmationDialog";
 import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
+import SearchableTable from "../../../components/SearchableTable";
 
 const TransactionList = () => {
   const [transactions, setTransactions] = useState();
@@ -40,17 +41,15 @@ const TransactionList = () => {
       key: "acc_ID",
     },
     {
-        title: "Description",
-        dataIndex: "description",
-        key: "description",
-      },
-      {
-        title: "Amount",
-        dataIndex: "amount",
-        key: "amount",
-      },
-      
-    
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+    },
   ];
 
   return (
@@ -58,13 +57,14 @@ const TransactionList = () => {
       <EmployeePageHeading text={"Transactions"} />
       <Card style={{ width: "100%" }}>
         <Button href="transactions/add">Add transaction</Button>
-        <Table dataSource={transactions} columns={columns} bordered />
+        <SearchableTable dataSource={transactions} columns={columns} bordered />
       </Card>
     </div>
   );
 };
 
-{/*return (
+{
+  /*return (
   <div className="transparent">
     <EmployeePageHeading text={"Transactions"} />
     <Card style={{ width: "100%" }}>
@@ -72,5 +72,6 @@ const TransactionList = () => {
       <Table dataSource={Transaction} columns={columns} bordered />
     </Card>
   </div>
-);*/}
+);*/
+}
 export default TransactionList;
