@@ -6,6 +6,7 @@ import { navigateToHome } from "../../utils/navigation";
 import bgImage from "../../images/employeePortal/EmployeeLogin.jpg";
 import { CustomerPageHeading } from "../../components/layout/CustomerPageHeading.jsx";
 import { Logo } from "../../components/logo.jsx";
+import LogoImg from "../../images/banklogo.png";
 
 const clamp = (min, max, val) => Math.max(min, Math.min(val, max));
 
@@ -41,26 +42,47 @@ const CustomerLogin = () => {
     inputRefs.current[nextIndex].focus();
   };
 
-
   if (true) {
     return (
       <div className="login">
         <div className="div left-half">
           <div className="article">
-
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                paddingBottom: 50,
+              }}
+            >
+              <img src={LogoImg} className="App-logo" alt="logo" />
+            </div>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <div style={{ width: "50%", fontSize: 50 }}>
+                <Logo />
+              </div>
+            </div>
           </div>
         </div>
         <div className="div right-half glass">
           <div className="article padding">
-            <div >
+            <div>
               {/* <div className="transaparent padding" style={{ fontSize: 50, textAlign: 'center' }}>
                 <Logo />
               </div> */}
-
             </div>
-            <div className="transparent" style={{width: '100%' }}>
+            <div className="transparent" style={{ width: "100%" }}>
               <CustomerPageHeading text={"Customer portal"} />
               <Form
+                style={{ paddingTop: 100 }}
                 name="basic"
                 labelCol={{
                   span: 8,
@@ -111,16 +133,18 @@ const CustomerLogin = () => {
                 </Form.Item>
 
                 <div
-                  // wrapperCol={{
-                  //   offset: 8,
-                  //   span: 16,
-
-                  // }}
+                  wrapperCol={{
+                    offset: 8,
+                    span: 16,
+                  }}
                   style={{
                     // width: "100%",
+                    paddingLeft: 200,
+                    paddingRight: 200,
                     justifyContent: "space-around",
                     flexDirection: "row",
                     display: "flex",
+                    flex: 0.5,
                   }}
                 >
                   <Button
@@ -146,7 +170,7 @@ const CustomerLogin = () => {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -159,14 +183,12 @@ const CustomerLogin = () => {
         width: "100%",
         height: "100vh",
         backgroundColor: "#ececec",
-        flexDirection: 'column'
+        flexDirection: "column",
         // background-color: #21D4FD;
         // backgroundImage: "linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)",
       }}
     >
-      <div style={{}}>
-
-      </div>
+      <div style={{}}></div>
       <Logo />
       <CustomerPageHeading text={"Customer portal"} />
       <Card className="glass padding rounded">

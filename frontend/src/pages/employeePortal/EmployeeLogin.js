@@ -6,7 +6,7 @@ import { navigateToHome } from "../../utils/navigation";
 import bgImage from "../../images/employeePortal/EmployeeLogin.jpg";
 import { EmployeePageHeading } from "../../components/layout/employeePageHeading.jsx";
 import { Logo } from "../../components/logo.jsx";
-import LogoImg from "../../images/banklogo.png"
+import LogoImg from "../../images/banklogo.png";
 
 const clamp = (min, max, val) => Math.max(min, Math.min(val, max));
 
@@ -52,8 +52,8 @@ const EmployeeLogin = () => {
         width: "100%",
         height: "100vh",
         backgroundColor: "#ececec",
-        flexDirection: 'column',
-        justifyContent: 'space-evenly'
+        flexDirection: "column",
+        justifyContent: "space-evenly",
         // background-color: #21D4FD;
         // backgroundImage: "linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)",
       }}
@@ -62,7 +62,10 @@ const EmployeeLogin = () => {
         <Logo />
       </div>
       <Card className="glass padding rounded">
-        {/* <img src={LogoImg} className="App-logo" alt="logo" /> */}
+        <div style={{ width: "100%", display:"flex", alignItems: 'center', justifyContent: 'center' }}>
+          <img src={LogoImg} className="App-logo" alt="logo" />
+        </div>
+
         <EmployeePageHeading text="Employee portal" />
         {/* <div className="glass"> */}
 
