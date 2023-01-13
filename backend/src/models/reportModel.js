@@ -7,7 +7,7 @@ const Report = function () {
 
 Report.lateInstallmentsReport = (branch_ID, result) => {
   sql.query(
-    "SELECT * from pending_installments where branch_ID = 'COL02';",
+    "SELECT * from late_installments where branch_ID = ? ;",
     [branch_ID],
     (err, res) => {
       if (err) {
@@ -22,15 +22,19 @@ Report.lateInstallmentsReport = (branch_ID, result) => {
 };
 
 Report.totalTransactionReport = (branch_ID, result) => {
-  sql.query("INSERT INTO trans_mode SET ?", ["replace"], (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
+  sql.query(
+    "Select * from tot_transactions where branch_ID = ?",
+    [branch_ID],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
 
-    result(null, res);
-  });
+      result(null, res);
+    }
+  );
 };
 
 module.exports = Report;
