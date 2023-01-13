@@ -186,6 +186,7 @@ Transaction.addWithdrawal = (values, result) => {
 };
 
 Transaction.getWithdrawalCount = (account, result) => {
+console.log({account})
   sql.query(
     "select count(*) as count from transaction where acc_ID=? and description='withdrawal' and month(timestamp)=month(now()) and year(timestamp)=year(now());",
     [account],

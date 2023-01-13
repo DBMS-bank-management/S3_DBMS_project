@@ -104,7 +104,7 @@ export const addWithdraw = (data) => {
 
 export const getWithdrawalsCount = (account) => {
   return employeeAxios
-    .post(`${BASE_URL}/transactions/withdrawals/count`, account)
+    .post(`${BASE_URL}/transactions/withdrawals/count`, {account})
     .then((response) => {
       return response.data;
     })

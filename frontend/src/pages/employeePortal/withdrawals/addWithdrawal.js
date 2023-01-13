@@ -83,7 +83,7 @@ const AddWithdrawal = () => {
               (input, option) => option.label === input
               // (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
             }
-            onChange={handleChange}
+            onSelect={handleChange}
             options={accounts}
           />
         </Form.Item>
@@ -116,15 +116,26 @@ const AddWithdrawal = () => {
         >
           <InputNumber />
         </Form.Item>
-        <Typography type="danger">{`Withdrawals count: ${withdrawalCount?.count}`}</Typography>
-
+        <Typography
+          style={{ width: "100%", textAlign: "center" }}
+          type="danger"
+        >{`Withdrawals count: ${withdrawalCount?.count}`}</Typography>
+        {withdrawalCount?.count >= 5 && (
+          <Typography style={{ textAlign: "center", color: "red" }}>
+            Maximum transaction count reached
+          </Typography>
+        )}
         <Form.Item
           wrapperCol={{
             offset: 8,
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="submit"
+            disabled={withdrawalCount?.count >= 5}
+          >
             Done
           </Button>
         </Form.Item>
