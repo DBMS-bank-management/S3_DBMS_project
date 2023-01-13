@@ -55,7 +55,7 @@ const AccountPlanList = () => {
     <div className="transparent">
       <EmployeePageHeading text={"Account Plans"} />
       <Card style={{ width: "100%" }}>
-        <Button href="accountplan/add">Add AccountPlan</Button>
+        {/* <Button href="accountplan/add">Add AccountPlan</Button> */}
         <Table dataSource={accountplans} columns={columns} bordered />
       </Card>
     </div>

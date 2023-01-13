@@ -18,7 +18,7 @@ export function addTransaction(data) {
 }
 
 export const getTransactions = () => {
-  return axios
+  return employeeAxios
     .get(`${BASE_URL}/transactions`)
     .then((response) => {
       return response.data;

@@ -1,5 +1,6 @@
 import { Button, Card, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
+import { isManager } from "../../../api/authentication";
 import { deleteBranch, getBranches } from "../../../api/branch";
 import ConfirmationDialog from "../../../components/confirmationDialog";
 import { EmployeePageHeading } from "../../../components/layout/employeePageHeading";
@@ -13,6 +14,7 @@ const BranchesList = () => {
   const onDelete = (id) => {
     deleteBranch(id);
     loadBranchesList();
+
   };
 
   function loadBranchesList() {
@@ -20,7 +22,8 @@ const BranchesList = () => {
       .then((data) => {
         setBranches(data);
       })
-      .catch((err) => message.error(err));
+      .catch((err) => message.error(err))
+      .finally(() => { setLoading(false) });
   }
 
   const columns = [
@@ -44,15 +47,17 @@ const BranchesList = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button href={`branches/${record.branch_ID}`} type="link">
-            Edit
-          </Button>
-          <ConfirmationDialog
-            buttonProps={{ type: "link", danger: true }}
-            onOk={() => {
-              onDelete(record.branch_ID);
-            }}
-          />
+          {isManager() && <>
+            <Button href={`branches/${record.branch_ID}`} type="link">
+              Edit
+            </Button>
+            <ConfirmationDialog
+              buttonProps={{ type: "link", danger: true }}
+              onOk={() => {
+                onDelete(record.branch_ID);
+              }}
+            />
+          </>}
         </Space>
       ),
     },
@@ -62,8 +67,8 @@ const BranchesList = () => {
     <div className="transparent">
       <EmployeePageHeading text={"Branches"} />
       <Card style={{ width: "100%" }}>
-        <Button href="branches/add">Add branch</Button>
-        <Table dataSource={branches} columns={columns} bordered />
+        {/* <Button href="branches/add">Add branch</Button> */}
+        <Table loading={loading} dataSource={branches} columns={columns} bordered />
       </Card>
     </div>
   );
