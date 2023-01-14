@@ -4,6 +4,7 @@ import { Table } from "antd";
 import { getFixedDepositsByID } from "../../api/fd";
 import { formatDate } from "../../utils";
 import { CustomerPageHeading } from "../../components/layout/CustomerPageHeading";
+import SearchableTable from "../../components/SearchableTable";
 
 const CustomerFixedDepositsList = () => {
   const [fixedDeposits, setFixedDeposits] = useState([]);
@@ -51,7 +52,7 @@ const CustomerFixedDepositsList = () => {
     <>
       <CustomerPageHeading text={"Fixed deposits"} />
       <div style={{ width: "100%", minHeight: 300 }}>
-        <Table
+        <SearchableTable
           style={{ width: "100%" }}
           columns={columns}
           dataSource={fixedDeposits}

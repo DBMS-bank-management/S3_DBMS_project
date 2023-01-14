@@ -3,7 +3,7 @@ import { customerAxios, employeeAxios as axios, employeeAxios } from "./authenti
 import { BASE_URL } from "./config";
 
 export function addNormalApplication(data) {
-  return axios
+  return employeeAxios
     .post(`${BASE_URL}/normalApplications`, {
       acc_ID: data.acc_ID,
       amount: data.amount,
