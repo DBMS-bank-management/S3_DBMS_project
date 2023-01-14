@@ -1,9 +1,9 @@
 // import axios from "axios";
-import { employeeAxios as axios } from "./authentication";
+import { customerAxios, employeeAxios as axios } from "./authentication";
 import { BASE_URL } from "./config";
 
 export function addOnlineApplication(data) {
-  return axios
+  return customerAxios
     .post(`${BASE_URL}/onlineApplications`, {
       fd_ID: data.fd_ID,
       acc_ID: data.acc_ID,
