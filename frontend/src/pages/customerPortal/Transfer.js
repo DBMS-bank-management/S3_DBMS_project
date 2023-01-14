@@ -10,7 +10,7 @@ import {
 } from "antd";
 import { useNavigate } from "react-router-dom";
 import { addTransfer, addTransferByCustomer } from "../../api/transaction";
-import { getAccounts, getAccountsByID } from "../../api/account";
+import { getAccounts, getAccountsByCustomer, getAccountsByID } from "../../api/account";
 
 const handleChange = (value) => {
   console.log(`selected ${value}`);
@@ -54,7 +54,7 @@ const Transfer = () => {
   }
 
   function loadAccountsList() {
-    getAccounts()
+    getAccountsByCustomer()
       .then((data) => {
         setAccounts(
           data.map((acc) => ({ label: acc.account_ID, value: acc.account_ID }))

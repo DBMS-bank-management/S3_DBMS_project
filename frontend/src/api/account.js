@@ -27,6 +27,15 @@ export const getAccounts = () => {
     .catch((err) => Promise.reject("Failed to get accounts list!"));
 };
 
+export const getAccountsByCustomer = () => {
+  return customerAxios
+    .get(`${BASE_URL}/accounts`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => Promise.reject("Failed to get accounts list!"));
+};
+
 export const getAccount = (id) => {
   return employeeAxios
     .get(`${BASE_URL}/accounts/${id}`)
