@@ -7,7 +7,7 @@ const Report = function () {
 
 Report.lateInstallmentsReport = (branch_ID, result) => {
   sql.query(
-    "SELECT * from late_installments where branch_ID = ? ;",
+    "SELECT * from late_installments where branch_ID = 'COL02' ;",
     [branch_ID],
     (err, res) => {
       if (err) {

@@ -116,6 +116,9 @@ exports.delete = (req, res) => {
   });
 };
 exports.approve = (req, res) => {
+console.log("approved n application")
+  console.log({id: req.params.id})
+
   NormalApplicationModel.approve(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {

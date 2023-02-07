@@ -119,7 +119,7 @@ const EmployeeLogin = () => {
             />
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             name="remember"
             valuePropName="checked"
             wrapperCol={{
@@ -128,7 +128,7 @@ const EmployeeLogin = () => {
             }}
           >
             <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+          </Form.Item> */}
 
           <div
             // wrapperCol={{
