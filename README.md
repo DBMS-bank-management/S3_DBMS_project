@@ -27,3 +27,8 @@ Start frontend
 1. `cd frontend`
 2. `npm start`
 
+## Contributors
+
+<a href="https://github.com/DBMS-bank-management/S3_DBMS_project/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=DBMS-bank-management/S3_DBMS_project" />
+</a>
